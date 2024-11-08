@@ -1,6 +1,6 @@
 import { formDeviceToPayload, parseDevices } from "./formDevices";
 import { yamlToObject } from "./yaml";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { dump as dumpYaml } from "js-yaml";
 
 const deviceYaml =
@@ -31,7 +31,7 @@ const deviceYaml =
 
 describe("parseDevices and formDeviceToPayload", () => {
   it("preserves disk, network and custom devices", () => {
-    const instance = yamlToObject(deviceYaml) as LxdInstance;
+    const instance = yamlToObject(deviceYaml) as IncusInstance;
     const formDevices = parseDevices(instance.devices);
     const payload = formDeviceToPayload(formDevices);
 

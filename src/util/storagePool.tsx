@@ -1,6 +1,6 @@
 import { AbortControllerState, checkDuplicateName } from "util/helpers";
 import { AnyObject, TestFunction } from "yup";
-import { LxdConfigOptionsKeys } from "types/config";
+import { IncusConfigOptionsKeys } from "types/config";
 import { FormikProps } from "formik";
 import { StoragePoolFormValues } from "pages/storage/forms/StoragePoolForm";
 import { powerFlex } from "util/storageOptions";
@@ -40,18 +40,19 @@ export const getCephPoolFormFields = () => {
   );
 };
 
-const storagePoolDriverToOptionKey: Record<string, LxdConfigOptionsKeys> = {
+const storagePoolDriverToOptionKey: Record<string, IncusConfigOptionsKeys> = {
   dir: "storage-dir",
   btrfs: "storage-btrfs",
   lvm: "storage-lvm",
   zfs: "storage-zfs",
   ceph: "storage-ceph",
   powerflex: "storage-powerflex",
+  lvmcluster: "storage-lvmcluster",
 };
 
 export const storagePoolFormDriverToOptionKey = (
   driver: string,
-): LxdConfigOptionsKeys => {
+): IncusConfigOptionsKeys => {
   if (!(driver in storagePoolDriverToOptionKey)) {
     throw new Error(`Could not find ${driver} in storagePoolDriverToOptionKey`);
   }

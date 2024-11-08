@@ -8,14 +8,14 @@ import {
   SearchBox,
   Select,
 } from "@canonical/react-components";
-import { LxdImageType, RemoteImage, RemoteImageList } from "types/image";
+import { IncusImageType, RemoteImage, RemoteImageList } from "types/image";
 import { handleResponse } from "util/helpers";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { MainTableRow } from "@canonical/react-components/dist/components/MainTable/MainTable";
 import {
   byLtsFirst,
-  localLxdToRemoteImage,
+  localIncusToRemoteImage,
   isContainerOnlyImage,
   isVmOnlyImage,
   LOCAL_ISO,
@@ -29,20 +29,13 @@ import { fetchImageList } from "api/images";
 import { useParams } from "react-router-dom";
 
 interface Props {
-  onSelect: (image: RemoteImage, type?: LxdImageType) => void;
+  onSelect: (image: RemoteImage, type?: IncusImageType) => void;
   onClose: () => void;
 }
 
-const canonicalJson =
-  "https://cloud-images.ubuntu.com/releases/streams/v1/com.ubuntu.cloud:released:download.json";
-const canonicalServer = "https://cloud-images.ubuntu.com/releases";
-
-const minimalJson =
-  "https://cloud-images.ubuntu.com/minimal/releases/streams/v1/com.ubuntu.cloud:released:download.json";
-const minimalServer = "https://cloud-images.ubuntu.com/minimal/releases/";
-
-const imagesLxdJson = "https://images.lxd.canonical.com/streams/v1/images.json";
-const imagesLxdServer = "https://images.lxd.canonical.com/";
+const linuxContainersJson =
+  "https://images.linuxcontainers.org/streams/v1/images.json";
+const linuxContainersServer = "https://images.linuxcontainers.org";
 
 const ANY = "any";
 const CONTAINER = "container";
@@ -53,7 +46,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
   const [os, setOs] = useState<string>("");
   const [release, setRelease] = useState<string>("");
   const [arch, setArch] = useState<string>("amd64");
-  const [type, setType] = useState<LxdImageType | undefined>(undefined);
+  const [type, setType] = useState<IncusImageType | undefined>(undefined);
   const [variant, setVariant] = useState<string>(ANY);
   const { project } = useParams<{ project: string }>();
 
@@ -75,33 +68,17 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
 
   const { data: settings, isLoading: isSettingsLoading } = useSettings();
 
-  const { data: canonicalImages = [], isLoading: isCiLoading } = useQuery({
-    queryKey: [queryKeys.images, canonicalServer],
-    queryFn: () => loadImages(canonicalJson, canonicalServer),
+  const { data: linuxContainerImages = [], isLoading: isLciLoading } = useQuery({
+    queryKey: [queryKeys.images, linuxContainersServer],
+    queryFn: () => loadImages(linuxContainersJson, linuxContainersServer),
   });
-
-  const { data: minimalImages = [], isLoading: isMinimalLoading } = useQuery({
-    queryKey: [queryKeys.images, minimalServer],
-    queryFn: () => loadImages(minimalJson, minimalServer),
-  });
-
-  const { data: imagesLxdImages = [], isLoading: isImagesLxdLoading } =
-    useQuery({
-      queryKey: [queryKeys.images, imagesLxdServer],
-      queryFn: () => loadImages(imagesLxdJson, imagesLxdServer),
-    });
 
   const { data: localImages = [], isLoading: isLocalImageLoading } = useQuery({
     queryKey: [queryKeys.images, project],
     queryFn: () => fetchImageList(project ?? ""),
   });
 
-  const isLoading =
-    isCiLoading ||
-    isMinimalLoading ||
-    isImagesLxdLoading ||
-    isLocalImageLoading ||
-    isSettingsLoading;
+  const isLoading = isLciLoading || isLocalImageLoading || isSettingsLoading;
   const archSupported = getArchitectureAliases(
     settings?.environment?.architectures ?? [],
   );
@@ -109,10 +86,8 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
     ? []
     : localImages
         .filter((image) => !image.cached)
-        .map(localLxdToRemoteImage)
-        .concat([...canonicalImages].reverse().sort(byLtsFirst))
-        .concat([...minimalImages].reverse().sort(byLtsFirst))
-        .concat([...imagesLxdImages])
+        .map(localIncusToRemoteImage)
+        .concat(linuxContainerImages)
         .filter((image) => archSupported.includes(image.arch));
 
   const archAll = [...new Set(images.map((item) => item.arch))]
@@ -213,14 +188,8 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
         if (item.created_at) {
           return "Local";
         }
-        if (item.server === canonicalServer) {
-          return "Ubuntu";
-        }
-        if (item.server === minimalServer) {
-          return "Ubuntu Minimal";
-        }
-        if (item.server === imagesLxdServer) {
-          return "LXD Images";
+        if (item.server === linuxContainersServer) {
+          return "Linux Containers";
         }
         return "Custom";
       };
@@ -391,7 +360,7 @@ const ImageSelector: FC<Props> = ({ onSelect, onClose }) => {
                 setType(
                   v.target.value === ANY
                     ? "container"
-                    : (v.target.value as LxdImageType),
+                    : (v.target.value as IncusImageType),
                 );
               }}
               options={[

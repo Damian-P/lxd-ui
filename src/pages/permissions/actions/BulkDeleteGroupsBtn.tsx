@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import { Button, Icon } from "@canonical/react-components";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import DeleteGroupModal from "./DeleteGroupModal";
 import { pluralize } from "util/instanceBulkActions";
 
 interface Props {
-  groups: LxdGroup[];
+  groups: IncusGroup[];
   onDelete: () => void;
   className?: string;
 }

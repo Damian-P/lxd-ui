@@ -1,4 +1,4 @@
-export interface LxdDiskDevice {
+export interface IncusDiskDevice {
   name?: string;
   path?: string;
   pool: string;
@@ -9,25 +9,25 @@ export interface LxdDiskDevice {
   type: "disk";
 }
 
-export interface LxdIsoDevice {
+export interface IncusIsoDevice {
   "boot.priority": string;
   pool: string;
   source: string;
   type: "disk";
 }
 
-export interface LxdNicDevice {
+export interface IncusNicDevice {
   name?: string;
   network: string;
   type: "nic";
 }
 
-export interface LxdNoneDevice {
+export interface IncusNoneDevice {
   name?: string;
   type: "none";
 }
 
-export type LxdDevices = Record<
+export type IncusDevices = Record<
   string,
-  LxdDiskDevice | LxdIsoDevice | LxdNicDevice | LxdNoneDevice
+  IncusDiskDevice | IncusIsoDevice | IncusNicDevice | IncusNoneDevice
 >;

@@ -10,12 +10,12 @@ import classnames from "classnames";
 import ItemName from "components/ItemName";
 import { useSmallScreen } from "context/useSmallScreen";
 import { useNavigate } from "react-router-dom";
-import { LxdStoragePool } from "types/storage";
+import { IncusStoragePool } from "types/storage";
 import { queryKeys } from "util/queryKeys";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  pool: LxdStoragePool;
+  pool: IncusStoragePool;
   project: string;
   shouldExpand?: boolean;
 }

@@ -1,11 +1,11 @@
 import { FC, ReactNode } from "react";
 import usePortal from "react-useportal";
 import { Button, Tooltip } from "@canonical/react-components";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import CreateInstanceSnapshotForm from "pages/instances/forms/CreateInstanceSnapshotForm";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   onSuccess: (message: ReactNode) => void;
   onFailure: (title: string, e: unknown, message?: ReactNode) => void;
   className?: string;

@@ -23,7 +23,7 @@ import { slugify } from "util/slugify";
 import { MAIN_CONFIGURATION } from "./forms/StoragePoolFormMenu";
 import { useToastNotification } from "context/toastNotificationProvider";
 import { yamlToObject } from "util/yaml";
-import { LxdStoragePool } from "types/storage";
+import { IncusStoragePool } from "types/storage";
 
 const CreateStoragePool: FC = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const CreateStoragePool: FC = () => {
     validationSchema: CreateStoragePoolSchema,
     onSubmit: (values) => {
       const storagePool = values.yaml
-        ? (yamlToObject(values.yaml) as LxdStoragePool)
+        ? (yamlToObject(values.yaml) as IncusStoragePool)
         : toStoragePool(values);
 
       const mutation =

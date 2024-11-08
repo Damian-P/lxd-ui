@@ -1,10 +1,10 @@
-export type LxdOperationStatus =
+export type IncusOperationStatus =
   | "Cancelled"
   | "Failure"
   | "Running"
   | "Success";
 
-export interface LxdOperation {
+export interface IncusOperation {
   class: string;
   created_at: string;
   description: string;
@@ -16,18 +16,18 @@ export interface LxdOperation {
   resources?: {
     instances?: string[];
   };
-  status: LxdOperationStatus;
+  status: IncusOperationStatus;
   status_code: string;
   updated_at: string;
 }
 
-export interface LxdOperationResponse {
+export interface IncusOperationResponse {
   operation: string;
-  metadata: LxdOperation;
+  metadata: IncusOperation;
 }
 
-export interface LxdOperationList {
-  failure?: LxdOperation[];
-  running?: LxdOperation[];
-  success?: LxdOperation[];
+export interface IncusOperationList {
+  failure?: IncusOperation[];
+  running?: IncusOperation[];
+  success?: IncusOperation[];
 }

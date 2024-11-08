@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import { isNicDevice } from "util/devices";
 import ExpandableList from "components/ExpandableList";
 
 interface Props {
-  profile: LxdProfile;
+  profile: IncusProfile;
 }
 
 const ProfileNetworkList: FC<Props> = ({ profile }) => {

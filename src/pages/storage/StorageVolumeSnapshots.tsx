@@ -16,7 +16,7 @@ import { useProject } from "context/project";
 import ScrollableTable from "components/ScrollableTable";
 import SelectedTableNotification from "components/SelectedTableNotification";
 import { useDocs } from "context/useDocs";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import VolumeSnapshotBulkDelete from "./actions/snapshots/VolumeSnapshotBulkDelete";
 import VolumeAddSnapshotBtn from "./actions/snapshots/VolumeAddSnapshotBtn";
 import VolumeConfigureSnapshotBtn from "./actions/snapshots/VolumeConfigureSnapshotBtn";
@@ -28,7 +28,7 @@ import { figureCollapsedScreen } from "util/storageVolume";
 import useSortTableData from "util/useSortTableData";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
 }
 
 const StorageVolumeSnapshots: FC<Props> = ({ volume }) => {

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Button, Icon } from "@canonical/react-components";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import usePanelParams from "util/usePanelParams";
 
 interface Props {
-  groups: LxdGroup[];
+  groups: IncusGroup[];
   className?: string;
 }
 

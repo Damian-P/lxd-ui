@@ -1,4 +1,4 @@
-import { LxdDiskDevice, LxdNicDevice } from "types/device";
+import { IncusDiskDevice, IncusNicDevice } from "types/device";
 import {
   CpuLimit,
   CPU_LIMIT_TYPE,
@@ -7,13 +7,13 @@ import {
   BYTES_UNITS,
 } from "types/limits";
 
-export const DEFAULT_NIC_DEVICE: LxdNicDevice = {
+export const DEFAULT_NIC_DEVICE: IncusNicDevice = {
   name: "",
   network: "",
   type: "nic",
 };
 
-export const DEFAULT_DISK_DEVICE: LxdDiskDevice = {
+export const DEFAULT_DISK_DEVICE: IncusDiskDevice = {
   path: "/",
   pool: "",
   type: "disk",

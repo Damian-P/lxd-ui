@@ -1,4 +1,4 @@
-import { LxdOperationResponse } from "types/operation";
+import { IncusOperationResponse } from "types/operation";
 import { getInstanceName } from "./operations";
 import InstanceLink from "pages/instances/InstanceLink";
 import { ReactNode } from "react";
@@ -16,7 +16,7 @@ export const instanceLinkFromName = (args: {
 };
 
 export const instanceLinkFromOperation = (args: {
-  operation?: LxdOperationResponse;
+  operation?: IncusOperationResponse;
   project?: string;
 }): ReactNode | undefined => {
   const { operation, project } = args;

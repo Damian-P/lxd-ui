@@ -41,7 +41,7 @@ import ProfileFormMenu, {
   YAML_CONFIGURATION,
   NETWORK_DEVICES,
 } from "pages/profiles/forms/ProfileFormMenu";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import useEventListener from "@use-it/event-listener";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import DiskDeviceForm from "components/forms/DiskDeviceForm";
@@ -70,7 +70,7 @@ export type EditProfileFormValues = ProfileDetailsFormValues &
   YamlFormValues;
 
 interface Props {
-  profile: LxdProfile;
+  profile: IncusProfile;
   featuresProfiles: boolean;
 }
 
@@ -108,7 +108,7 @@ const EditProfile: FC<Props> = ({ profile, featuresProfiles }) => {
         values.yaml
           ? yamlToObject(values.yaml)
           : getProfilePayload(profile, values)
-      ) as LxdProfile;
+      ) as IncusProfile;
 
       // ensure the etag is set (it is missing on the yaml)
       profilePayload.etag = profile.etag;

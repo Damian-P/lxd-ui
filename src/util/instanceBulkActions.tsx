@@ -1,7 +1,7 @@
 import {
-  LxdInstance,
-  LxdInstanceAction,
-  LxdInstanceStatus,
+  IncusInstance,
+  IncusInstanceAction,
+  IncusInstanceStatus,
 } from "types/instance";
 import { InstanceBulkAction } from "api/instances";
 
@@ -9,8 +9,8 @@ import { InstanceBulkAction } from "api/instances";
 // statuses missing will be ignored
 const actionsToPerform: Partial<
   Record<
-    LxdInstanceAction,
-    Partial<Record<LxdInstanceStatus, LxdInstanceAction>>
+    IncusInstanceAction,
+    Partial<Record<IncusInstanceStatus, IncusInstanceAction>>
   >
 > = {
   start: {
@@ -33,16 +33,16 @@ const actionsToPerform: Partial<
 };
 
 export const instanceAction = (
-  desiredAction: LxdInstanceAction,
-  currentState: LxdInstanceStatus,
-): LxdInstanceAction | undefined => {
+  desiredAction: IncusInstanceAction,
+  currentState: IncusInstanceStatus,
+): IncusInstanceAction | undefined => {
   const actionMap = actionsToPerform[desiredAction];
   return actionMap ? actionMap[currentState] : undefined;
 };
 
 export const instanceActions = (
-  instances: LxdInstance[],
-  desiredAction: LxdInstanceAction,
+  instances: IncusInstance[],
+  desiredAction: IncusInstanceAction,
 ): InstanceBulkAction[] => {
   const actions: InstanceBulkAction[] = [];
   instances.forEach((instance) => {
@@ -58,7 +58,7 @@ export const instanceActions = (
   return actions;
 };
 
-export const instanceActionLabel = (action: LxdInstanceAction): string => {
+export const instanceActionLabel = (action: IncusInstanceAction): string => {
   return {
     unfreeze: "started",
     start: "started",
@@ -82,8 +82,8 @@ export const pluralize = (item: string, count: number): string => {
   return `${item}s`;
 };
 
-export const statusLabel = (status: LxdInstanceStatus): string | undefined => {
-  const statusToLabel: Partial<Record<LxdInstanceStatus, string>> = {
+export const statusLabel = (status: IncusInstanceStatus): string | undefined => {
+  const statusToLabel: Partial<Record<IncusInstanceStatus, string>> = {
     Frozen: "frozen",
     Stopped: "stopped",
     Running: "running",

@@ -7,7 +7,7 @@ import { FormikProps } from "formik/dist/types";
 import { optionAllowBlock, optionAllowBlockManaged } from "util/projectOptions";
 import { optionRenderer } from "util/formFields";
 import { getProjectKey } from "util/projectConfigFields";
-import { LxdConfigPair } from "types/config";
+import { IncusConfigPair } from "types/config";
 
 export interface DeviceUsageRestrictionFormValues {
   restricted_devices_disk?: string;
@@ -24,7 +24,7 @@ export interface DeviceUsageRestrictionFormValues {
 
 export const deviceUsageRestrictionPayload = (
   values: DeviceUsageRestrictionFormValues,
-): LxdConfigPair => {
+): IncusConfigPair => {
   return {
     [getProjectKey("restricted_devices_disk")]: values.restricted_devices_disk,
     [getProjectKey("restricted_devices_disk_paths")]:

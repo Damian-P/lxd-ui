@@ -1,8 +1,8 @@
-import { LxdStoragePool } from "types/storage";
+import { IncusStoragePool } from "types/storage";
 import { StoragePoolFormValues } from "pages/storage/forms/StoragePoolForm";
 
 export const toStoragePoolFormValues = (
-  pool: LxdStoragePool,
+  pool: IncusStoragePool,
 ): StoragePoolFormValues => {
   return {
     readOnly: true,

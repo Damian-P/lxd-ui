@@ -1,14 +1,14 @@
 import {
-  LxdDiskDevice,
-  LxdIsoDevice,
-  LxdNicDevice,
-  LxdNoneDevice,
+  IncusDiskDevice,
+  IncusIsoDevice,
+  IncusNicDevice,
+  IncusNoneDevice,
 } from "types/device";
 
 export const isNicDevice = (
-  device: LxdDiskDevice | LxdNicDevice | LxdIsoDevice | LxdNoneDevice,
-): device is LxdNicDevice => device.type === "nic";
+  device: IncusDiskDevice | IncusNicDevice | IncusIsoDevice | IncusNoneDevice,
+): device is IncusNicDevice => device.type === "nic";
 
 export const isDiskDevice = (
-  device: LxdDiskDevice | LxdNicDevice | LxdIsoDevice | LxdNoneDevice,
-): device is LxdDiskDevice => device.type === "disk";
+  device: IncusDiskDevice | IncusNicDevice | IncusIsoDevice | IncusNoneDevice,
+): device is IncusDiskDevice => device.type === "disk";

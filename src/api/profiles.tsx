@@ -1,24 +1,24 @@
 import { handleEtagResponse, handleResponse } from "util/helpers";
-import { LxdProfile } from "types/profile";
-import { LxdApiResponse } from "types/apiResponse";
+import { IncusProfile } from "types/profile";
+import { IncusApiResponse } from "types/apiResponse";
 
 export const fetchProfile = (
   name: string,
   project: string,
-): Promise<LxdProfile> => {
+): Promise<IncusProfile> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/profiles/${name}?project=${project}&recursion=1`)
       .then(handleEtagResponse)
-      .then((data) => resolve(data as LxdProfile))
+      .then((data) => resolve(data as IncusProfile))
       .catch(reject);
   });
 };
 
-export const fetchProfiles = (project: string): Promise<LxdProfile[]> => {
+export const fetchProfiles = (project: string): Promise<IncusProfile[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/profiles?project=${project}&recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdProfile[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusProfile[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
@@ -36,7 +36,7 @@ export const createProfile = (body: string, project: string): Promise<void> => {
 };
 
 export const updateProfile = (
-  profile: LxdProfile,
+  profile: IncusProfile,
   project: string,
 ): Promise<void> => {
   return new Promise((resolve, reject) => {

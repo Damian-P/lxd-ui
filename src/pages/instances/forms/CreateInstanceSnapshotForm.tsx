@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import {
   getInstanceSnapshotSchema,
   isInstanceStateful,
@@ -25,7 +25,7 @@ import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
   close: () => void;
-  instance: LxdInstance;
+  instance: IncusInstance;
   onSuccess: (message: ReactNode) => void;
 }
 

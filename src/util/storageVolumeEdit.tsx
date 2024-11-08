@@ -1,8 +1,8 @@
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { StorageVolumeFormValues } from "pages/storage/forms/StorageVolumeForm";
 
 export const getStorageVolumeEditValues = (
-  volume: LxdStorageVolume,
+  volume: IncusStorageVolume,
 ): StorageVolumeFormValues => {
   return {
     name: volume.name,

@@ -6,7 +6,7 @@ import { getWsErrorMsg } from "util/helpers";
 import useEventListener from "@use-it/event-listener";
 import Loader from "components/Loader";
 import { updateMaxHeight } from "util/updateMaxHeight";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { useNotify } from "@canonical/react-components";
 
 declare global {
@@ -23,7 +23,7 @@ interface SpiceWheelEvent extends CustomEvent {
 }
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   onMount: (handler: () => void) => void;
   onFailure: (title: string, e: unknown, message?: string) => void;
 }

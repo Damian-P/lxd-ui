@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteProfileBtn from "./actions/DeleteProfileBtn";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import RenameHeader, { RenameHeaderValues } from "components/RenameHeader";
 import { renameProfile } from "api/profiles";
 import { useFormik } from "formik";
@@ -12,7 +12,7 @@ import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
   name: string;
-  profile?: LxdProfile;
+  profile?: IncusProfile;
   project: string;
   featuresProfiles: boolean;
 }

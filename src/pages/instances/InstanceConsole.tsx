@@ -9,7 +9,7 @@ import {
   useNotify,
 } from "@canonical/react-components";
 import InstanceGraphicConsole from "./InstanceGraphicConsole";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import InstanceTextConsole from "./InstanceTextConsole";
 import { useInstanceStart } from "util/instanceStart";
 import {
@@ -22,7 +22,7 @@ import NotificationRow from "components/NotificationRow";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const InstanceConsole: FC<Props> = ({ instance }) => {

@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { LxdNetwork, LxdNetworkForward } from "types/network";
+import { IncusNetwork, IncusNetworkForward } from "types/network";
 import { queryKeys } from "util/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
 import {
@@ -11,8 +11,8 @@ import { deleteNetworkForward } from "api/network-forwards";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  network: LxdNetwork;
-  forward: LxdNetworkForward;
+  network: IncusNetwork;
+  forward: IncusNetworkForward;
   project: string;
 }
 

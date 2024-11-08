@@ -1,13 +1,13 @@
 import { FC, useRef, useState } from "react";
 import { ContextualMenu, Icon } from "@canonical/react-components";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import usePanelParams from "util/usePanelParams";
 import DeleteGroupModal from "./DeleteGroupModal";
 import usePortal from "react-useportal";
 import classnames from "classnames";
 
 interface Props {
-  group: LxdGroup;
+  group: IncusGroup;
 }
 
 const GroupActions: FC<Props> = ({ group }) => {

@@ -2,7 +2,7 @@ import { Button, Icon } from "@canonical/react-components";
 import { FC, useEffect, useRef, useState } from "react";
 import { ChangeSummary } from "util/permissionIdentities";
 import Tag from "components/Tag";
-import { LxdIdentity } from "types/permissions";
+import { IncusIdentity } from "types/permissions";
 import LoggedInUserNotification from "./LoggedInUserNotification";
 import { useSettings } from "context/useSettings";
 import {
@@ -15,7 +15,7 @@ import useEventListener from "@use-it/event-listener";
 interface Props {
   identityGroupsChangeSummary: ChangeSummary;
   groupIdentitiesChangeSummary: ChangeSummary;
-  identities: LxdIdentity[];
+  identities: IncusIdentity[];
   initialGroupBy: "identity" | "group";
 }
 
@@ -67,7 +67,7 @@ const generateRowsFromIdentityGroupChanges = (
 const generateRowsFromGroupIdentityChanges = (
   groupIdentitiesChangeSummary: ChangeSummary,
   loggedInIdentityID: string,
-  identities: LxdIdentity[],
+  identities: IncusIdentity[],
 ) => {
   const groups = Object.keys(groupIdentitiesChangeSummary);
   const identityNameLookup: Record<string, string> = {};

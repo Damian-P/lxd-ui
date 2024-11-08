@@ -1,15 +1,15 @@
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { AbortControllerState, checkDuplicateName } from "./helpers";
 import * as Yup from "yup";
 import { testFutureDate, testValidDate, testValidTime } from "./snapshots";
 
 /*** Instance snapshot utils ***/
-export const isInstanceStateful = (instance: LxdInstance): boolean => {
-  return Boolean(instance.config["migration.stateful"]);
+export const isInstanceStateful = (instance: IncusInstance): boolean => {
+  return Boolean(instance.expanded_config["migration.stateful"]);
 };
 
 export const testDuplicateInstanceSnapshotName = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   controllerState: AbortControllerState,
   excludeName?: string,
 ): [string, string, Yup.TestFunction<string | undefined, Yup.AnyObject>] => {
@@ -31,7 +31,7 @@ export const testDuplicateInstanceSnapshotName = (
 };
 
 export const getInstanceSnapshotSchema = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   controllerState: AbortControllerState,
   snapshotName?: string,
 ) => {

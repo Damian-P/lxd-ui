@@ -1,4 +1,4 @@
-import { LxdGroup, LxdIdentity } from "types/permissions";
+import { IncusGroup, IncusIdentity } from "types/permissions";
 import {
   getCurrentIdentitiesForGroups,
   generateGroupAllocationsForIdentities,
@@ -17,7 +17,7 @@ describe("Permissions util functions for groups page", () => {
       {
         name: "group-3",
       },
-    ] as LxdGroup[];
+    ] as IncusGroup[];
 
     const identities = [
       {
@@ -32,7 +32,7 @@ describe("Permissions util functions for groups page", () => {
         id: "user-3",
         groups: [],
       },
-    ] as LxdIdentity[];
+    ] as IncusIdentity[];
 
     const {
       identityIdsInAllGroups,
@@ -55,7 +55,7 @@ describe("Permissions util functions for groups page", () => {
       {
         name: "group-2",
       },
-    ] as LxdGroup[];
+    ] as IncusGroup[];
     const addedOrRemovedIdentities = [
       {
         id: "user-1",
@@ -69,7 +69,7 @@ describe("Permissions util functions for groups page", () => {
         id: "user-3",
         groups: ["group-3"],
       },
-    ] as LxdIdentity[];
+    ] as IncusIdentity[];
 
     const groupsForIdentities = generateGroupAllocationsForIdentities(
       addedIdentities,
@@ -105,7 +105,7 @@ describe("Permissions util functions for groups page", () => {
         name: "user-3",
         groups: ["group-2"],
       },
-    ] as LxdIdentity[];
+    ] as IncusIdentity[];
 
     const addedIdentities = new Set(["user-2", "user-3"]);
     const removedIdentities = new Set(["user-1"]);
@@ -117,7 +117,7 @@ describe("Permissions util functions for groups page", () => {
       {
         name: "group-2",
       },
-    ] as LxdGroup[];
+    ] as IncusGroup[];
 
     const identityGroupsChangeSummary = getChangesInGroupsForIdentities(
       allIdentities,

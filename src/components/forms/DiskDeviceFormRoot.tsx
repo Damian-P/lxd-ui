@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Button, Icon } from "@canonical/react-components";
-import { LxdDiskDevice } from "types/device";
+import { IncusDiskDevice } from "types/device";
 import { InstanceAndProfileFormikProps } from "./instanceAndProfileFormValues";
 import ConfigurationTable from "components/ConfigurationTable";
 import { EditInstanceFormValues } from "pages/instances/EditInstance";
@@ -9,16 +9,16 @@ import { getInheritedRootStorage } from "util/configInheritance";
 import StoragePoolSelector from "pages/storage/StoragePoolSelector";
 import { getDiskDeviceRow } from "./DiskDeviceRow";
 import DiskSizeSelector from "components/forms/DiskSizeSelector";
-import { LxdStoragePool } from "types/storage";
-import { LxdProfile } from "types/profile";
+import { IncusStoragePool } from "types/storage";
+import { IncusProfile } from "types/profile";
 import { removeDevice } from "util/formDevices";
 import { hasNoRootDisk } from "util/instanceValidation";
 
 interface Props {
   formik: InstanceAndProfileFormikProps;
   project: string;
-  pools: LxdStoragePool[];
-  profiles: LxdProfile[];
+  pools: IncusStoragePool[];
+  profiles: IncusProfile[];
 }
 
 const DiskDeviceFormRoot: FC<Props> = ({
@@ -34,7 +34,7 @@ const DiskDeviceFormRoot: FC<Props> = ({
   const hasRootStorage = rootIndex !== -1;
   const formRootDevice = formik.values.devices[
     rootIndex
-  ] as LxdDiskDevice | null;
+  ] as IncusDiskDevice | null;
 
   const [inheritValue, inheritSource] = getInheritedRootStorage(
     formik.values,

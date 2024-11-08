@@ -1,6 +1,6 @@
 declare module "parse-prometheus-text-format" {
-  import { LxdMetricGroup } from "./metrics";
+  import { IncusMetricGroup } from "./metrics";
 
-  function parsePrometheusTextFormat(input: string): LxdMetricGroup[];
+  function parsePrometheusTextFormat(input: string): IncusMetricGroup[];
   export = parsePrometheusTextFormat;
 }

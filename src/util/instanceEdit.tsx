@@ -1,5 +1,5 @@
-import { LxdProfile } from "types/profile";
-import { LxdInstance } from "types/instance";
+import { IncusProfile } from "types/profile";
+import { IncusInstance } from "types/instance";
 import { formDeviceToPayload, parseDevices } from "util/formDevices";
 import { parseCpuLimit, parseMemoryLimit } from "util/limits";
 import { getInstanceConfigKeys } from "util/instanceConfigFields";
@@ -15,7 +15,7 @@ import { EditProfileFormValues } from "pages/profiles/EditProfile";
 import { migrationPayload } from "components/forms/MigrationForm";
 
 const getEditValues = (
-  item: LxdProfile | LxdInstance,
+  item: IncusProfile | IncusInstance,
 ): Omit<EditProfileFormValues, "entityType" | "readOnly"> => {
   return {
     name: item.name,
@@ -42,8 +42,8 @@ const getEditValues = (
       ? parseInt(item.config["security.idmap.size"])
       : undefined,
     security_idmap_isolated: item.config["security.idmap.isolated"],
-    security_devlxd: item.config["security.devlxd"],
-    security_devlxd_images: item.config["security.devlxd.images"],
+    security_guestapi: item.config["security.guestapi"],
+    security_guestapi_images: item.config["security.guestapi.images"],
     security_secureboot: item.config["security.secureboot"],
 
     snapshots_pattern: item.config["snapshots.pattern"],
@@ -60,7 +60,7 @@ const getEditValues = (
 };
 
 export const getInstanceEditValues = (
-  instance: LxdInstance,
+  instance: IncusInstance,
 ): EditInstanceFormValues => {
   return {
     instanceType: instance.type,
@@ -73,7 +73,7 @@ export const getInstanceEditValues = (
 };
 
 export const getProfileEditValues = (
-  profile: LxdProfile,
+  profile: IncusProfile,
 ): EditProfileFormValues => {
   return {
     readOnly: true,
@@ -83,7 +83,7 @@ export const getProfileEditValues = (
 };
 
 export const getInstancePayload = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   values: EditInstanceFormValues,
 ) => {
   const handledConfigKeys = getInstanceConfigKeys();

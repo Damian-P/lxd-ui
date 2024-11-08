@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { deleteStorageVolume } from "api/storage-pools";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
@@ -10,7 +10,7 @@ import {
 } from "@canonical/react-components";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   project: string;
   onFinish: () => void;
   appearance?: string;

@@ -14,16 +14,14 @@ const Version: FC = () => {
   const serverMajor = serverVersion.includes(".")
     ? serverVersion.split(".")[0]
     : undefined;
-  const isOutdated = serverMajor
-    ? parseInt(serverMajor) < RECENT_MAJOR_SERVER_VERSION
-    : false;
+  const isOutdated = false;
 
   return (
     <>
       <span className="server-version p-text--small">
         {isOutdated && (
           <Tooltip
-            message="You are using an outdated server version. Update your LXD server to benefit from the latest features."
+            message="You are using an outdated server version. Update your Incus server to benefit from the latest features."
             tooltipClassName="version-warning"
             zIndex={1000}
           >

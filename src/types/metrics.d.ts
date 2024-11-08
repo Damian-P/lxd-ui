@@ -1,11 +1,11 @@
-export interface LxdMetricGroup {
+export interface IncusMetricGroup {
   name: string;
   help: string;
   type: string;
-  metrics: LxdMetric[];
+  metrics: IncusMetric[];
 }
 
-export interface LxdMetric {
+export interface IncusMetric {
   value: number;
   labels: {
     name: string;

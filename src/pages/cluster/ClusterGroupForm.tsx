@@ -15,7 +15,7 @@ import {
   fetchClusterMembers,
   updateClusterGroup,
 } from "api/cluster";
-import { LxdClusterGroup } from "types/cluster";
+import { IncusClusterGroup } from "types/cluster";
 import * as Yup from "yup";
 import { checkDuplicateName } from "util/helpers";
 import { useFormik } from "formik";
@@ -36,7 +36,7 @@ export interface ClusterGroupFormValues {
 }
 
 interface Props {
-  group?: LxdClusterGroup;
+  group?: IncusClusterGroup;
 }
 
 const ClusterGroupForm: FC<Props> = ({ group }) => {

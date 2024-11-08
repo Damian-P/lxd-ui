@@ -11,7 +11,7 @@ import {
 } from "@canonical/react-components";
 import { FormikProps } from "formik/dist/types";
 import * as Yup from "yup";
-import { LxdNetworkForward } from "types/network";
+import { IncusNetworkForward } from "types/network";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import useEventListener from "@use-it/event-listener";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +26,7 @@ import ScrollableForm from "components/ScrollableForm";
 
 export const toNetworkForward = (
   values: NetworkForwardFormValues,
-): LxdNetworkForward => {
+): IncusNetworkForward => {
   return {
     listen_address: values.listenAddress,
     description: values.description,
@@ -144,7 +144,7 @@ const NetworkForwardForm: FC<Props> = ({
               required
               stacked
               disabled={isEdit}
-              help="Any address routed to LXD."
+              help="Any address routed to Incus."
               error={
                 formik.touched.listenAddress
                   ? formik.errors.listenAddress

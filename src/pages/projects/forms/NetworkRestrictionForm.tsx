@@ -5,7 +5,7 @@ import ScrollableConfigurationTable from "components/forms/ScrollableConfigurati
 import { ProjectFormValues } from "pages/projects/CreateProject";
 import { FormikProps } from "formik/dist/types";
 import { getProjectKey } from "util/projectConfigFields";
-import { LxdConfigPair } from "types/config";
+import { IncusConfigPair } from "types/config";
 
 export interface NetworkRestrictionFormValues {
   restricted_network_access?: string;
@@ -16,7 +16,7 @@ export interface NetworkRestrictionFormValues {
 
 export const networkRestrictionPayload = (
   values: NetworkRestrictionFormValues,
-): LxdConfigPair => {
+): IncusConfigPair => {
   return {
     [getProjectKey("restricted_network_access")]:
       values.restricted_network_access,

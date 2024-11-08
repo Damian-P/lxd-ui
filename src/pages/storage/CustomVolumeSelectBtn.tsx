@@ -2,13 +2,13 @@ import { FC, ReactNode } from "react";
 import { Button, ButtonProps } from "@canonical/react-components";
 import usePortal from "react-useportal";
 import CustomVolumeModal from "pages/storage/CustomVolumeModal";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 
 interface Props {
   children: ReactNode;
   buttonProps?: ButtonProps;
   project: string;
-  setValue: (volume: LxdStorageVolume) => void;
+  setValue: (volume: IncusStorageVolume) => void;
 }
 
 const CustomVolumeSelectBtn: FC<Props> = ({
@@ -21,7 +21,7 @@ const CustomVolumeSelectBtn: FC<Props> = ({
 
   const handleCancel = () => closePortal();
 
-  const handleFinish = (volume: LxdStorageVolume) => {
+  const handleFinish = (volume: IncusStorageVolume) => {
     setValue(volume);
     closePortal();
   };

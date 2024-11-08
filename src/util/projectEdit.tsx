@@ -1,4 +1,4 @@
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { ProjectFormValues } from "pages/projects/CreateProject";
 import { isProjectWithProfiles } from "./projects";
 import { getProjectConfigKeys } from "util/projectConfigFields";
@@ -14,7 +14,7 @@ import { networkRestrictionPayload } from "pages/projects/forms/NetworkRestricti
 import { getUnhandledKeyValues } from "util/formFields";
 
 export const getProjectEditValues = (
-  project: LxdProject,
+  project: IncusProject,
 ): ProjectFormValues => {
   return {
     name: project.name,
@@ -96,9 +96,9 @@ export const getProjectEditValues = (
 };
 
 export const getProjectPayload = (
-  project: LxdProject,
+  project: IncusProject,
   values: ProjectFormValues,
-): Partial<LxdProject> => {
+): Partial<IncusProject> => {
   const handledConfigKeys = getProjectConfigKeys();
   const handledKeys = new Set(["name", "description", "config"]);
 

@@ -1,12 +1,12 @@
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { isSnapshot } from "util/storageVolume";
 import { loadVolumes } from "context/loadIsoVolumes";
 
 export const loadCustomVolumes = async (
   project: string,
   hasStorageVolumesAll: boolean,
-): Promise<LxdStorageVolume[]> => {
-  const result: LxdStorageVolume[] = [];
+): Promise<IncusStorageVolume[]> => {
+  const result: IncusStorageVolume[] = [];
 
   const volumes = await loadVolumes(project, hasStorageVolumesAll);
   volumes.forEach((volume) => {

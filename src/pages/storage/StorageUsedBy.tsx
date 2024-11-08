@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import ImageName from "pages/images/ImageName";
-import { LxdStoragePool, LxdStorageVolume } from "types/storage";
-import { filterUsedByType, LxdUsedBy } from "util/usedBy";
+import { IncusStoragePool, IncusStorageVolume } from "types/storage";
+import { filterUsedByType, IncusUsedBy } from "util/usedBy";
 import InstanceLink from "pages/instances/InstanceLink";
 import ExpandableList from "components/ExpandableList";
 
 interface Props {
-  storage: LxdStoragePool | LxdStorageVolume;
+  storage: IncusStoragePool | IncusStorageVolume;
   project: string;
 }
 
@@ -18,7 +18,7 @@ const SNAPSHOTS = "Snapshots";
 const CUSTOM_VOLUMES = "Custom volumes";
 
 const StorageUsedBy: FC<Props> = ({ storage, project }) => {
-  const data: Record<string, LxdUsedBy[]> = {
+  const data: Record<string, IncusUsedBy[]> = {
     [INSTANCES]: filterUsedByType("instance", storage.used_by),
     [PROFILES]: filterUsedByType("profile", storage.used_by),
     [IMAGES]: filterUsedByType("image", storage.used_by),

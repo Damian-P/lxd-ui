@@ -24,9 +24,9 @@ import {
   getZfsVolumeFormFields,
 } from "util/storageVolume";
 import {
-  LxdStorageVolume,
-  LxdStorageVolumeContentType,
-  LxdStorageVolumeType,
+  IncusStorageVolume,
+  IncusStorageVolumeContentType,
+  IncusStorageVolumeType,
 } from "types/storage";
 import { slugify } from "util/slugify";
 import { driversWithFilesystemSupport } from "util/storageOptions";
@@ -37,8 +37,8 @@ export interface StorageVolumeFormValues {
   project: string;
   pool: string;
   size?: string;
-  content_type: LxdStorageVolumeContentType;
-  volumeType: LxdStorageVolumeType;
+  content_type: IncusStorageVolumeContentType;
+  volumeType: IncusStorageVolumeType;
   security_shifted?: string;
   security_unmapped?: string;
   snapshots_expiry?: string;
@@ -61,8 +61,8 @@ export interface StorageVolumeFormValues {
 export const volumeFormToPayload = (
   values: StorageVolumeFormValues,
   project: string,
-  volume?: LxdStorageVolume,
-): LxdStorageVolume => {
+  volume?: IncusStorageVolume,
+): IncusStorageVolume => {
   const hasValidSize = values.size?.match(/^\d/);
   const unhandledVolumeConfigs = getUnhandledKeyValues(
     volume?.config || {},

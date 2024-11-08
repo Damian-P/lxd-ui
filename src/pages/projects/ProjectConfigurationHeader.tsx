@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RenameHeader, { RenameHeaderValues } from "components/RenameHeader";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { renameProject } from "api/projects";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -13,7 +13,7 @@ import { useDocs } from "context/useDocs";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  project: LxdProject;
+  project: IncusProject;
 }
 
 const ProjectConfigurationHeader: FC<Props> = ({ project }) => {

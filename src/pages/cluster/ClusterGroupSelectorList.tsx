@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { LxdClusterGroup } from "types/cluster";
+import { IncusClusterGroup } from "types/cluster";
 import { allClusterGroups } from "util/clusterGroups";
 
 interface Props {
-  clusterGroups: LxdClusterGroup[];
+  clusterGroups: IncusClusterGroup[];
 }
 
 const ClusterGroupSelectorList: FC<Props> = ({ clusterGroups }) => {

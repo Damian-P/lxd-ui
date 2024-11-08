@@ -9,7 +9,7 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
-import { LxdStoragePool } from "types/storage";
+import { IncusStoragePool } from "types/storage";
 import { queryKeys } from "util/queryKeys";
 import StoragePoolForm, {
   toStoragePool,
@@ -30,7 +30,7 @@ import { useSettings } from "context/useSettings";
 import { getSupportedStorageDrivers } from "util/storageOptions";
 
 interface Props {
-  pool: LxdStoragePool;
+  pool: IncusStoragePool;
 }
 
 const EditStoragePool: FC<Props> = ({ pool }) => {
@@ -67,7 +67,7 @@ const EditStoragePool: FC<Props> = ({ pool }) => {
     validationSchema: StoragePoolSchema,
     onSubmit: (values) => {
       const savedPool = values.yaml
-        ? (yamlToObject(values.yaml) as LxdStoragePool)
+        ? (yamlToObject(values.yaml) as IncusStoragePool)
         : toStoragePool(values);
 
       const mutation =

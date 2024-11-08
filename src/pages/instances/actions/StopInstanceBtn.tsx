@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { useQueryClient } from "@tanstack/react-query";
 import { stopInstance } from "api/instances";
 import { queryKeys } from "util/queryKeys";
@@ -12,7 +12,7 @@ import { useEventQueue } from "context/eventQueue";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const StopInstanceBtn: FC<Props> = ({ instance }) => {

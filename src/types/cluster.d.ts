@@ -1,8 +1,8 @@
-export type LxdClusterMemberAction = "evacuate" | "restore";
+export type IncusClusterMemberAction = "evacuate" | "restore";
 
-export type LxdClusterMemberStatus = "Evacuated" | "Online";
+export type IncusClusterMemberStatus = "Evacuated" | "Online";
 
-export interface LxdClusterMember {
+export interface IncusClusterMember {
   architecture: string;
   database: boolean;
   description: string;
@@ -11,11 +11,11 @@ export interface LxdClusterMember {
   message: string;
   roles: string[];
   server_name: string;
-  status: LxdClusterMemberStatus;
+  status: IncusClusterMemberStatus;
   url: string;
 }
 
-export interface LxdClusterGroup {
+export interface IncusClusterGroup {
   description: string;
   members: string[];
   name: string;

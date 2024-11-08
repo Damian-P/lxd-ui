@@ -14,7 +14,7 @@ import { queryKeys } from "util/queryKeys";
 import { dump as dumpYaml } from "js-yaml";
 import { yamlToObject } from "util/yaml";
 import { useNavigate, useParams } from "react-router-dom";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { FormDeviceValues } from "util/formDevices";
 import SecurityPoliciesForm, {
   SecurityPoliciesFormValues,
@@ -81,7 +81,7 @@ export type EditInstanceFormValues = InstanceEditDetailsFormValues &
   YamlFormValues;
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const EditInstance: FC<Props> = ({ instance }) => {
@@ -114,7 +114,7 @@ const EditInstance: FC<Props> = ({ instance }) => {
         values.yaml
           ? yamlToObject(values.yaml)
           : getInstancePayload(instance, values)
-      ) as LxdInstance;
+      ) as IncusInstance;
 
       // ensure the etag is set (it is missing on the yaml)
       instancePayload.etag = instance.etag;

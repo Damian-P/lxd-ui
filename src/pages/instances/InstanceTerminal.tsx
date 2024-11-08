@@ -8,7 +8,7 @@ import ReconnectTerminalBtn from "./actions/ReconnectTerminalBtn";
 import { TerminalConnectPayload } from "types/terminal";
 import Loader from "components/Loader";
 import { updateMaxHeight } from "util/updateMaxHeight";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { useInstanceStart } from "util/instanceStart";
 import Xterm from "components/Xterm";
 import { Terminal } from "xterm";
@@ -43,7 +43,7 @@ export const defaultPayload: TerminalConnectPayload = {
 };
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const InstanceTerminal: FC<Props> = ({ instance }) => {

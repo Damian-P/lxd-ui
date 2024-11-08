@@ -10,7 +10,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { fetchNetworks } from "api/networks";
-import { LxdNicDevice } from "types/device";
+import { IncusNicDevice } from "types/device";
 import { InstanceAndProfileFormikProps } from "./instanceAndProfileFormValues";
 import ScrollableConfigurationTable from "components/forms/ScrollableConfigurationTable";
 import { fetchProfiles } from "api/profiles";
@@ -134,7 +134,7 @@ or remove the originating item"
             return {};
           }
           const device = formik.values.devices[index] as
-            | LxdNicDevice
+            | IncusNicDevice
             | CustomNetworkDevice;
 
           return getConfigurationRowBase({
@@ -150,7 +150,7 @@ or remove the originating item"
                     id={`devices.${index}.name`}
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
-                    value={(formik.values.devices[index] as LxdNicDevice).name}
+                    value={(formik.values.devices[index] as IncusNicDevice).name}
                     type="text"
                     placeholder="Enter name"
                     error={
@@ -172,7 +172,7 @@ or remove the originating item"
                   </Tooltip>{" "}
                 </>
               ) : readOnly ? (
-                (formik.values.devices[index] as LxdNicDevice).network
+                (formik.values.devices[index] as IncusNicDevice).network
               ) : (
                 <div className="network-device" key={index}>
                   <div>
@@ -183,7 +183,7 @@ or remove the originating item"
                       onBlur={formik.handleBlur}
                       onChange={formik.handleChange}
                       value={
-                        (formik.values.devices[index] as LxdNicDevice).network
+                        (formik.values.devices[index] as IncusNicDevice).network
                       }
                       options={getNetworkOptions()}
                     />

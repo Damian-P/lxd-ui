@@ -1,9 +1,9 @@
-import { LxdInstance } from "types/instance";
-import { LxdNetwork, LxdNetworkConfig } from "types/network";
-import { LxdConfigOptionsKeys } from "types/config";
+import { IncusInstance } from "types/instance";
+import { IncusNetwork, IncusNetworkConfig } from "types/network";
+import { IncusConfigOptionsKeys } from "types/config";
 
 export const getIpAddresses = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   family: "inet" | "inet6",
 ) => {
   if (!instance.state?.network) return [];
@@ -19,7 +19,7 @@ export const getIpAddresses = (
 
 export const networkFormFieldToPayloadName: Record<
   string,
-  keyof LxdNetworkConfig
+  keyof IncusNetworkConfig
 > = {
   bridge_driver: "bridge.driver",
   bridge_hwaddr: "bridge.hwaddr",
@@ -60,7 +60,7 @@ export const getHandledNetworkConfigKeys = () => {
   return new Set(Object.values(networkFormFieldToPayloadName));
 };
 
-export const getNetworkKey = (formField: string): keyof LxdNetworkConfig => {
+export const getNetworkKey = (formField: string): keyof IncusNetworkConfig => {
   if (!(formField in networkFormFieldToPayloadName)) {
     throw new Error(
       `Could not find ${formField} in networkFormFieldToPayloadName`,
@@ -69,7 +69,7 @@ export const getNetworkKey = (formField: string): keyof LxdNetworkConfig => {
   return networkFormFieldToPayloadName[formField];
 };
 
-const networkTypeToOptionKey: Record<string, LxdConfigOptionsKeys> = {
+const networkTypeToOptionKey: Record<string, IncusConfigOptionsKeys> = {
   bridge: "network-bridge",
   ovn: "network-ovn",
   macvlan: "network-macvlan",
@@ -79,7 +79,7 @@ const networkTypeToOptionKey: Record<string, LxdConfigOptionsKeys> = {
 
 export const networkFormTypeToOptionKey = (
   type: string,
-): LxdConfigOptionsKeys => {
+): IncusConfigOptionsKeys => {
   if (!(type in networkTypeToOptionKey)) {
     throw new Error(`Could not find ${type} in networkTypeToOptionKey`);
   }
@@ -87,8 +87,8 @@ export const networkFormTypeToOptionKey = (
 };
 
 const hasNetworkConfigDiff = (
-  a: Partial<LxdNetworkConfig>,
-  b: Partial<LxdNetworkConfig>,
+  a: Partial<IncusNetworkConfig>,
+  b: Partial<IncusNetworkConfig>,
 ): boolean => {
   return (Object.keys(a) as Array<keyof typeof a>).some((key) => {
     const isIp = key === "ipv4.address" || key === "ipv6.address";
@@ -100,8 +100,8 @@ const hasNetworkConfigDiff = (
 };
 
 export const areNetworksEqual = (
-  a: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">>,
-  b: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">>,
+  a: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">>,
+  b: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">>,
 ): boolean => {
   if (hasNetworkConfigDiff(a.config, b.config)) {
     return false;

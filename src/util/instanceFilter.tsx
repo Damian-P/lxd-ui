@@ -1,13 +1,13 @@
-import { LxdInstanceStatus } from "types/instance";
+import { IncusInstanceStatus } from "types/instance";
 
 export interface InstanceFilters {
   queries: string[];
-  statuses: LxdInstanceStatus[];
+  statuses: IncusInstanceStatus[];
   types: string[];
   profileQueries: string[];
 }
 
-export const instanceStatuses: LxdInstanceStatus[] = [
+export const instanceStatuses: IncusInstanceStatus[] = [
   "Running",
   "Stopped",
   "Frozen",
@@ -17,13 +17,13 @@ export const instanceStatuses: LxdInstanceStatus[] = [
 export const instanceTypes: string[] = ["Container", "VM"];
 
 export const enrichStatuses = (
-  statuses: LxdInstanceStatus[],
-): LxdInstanceStatus[] => {
+  statuses: IncusInstanceStatus[],
+): IncusInstanceStatus[] => {
   if (statuses.includes("Frozen")) {
     statuses.push("Freezing");
   }
   if (statuses.includes("Running")) {
-    statuses.push(...(["Restarting", "Starting"] as LxdInstanceStatus[]));
+    statuses.push(...(["Restarting", "Starting"] as IncusInstanceStatus[]));
   }
   if (statuses.includes("Stopped")) {
     statuses.push("Stopping");

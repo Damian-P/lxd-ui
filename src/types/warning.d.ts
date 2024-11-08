@@ -1,4 +1,4 @@
-export interface LxdWarning {
+export interface IncusWarning {
   status: string;
   uuid: string;
   project: string;

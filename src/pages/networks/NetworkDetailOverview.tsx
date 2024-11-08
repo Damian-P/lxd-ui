@@ -4,18 +4,18 @@ import { Col, Row } from "@canonical/react-components";
 import useEventListener from "@use-it/event-listener";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import ItemName from "components/ItemName";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { fetchNetworkState } from "api/networks";
 import { humanFileSize } from "util/helpers";
 import Loader from "components/Loader";
-import { filterUsedByType, LxdUsedBy } from "util/usedBy";
+import { filterUsedByType, IncusUsedBy } from "util/usedBy";
 import InstanceLink from "pages/instances/InstanceLink";
 import ExpandableList from "components/ExpandableList";
 
 interface Props {
-  network: LxdNetwork;
+  network: IncusNetwork;
 }
 
 const NetworkDetailOverview: FC<Props> = ({ network }) => {
@@ -52,7 +52,7 @@ const NetworkDetailOverview: FC<Props> = ({ network }) => {
     return <Loader />;
   }
 
-  const data: Record<string, LxdUsedBy[]> = {
+  const data: Record<string, IncusUsedBy[]> = {
     instances: filterUsedByType("instance", network.used_by),
     profiles: filterUsedByType("profile", network.used_by),
   };

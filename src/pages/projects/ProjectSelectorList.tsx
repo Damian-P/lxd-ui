@@ -1,11 +1,11 @@
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { getSubpageFromUrl } from "util/projects";
 import { filterUsedByType } from "util/usedBy";
 
 interface Props {
-  projects: LxdProject[];
+  projects: IncusProject[];
   onMount: (val: Dispatch<SetStateAction<string>>) => void;
 }
 
@@ -17,7 +17,7 @@ const ProjectSelectorList: FC<Props> = ({ projects, onMount }): JSX.Element => {
 
   const targetSection = getSubpageFromUrl(location.pathname) ?? "instances";
 
-  function getInstanceCount(project: LxdProject) {
+  function getInstanceCount(project: IncusProject) {
     const count = filterUsedByType("instance", project.used_by).length;
     return count === 1 ? "1 instance" : `${count} instances`;
   }

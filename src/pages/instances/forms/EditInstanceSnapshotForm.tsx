@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { LxdInstance, LxdInstanceSnapshot } from "types/instance";
+import { IncusInstance, IncusInstanceSnapshot } from "types/instance";
 import SnapshotForm from "components/forms/SnapshotForm";
 import { useQueryClient } from "@tanstack/react-query";
 import {
@@ -20,8 +20,8 @@ import { SnapshotFormValues, getExpiresAt } from "util/snapshots";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  instance: LxdInstance;
-  snapshot: LxdInstanceSnapshot;
+  instance: IncusInstance;
+  snapshot: IncusInstanceSnapshot;
   close: () => void;
   onSuccess: (message: ReactNode) => void;
 }
@@ -54,7 +54,7 @@ const EditInstanceSnapshotForm: FC<Props> = ({
     const targetSnapshot = newName
       ? ({
           name: newName,
-        } as LxdInstanceSnapshot)
+        } as IncusInstanceSnapshot)
       : snapshot;
     void updateInstanceSnapshot(instance, targetSnapshot, expiresAt)
       .then((operation) =>

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Button, ButtonProps } from "@canonical/react-components";
-import { LxdIdentity } from "types/permissions";
+import { IncusIdentity } from "types/permissions";
 import usePanelParams from "util/usePanelParams";
 
 interface Props {
-  identities: LxdIdentity[];
+  identities: IncusIdentity[];
   className?: string;
 }
 

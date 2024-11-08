@@ -2,7 +2,7 @@ import { Button, Select, useNotify } from "@canonical/react-components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPermissions } from "api/auth-permissions";
 import { ChangeEvent, FC, useEffect, useState } from "react";
-import { LxdPermission } from "types/permissions";
+import { IncusPermission } from "types/permissions";
 import {
   generateEntitlementOptions,
   generateResourceOptions,
@@ -11,12 +11,12 @@ import {
 } from "util/permissions";
 import { queryKeys } from "util/queryKeys";
 
-export type LxdPermissionWithID = LxdPermission & { id: string };
+export type IncusPermissionWithID = IncusPermission & { id: string };
 
 interface Props {
   imageNamesLookup: Record<string, string>;
   identityNamesLookup: Record<string, string>;
-  onAddPermission: (permission: LxdPermissionWithID) => void;
+  onAddPermission: (permission: IncusPermissionWithID) => void;
 }
 
 const PermissionSelector: FC<Props> = ({

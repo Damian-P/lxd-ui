@@ -9,7 +9,7 @@ import { fetchInstances } from "api/instances";
 import { isNicDevice } from "util/devices";
 import Cytoscape, { EdgeDefinition } from "cytoscape";
 import { fetchNetworks } from "api/networks";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import Loader from "components/Loader";
 import popper from "cytoscape-popper";
 import MapTooltip, {
@@ -64,7 +64,7 @@ const NetworkMap: FC = () => {
     return <Loader />;
   }
 
-  const getInstanceColor = (instance: LxdInstance) => {
+  const getInstanceColor = (instance: IncusInstance) => {
     switch (instance.status) {
       case "Running":
         return "#0E8420";

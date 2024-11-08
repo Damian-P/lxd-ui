@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Col, Notification, Row } from "@canonical/react-components";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import useEventListener from "@use-it/event-listener";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import ProfileInstances from "./ProfileInstances";
@@ -14,7 +14,7 @@ import ProfileNetworkList from "./ProfileNetworkList";
 import ProfileStorageList from "./ProfileStorageList";
 
 interface Props {
-  profile: LxdProfile;
+  profile: IncusProfile;
   featuresProfiles: boolean;
 }
 

@@ -4,16 +4,16 @@ import {
   pushFailure,
   pushSuccess,
 } from "util/helpers";
-import { LxdInstance, LxdInstanceSnapshot } from "types/instance";
-import { LxdOperationResponse } from "types/operation";
+import { IncusInstance, IncusInstanceSnapshot } from "types/instance";
+import { IncusOperationResponse } from "types/operation";
 import { EventQueue } from "context/eventQueue";
 
 export const createInstanceSnapshot = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   name: string,
   expiresAt: string | null,
   stateful: boolean,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/instances/${instance.name}/snapshots?project=${instance.project}`,
@@ -33,9 +33,9 @@ export const createInstanceSnapshot = (
 };
 
 export const deleteInstanceSnapshot = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   snapshot: { name: string },
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/instances/${instance.name}/snapshots/${snapshot.name}?project=${instance.project}`,
@@ -50,7 +50,7 @@ export const deleteInstanceSnapshot = (
 };
 
 export const deleteInstanceSnapshotBulk = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   snapshotNames: string[],
   eventQueue: EventQueue,
 ): Promise<PromiseSettledResult<void>[]> => {
@@ -77,10 +77,10 @@ export const deleteInstanceSnapshotBulk = (
 };
 
 export const restoreInstanceSnapshot = (
-  instance: LxdInstance,
-  snapshot: LxdInstanceSnapshot,
+  instance: IncusInstance,
+  snapshot: IncusInstanceSnapshot,
   restoreState: boolean,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${instance.name}?project=${instance.project}`, {
       method: "PUT",
@@ -96,10 +96,10 @@ export const restoreInstanceSnapshot = (
 };
 
 export const renameInstanceSnapshot = (
-  instance: LxdInstance,
-  snapshot: LxdInstanceSnapshot,
+  instance: IncusInstance,
+  snapshot: IncusInstanceSnapshot,
   newName: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/instances/${instance.name}/snapshots/${snapshot.name}?project=${instance.project}`,
@@ -117,10 +117,10 @@ export const renameInstanceSnapshot = (
 };
 
 export const updateInstanceSnapshot = (
-  instance: LxdInstance,
-  snapshot: LxdInstanceSnapshot,
+  instance: IncusInstance,
+  snapshot: IncusInstanceSnapshot,
   expiresAt: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/instances/${instance.name}/snapshots/${snapshot.name}?project=${instance.project}`,

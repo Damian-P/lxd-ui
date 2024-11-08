@@ -1,6 +1,6 @@
 import { FC } from "react";
 import InstanceLink from "./InstanceLink";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import InstanceStatusIcon from "./InstanceStatusIcon";
 import { instanceCreationTypes } from "util/instanceOptions";
 import InstanceIps from "./InstanceIps";
@@ -14,7 +14,7 @@ import { isNicDevice } from "util/devices";
 const RECENT_SNAPSHOT_LIMIT = 5;
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const InstanceDetailPanelContent: FC<Props> = ({ instance }) => {

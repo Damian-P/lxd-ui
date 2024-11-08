@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Button } from "@canonical/react-components";
+import { Button, Icon } from "@canonical/react-components";
 import MigrateInstanceForm from "pages/instances/MigrateInstanceForm";
 import usePortal from "react-useportal";
 import { migrateInstance } from "api/instances";
@@ -12,18 +12,10 @@ import ItemName from "components/ItemName";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  instance: string;
-  location: string;
-  project: string;
-  onFinish: (newLocation: string) => void;
+  instance: IncusInstance;
 }
 
-const MigrateInstanceBtn: FC<Props> = ({
-  instance,
-  location,
-  project,
-  onFinish,
-}) => {
+const MigrateInstanceBtn: FC<Props> = ({ instance }) => {
   const eventQueue = useEventQueue();
   const toastNotify = useToastNotification();
   const { openPortal, closePortal, isOpen, Portal } = usePortal();
@@ -42,17 +34,16 @@ const MigrateInstanceBtn: FC<Props> = ({
     toastNotify.success(
       <>
         Migration finished for instance{" "}
-        <ItemName item={{ name: instance }} bold />
+        <ItemName item={{ name: instance.name }} bold />
       </>,
     );
-    onFinish(newTarget);
     void queryClient.invalidateQueries({
       queryKey: [queryKeys.instances, instance],
     });
   };
 
   const notifyFailure = (e: unknown) => {
-    toastNotify.failure(`Migration failed on instance ${instance}`, e);
+    toastNotify.failure(`Migration failed on instance ${instance.name}`, e);
   };
 
   const handleFailure = (msg: string) => {
@@ -63,14 +54,14 @@ const MigrateInstanceBtn: FC<Props> = ({
   };
 
   const handleMigrate = (target: string) => {
-    migrateInstance(instance, project, target)
+    migrateInstance(instance, target)
       .then((operation) => {
         eventQueue.set(
           operation.metadata.id,
           () => handleSuccess(target),
           handleFailure,
         );
-        toastNotify.info(`Migration started for instance ${instance}`);
+        toastNotify.info(`Migration started for instance ${instance.name}`);
         closePortal();
       })
       .catch((e) => {
@@ -87,13 +78,17 @@ const MigrateInstanceBtn: FC<Props> = ({
             close={closePortal}
             migrate={handleMigrate}
             instance={instance}
-            location={location}
             members={members}
           />
         </Portal>
       )}
-      <Button className="instance-migrate" onClick={openPortal} type="button">
-        Migrate
+      <Button
+        appearance="base"
+        loading={isLoading}
+        className="has-icon is-dense"
+        onClick={openPortal}
+      >
+        <Icon name="connected" />
       </Button>
     </>
   );

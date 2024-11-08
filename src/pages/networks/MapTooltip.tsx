@@ -1,13 +1,13 @@
 import { FC, ReactNode } from "react";
-import { LxdInstance } from "types/instance";
-import { LxdNetwork } from "types/network";
+import { IncusInstance } from "types/instance";
+import { IncusNetwork } from "types/network";
 import { createRoot } from "react-dom/client";
 import ItemName from "components/ItemName";
 import { getIpAddresses } from "util/networks";
 
 export interface MapTooltipProps {
   type: string;
-  item: LxdInstance | LxdNetwork;
+  item: IncusInstance | IncusNetwork;
 }
 
 export const mountElement = (component: ReactNode) => {
@@ -21,7 +21,7 @@ export const mountElement = (component: ReactNode) => {
 
 const MapTooltip: FC<MapTooltipProps> = ({ item, type }) => {
   if (type === "instance") {
-    const instance = item as LxdInstance;
+    const instance = item as IncusInstance;
 
     const ipAddresses = getIpAddresses(instance, "inet")
       .concat(getIpAddresses(instance, "inet6"))
@@ -47,7 +47,7 @@ const MapTooltip: FC<MapTooltipProps> = ({ item, type }) => {
     );
   }
   if (type === "network") {
-    const network = item as LxdNetwork;
+    const network = item as IncusNetwork;
     return (
       <div className="p-text--small tooltip">
         {network.name}

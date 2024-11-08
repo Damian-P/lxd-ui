@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { AbortControllerState, checkDuplicateName } from "./helpers";
-import { LxdGroup, LxdIdentity } from "types/permissions";
+import { IncusGroup, IncusIdentity } from "types/permissions";
 import { ChangeSummary } from "./permissionIdentities";
 
 export const testDuplicateGroupName = (
@@ -20,8 +20,8 @@ export const testDuplicateGroupName = (
 };
 
 export const getCurrentIdentitiesForGroups = (
-  groups: LxdGroup[],
-  identities: LxdIdentity[],
+  groups: IncusGroup[],
+  identities: IncusIdentity[],
 ): {
   identityIdsInAllGroups: string[];
   identityIdsInSomeGroups: string[];
@@ -64,7 +64,7 @@ export const getCurrentIdentitiesForGroups = (
 };
 
 export const getAddedOrRemovedIdentities = (
-  allIdentities: LxdIdentity[],
+  allIdentities: IncusIdentity[],
   addedIdentities: Set<string>,
   removedIdentities: Set<string>,
 ) => {
@@ -82,8 +82,8 @@ export const getAddedOrRemovedIdentities = (
 export const generateGroupAllocationsForIdentities = (
   addedIdentities: Set<string>,
   removedIdentities: Set<string>,
-  selectedGroups: LxdGroup[],
-  addedOrRemovedIdentities: LxdIdentity[],
+  selectedGroups: IncusGroup[],
+  addedOrRemovedIdentities: IncusIdentity[],
 ): Record<string, string[]> => {
   const addedIdentitiesLookup = new Set(addedIdentities);
   const removedIdentitiesLookup = new Set(removedIdentities);
@@ -120,8 +120,8 @@ export const generateGroupAllocationsForIdentities = (
 };
 
 export const getChangesInGroupsForIdentities = (
-  allIdentities: LxdIdentity[],
-  selectedGroups: LxdGroup[],
+  allIdentities: IncusIdentity[],
+  selectedGroups: IncusGroup[],
   addedIdentities: Set<string>,
   removedIdentities: Set<string>,
 ): ChangeSummary => {

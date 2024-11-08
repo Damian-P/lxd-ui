@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { isoTimeToString } from "util/helpers";
 import { Col, Row, useNotify } from "@canonical/react-components";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { instanceCreationTypes } from "util/instanceOptions";
 import useEventListener from "@use-it/event-listener";
 import { updateMaxHeight } from "util/updateMaxHeight";
@@ -13,7 +13,7 @@ import { useSettings } from "context/useSettings";
 import NotificationRow from "components/NotificationRow";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const InstanceOverview: FC<Props> = ({ instance }) => {

@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { Button, Icon } from "@canonical/react-components";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const OpenTerminalBtn: FC<Props> = ({ instance }) => {

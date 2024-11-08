@@ -1,12 +1,12 @@
 import { handleResponse, handleSettledResult } from "util/helpers";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdIdentity } from "types/permissions";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusIdentity } from "types/permissions";
 
-export const fetchIdentities = (): Promise<LxdIdentity[]> => {
+export const fetchIdentities = (): Promise<IncusIdentity[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/auth/identities?recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdIdentity[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusIdentity[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
@@ -14,16 +14,16 @@ export const fetchIdentities = (): Promise<LxdIdentity[]> => {
 export const fetchIdentity = (
   id: string,
   authMethod: string,
-): Promise<LxdIdentity> => {
+): Promise<IncusIdentity> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/auth/identities/${authMethod}/${id}`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdIdentity>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusIdentity>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
-export const updateIdentity = (identity: Partial<LxdIdentity>) => {
+export const updateIdentity = (identity: Partial<IncusIdentity>) => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/auth/identities/${identity.authentication_method}/${identity.id}`,
@@ -39,7 +39,7 @@ export const updateIdentity = (identity: Partial<LxdIdentity>) => {
 };
 
 export const updateIdentities = (
-  identities: Partial<LxdIdentity>[],
+  identities: Partial<IncusIdentity>[],
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     void Promise.allSettled(

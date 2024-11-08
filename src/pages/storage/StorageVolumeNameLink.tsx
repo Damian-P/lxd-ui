@@ -1,7 +1,7 @@
 import { ICONS, Icon } from "@canonical/react-components";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import classnames from "classnames";
 import {
   generateLinkForVolumeDetail,
@@ -10,7 +10,7 @@ import {
 import { useProject } from "context/project";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   isExternalLink?: boolean;
   overrideName?: string;
   className?: string;

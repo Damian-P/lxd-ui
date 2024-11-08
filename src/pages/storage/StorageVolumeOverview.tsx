@@ -3,7 +3,7 @@ import { Col, Row } from "@canonical/react-components";
 import StorageUsedBy from "pages/storage/StorageUsedBy";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import useEventListener from "@use-it/event-listener";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { isoTimeToString } from "util/helpers";
 import StorageVolumeSize from "pages/storage/StorageVolumeSize";
 import { renderContentType, renderVolumeType } from "util/storageVolume";
@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 interface Props {
   project: string;
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
 }
 
 const StorageVolumeOverview: FC<Props> = ({ project, volume }) => {

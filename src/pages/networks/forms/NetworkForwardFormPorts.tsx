@@ -8,7 +8,7 @@ import {
 } from "@canonical/react-components";
 import { FormikProps } from "formik/dist/types";
 import { NetworkForwardFormValues } from "pages/networks/forms/NetworkForwardForm";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 
 export interface NetworkForwardPortFormValues {
   listenPort: string;
@@ -19,7 +19,7 @@ export interface NetworkForwardPortFormValues {
 
 interface Props {
   formik: FormikProps<NetworkForwardFormValues>;
-  network?: LxdNetwork;
+  network?: IncusNetwork;
 }
 
 const NetworkForwardFormPorts: FC<Props> = ({ formik, network }) => {

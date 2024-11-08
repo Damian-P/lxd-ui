@@ -1,4 +1,4 @@
-export interface LxdTerminal {
+export interface IncusTerminal {
   operation: string;
   metadata: {
     metadata: {

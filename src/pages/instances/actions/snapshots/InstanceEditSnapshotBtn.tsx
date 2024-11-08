@@ -1,12 +1,12 @@
 import { FC, ReactNode } from "react";
 import usePortal from "react-useportal";
 import { Button, Icon } from "@canonical/react-components";
-import { LxdInstance, LxdInstanceSnapshot } from "types/instance";
+import { IncusInstance, IncusInstanceSnapshot } from "types/instance";
 import EditInstanceSnapshotForm from "pages/instances/forms/EditInstanceSnapshotForm";
 
 interface Props {
-  instance: LxdInstance;
-  snapshot: LxdInstanceSnapshot;
+  instance: IncusInstance;
+  snapshot: IncusInstanceSnapshot;
   onSuccess: (message: ReactNode) => void;
   isDeleting: boolean;
   isRestoring: boolean;

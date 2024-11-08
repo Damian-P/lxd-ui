@@ -16,7 +16,7 @@ import useEditHistory from "util/useEditHistory";
 import ModifiedStatusAction from "../actions/ModifiedStatusAction";
 import { pluralize } from "util/instanceBulkActions";
 import { fetchIdentities } from "api/auth-identities";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import { getCurrentIdentitiesForGroups } from "util/permissionGroups";
 import GroupIdentitiesPanelConfirmModal from "./GroupIdentitiesPanelConfirmModal";
 import PermissionIdentitiesFilter, {
@@ -34,7 +34,7 @@ type IdentityEditHistory = {
 };
 
 interface Props {
-  groups: LxdGroup[];
+  groups: IncusGroup[];
 }
 
 const EditGroupIdentitiesPanel: FC<Props> = ({ groups }) => {

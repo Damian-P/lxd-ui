@@ -5,15 +5,15 @@ import { queryKeys } from "util/queryKeys";
 import Loader from "components/Loader";
 import { loadCustomVolumes } from "context/loadCustomVolumes";
 import ScrollableTable from "components/ScrollableTable";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import NotificationRow from "components/NotificationRow";
 import { renderContentType } from "util/storageVolume";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 
 interface Props {
   project: string;
-  primaryVolume?: LxdStorageVolume;
-  onFinish: (volume: LxdStorageVolume) => void;
+  primaryVolume?: IncusStorageVolume;
+  onFinish: (volume: IncusStorageVolume) => void;
   onCancel: () => void;
   onCreate: () => void;
 }
@@ -43,7 +43,7 @@ const CustomVolumeSelectModal: FC<Props> = ({
     notify.failure("Loading storage volumes failed", error);
   }
 
-  const handleSelect = (volume: LxdStorageVolume) => {
+  const handleSelect = (volume: IncusStorageVolume) => {
     notify.clear();
     onFinish(volume);
   };

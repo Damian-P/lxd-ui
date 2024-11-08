@@ -2,10 +2,10 @@ import { FC } from "react";
 import usePortal from "react-useportal";
 import { Button } from "@canonical/react-components";
 import VolumeConfigureSnapshotModal from "./VolumeConfigureSnapshotModal";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   isDisabled?: boolean;
   className?: string;
 }

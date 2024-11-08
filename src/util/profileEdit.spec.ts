@@ -1,15 +1,15 @@
 import { getProfileEditValues } from "./instanceEdit";
 import { getProfilePayload } from "util/profileEdit";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 
 describe("conversion to form values and back with getProfileEditValues and getProfilePayload", () => {
   it("preserves custom top level profile setting field", () => {
-    type CustomPayload = LxdProfile & { "custom-key": string };
+    type CustomPayload = IncusProfile & { "custom-key": string };
     const profile = {
       config: {},
       devices: {},
       "custom-key": "custom-value",
-    } as unknown as LxdProfile;
+    } as unknown as IncusProfile;
 
     const formValues = getProfileEditValues(profile);
     const payload = getProfilePayload(profile, formValues) as CustomPayload;
@@ -23,7 +23,7 @@ describe("conversion to form values and back with getProfileEditValues and getPr
       config: {
         "custom-config-key": "custom-config-value",
       },
-    } as unknown as LxdProfile;
+    } as unknown as IncusProfile;
 
     const formValues = getProfileEditValues(Profile);
     const payload = getProfilePayload(Profile, formValues);
@@ -38,7 +38,7 @@ describe("conversion to form values and back with getProfileEditValues and getPr
         "limits.memory": "2GB",
         "limits.cpu": "2-3",
       },
-    } as unknown as LxdProfile;
+    } as unknown as IncusProfile;
 
     const formValues = getProfileEditValues(Profile);
     const payload = getProfilePayload(Profile, formValues);
@@ -48,7 +48,7 @@ describe("conversion to form values and back with getProfileEditValues and getPr
   });
 
   it("preserves custom devices on profile settings", () => {
-    type DevicePayload = LxdProfile & {
+    type DevicePayload = IncusProfile & {
       devices: { grafananat: { connect: string } };
     };
     const Profile = {
@@ -58,7 +58,7 @@ describe("conversion to form values and back with getProfileEditValues and getPr
           connect: "tcp:1.2.3.4:3000",
         },
       },
-    } as unknown as LxdProfile;
+    } as unknown as IncusProfile;
 
     const formValues = getProfileEditValues(Profile);
     const payload = getProfilePayload(Profile, formValues) as DevicePayload;

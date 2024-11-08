@@ -11,7 +11,7 @@ import { MainTableRow } from "@canonical/react-components/dist/components/MainTa
 import { getConfigurationRowBase } from "components/ConfigurationRow";
 import DetachDiskDeviceBtn from "pages/instances/actions/DetachDiskDeviceBtn";
 import classnames from "classnames";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { isDiskDeviceMountPointMissing } from "util/instanceValidation";
 
 interface Props {
@@ -30,7 +30,7 @@ const DiskDeviceFormCustom: FC<Props> = ({
     .filter((device) => device.name !== "root" && device.type === "disk")
     .map((device) => device as FormDiskDevice);
 
-  const addVolume = (volume: LxdStorageVolume) => {
+  const addVolume = (volume: IncusStorageVolume) => {
     const copy = [...formik.values.devices];
     copy.push({
       type: "disk",
@@ -46,7 +46,7 @@ const DiskDeviceFormCustom: FC<Props> = ({
   };
 
   const changeVolume = (
-    volume: LxdStorageVolume,
+    volume: IncusStorageVolume,
     formVolume: FormDiskDevice,
     index: number,
   ) => {

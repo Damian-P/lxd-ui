@@ -1,8 +1,8 @@
-import { LxdConfigPair } from "types/config";
+import { IncusConfigPair } from "types/config";
 
-export interface LxdProject {
+export interface IncusProject {
   name: string;
-  config: LxdConfigPair;
+  config: IncusConfigPair;
   description: string;
   used_by?: string[];
   etag?: string;

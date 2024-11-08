@@ -1,6 +1,6 @@
 import { FC, KeyboardEvent, ReactNode } from "react";
 import { ActionButton, Button, Modal } from "@canonical/react-components";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { useFormik } from "formik";
 import { updateInstance } from "api/instances";
 import { queryKeys } from "util/queryKeys";
@@ -16,7 +16,7 @@ import {
 import { useEventQueue } from "context/eventQueue";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   close: () => void;
   onSuccess: (message: ReactNode) => void;
   onFailure: (title: string, e: unknown) => void;
@@ -39,7 +39,7 @@ const InstanceConfigureSnapshotModal: FC<Props> = ({
       const instancePayload = getInstancePayload(
         instance,
         values,
-      ) as LxdInstance;
+      ) as IncusInstance;
 
       void updateInstance(instancePayload, project ?? "")
         .then((operation) => {

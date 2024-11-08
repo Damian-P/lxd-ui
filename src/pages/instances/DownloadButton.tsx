@@ -1,10 +1,10 @@
 import { FC, useRef } from "react";
 import { Button, Icon } from "@canonical/react-components";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { fetchInstanceLogFile } from "api/instances";
 
 interface DownloadButtonProps {
-  instance: LxdInstance;
+  instance: IncusInstance;
   fileName: string;
   content: string;
 }

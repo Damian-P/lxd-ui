@@ -1,13 +1,13 @@
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 
-export type LxdImageType = "container" | "virtual-machine";
+export type IncusImageType = "container" | "virtual-machine";
 
-interface LxdImageAlias {
+interface IncusImageAlias {
   name: string;
   description: string;
 }
 
-export interface LxdImage {
+export interface IncusImage {
   fingerprint: string;
   public: boolean;
   properties?: {
@@ -22,11 +22,12 @@ export interface LxdImage {
     server: string;
   };
   architecture: string;
-  type: LxdImageType;
+  type: IncusImageType;
   size: number;
   uploaded_at: string;
-  aliases: LxdImageAlias[];
+  aliases: IncusImageAlias[];
   cached: boolean;
+  profiles: string[];
 }
 
 export interface ImportImage {
@@ -38,7 +39,7 @@ export interface RemoteImage {
   aliases: string;
   arch: string;
   created_at: number;
-  lxd_requirements?: {
+  incus_requirements?: {
     secureboot: boolean;
   };
   os: string;
@@ -58,9 +59,10 @@ export interface RemoteImage {
     }
   >;
   server?: string;
-  volume?: LxdStorageVolume;
-  type?: LxdImageType;
+  volume?: IncusStorageVolume;
+  type?: IncusImageType;
   fingerprint?: string;
+  profiles?: string[];
 }
 
 export interface RemoteImageList {

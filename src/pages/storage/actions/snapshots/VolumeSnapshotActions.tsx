@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { LxdStorageVolume, LxdVolumeSnapshot } from "types/storage";
+import { IncusStorageVolume, IncusVolumeSnapshot } from "types/storage";
 import {
   deleteVolumeSnapshot,
   restoreVolumeSnapshot,
@@ -19,8 +19,8 @@ import VolumeEditSnapshotBtn from "./VolumeEditSnapshotBtn";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  volume: LxdStorageVolume;
-  snapshot: LxdVolumeSnapshot;
+  volume: IncusStorageVolume;
+  snapshot: IncusVolumeSnapshot;
 }
 
 const VolumeSnapshotActions: FC<Props> = ({ volume, snapshot }) => {

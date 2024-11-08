@@ -1,23 +1,23 @@
-import { LxdGroup, LxdIdentity } from "types/permissions";
+import { IncusGroup, IncusIdentity } from "types/permissions";
 
 export type ChangeSummary = Record<
   string,
   { added: Set<string>; removed: Set<string>; name: string }
 >;
 
-export const getIdentityIdsForGroup = (group: LxdGroup): string[] => {
+export const getIdentityIdsForGroup = (group: IncusGroup): string[] => {
   const oidcIdentityIds = group?.identities?.oidc || [];
   const tlsIdentityIds = group?.identities?.tls || [];
   const allIdentityIds = oidcIdentityIds.concat(tlsIdentityIds);
   return allIdentityIds;
 };
 
-// Given a set of lxd groups and some identities
+// Given a set of incus groups and some identities
 // Generate a subset of those groups that's allocated to all identities
 // Generate a subset of those groups that's allocated to some identities
 export const getGroupsForIdentities = (
-  groups: LxdGroup[],
-  identities: LxdIdentity[],
+  groups: IncusGroup[],
+  identities: IncusIdentity[],
 ): {
   groupsForAllIdentities: string[];
   groupsForSomeIdentities: string[];
@@ -66,7 +66,7 @@ export const getGroupsForIdentities = (
 export const generateGroupAllocationsForIdentities = (
   addedGroups: Set<string>,
   removedGroups: Set<string>,
-  identities: LxdIdentity[],
+  identities: IncusIdentity[],
 ): Record<string, string[]> => {
   const newGroupsForIdentities: Record<string, string[]> = {};
   for (const identity of identities) {
@@ -87,7 +87,7 @@ export const generateGroupAllocationsForIdentities = (
 };
 
 export const getChangesInGroupsForIdentities = (
-  identities: LxdIdentity[],
+  identities: IncusIdentity[],
   addedGroups: Set<string>,
   removedGroups: Set<string>,
 ): ChangeSummary => {

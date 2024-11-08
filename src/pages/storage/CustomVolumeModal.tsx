@@ -2,11 +2,11 @@ import { FC, useState } from "react";
 import CustomVolumeSelectModal from "pages/storage/CustomVolumeSelectModal";
 import CustomVolumeCreateModal from "pages/storage/CustomVolumeCreateModal";
 import { Modal } from "@canonical/react-components";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 
 interface Props {
   project: string;
-  onFinish: (volume: LxdStorageVolume) => void;
+  onFinish: (volume: IncusStorageVolume) => void;
   onCancel: () => void;
 }
 
@@ -16,10 +16,10 @@ const CREATE_VOLUME = "createVolume";
 const CustomVolumeModal: FC<Props> = ({ project, onFinish, onCancel }) => {
   const [content, setContent] = useState(SELECT_VOLUME);
   const [primaryVolume, setPrimaryVolume] = useState<
-    LxdStorageVolume | undefined
+    IncusStorageVolume | undefined
   >(undefined);
 
-  const handleCreateVolume = (volume: LxdStorageVolume) => {
+  const handleCreateVolume = (volume: IncusStorageVolume) => {
     setContent(SELECT_VOLUME);
     setPrimaryVolume(volume);
   };

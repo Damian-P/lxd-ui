@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
 import { Modal } from "@canonical/react-components";
-import { LxdImageType, RemoteImage } from "types/image";
+import { IncusImageType, RemoteImage } from "types/image";
 import UploadCustomIso from "pages/storage/UploadCustomIso";
 import CustomIsoSelector from "pages/images/CustomIsoSelector";
 import { IsoImage } from "types/iso";
 
 interface Props {
   onClose: () => void;
-  onSelect: (image: RemoteImage, type?: LxdImageType) => void;
+  onSelect: (image: RemoteImage, type?: IncusImageType) => void;
 }
 
 const SELECT_ISO = "selectIso";

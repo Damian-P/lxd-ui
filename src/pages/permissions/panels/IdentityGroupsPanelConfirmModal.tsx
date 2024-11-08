@@ -1,6 +1,6 @@
 import { ConfirmationModal, useNotify } from "@canonical/react-components";
 import { FC, useState } from "react";
-import { LxdIdentity } from "types/permissions";
+import { IncusIdentity } from "types/permissions";
 import {
   generateGroupAllocationsForIdentities,
   getChangesInGroupsForIdentities,
@@ -16,7 +16,7 @@ import usePanelParams from "util/usePanelParams";
 interface Props {
   onConfirm: () => void;
   close: () => void;
-  selectedIdentities: LxdIdentity[];
+  selectedIdentities: IncusIdentity[];
   addedGroups: Set<string>;
   removedGroups: Set<string>;
 }

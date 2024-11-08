@@ -7,11 +7,11 @@ import { snapshotsPayload } from "components/forms/InstanceSnapshotsForm";
 import { cloudInitPayload } from "components/forms/CloudInitForm";
 import { getUnhandledKeyValues } from "util/formFields";
 import { EditProfileFormValues } from "pages/profiles/EditProfile";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import { migrationPayload } from "components/forms/MigrationForm";
 
 export const getProfilePayload = (
-  profile: LxdProfile,
+  profile: IncusProfile,
   values: EditProfileFormValues,
 ) => {
   const handledConfigKeys = getProfileConfigKeys();

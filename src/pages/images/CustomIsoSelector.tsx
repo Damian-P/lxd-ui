@@ -6,13 +6,13 @@ import { loadIsoVolumes } from "context/loadIsoVolumes";
 import { queryKeys } from "util/queryKeys";
 import Loader from "components/Loader";
 import { useProject } from "context/project";
-import { LxdImageType, RemoteImage } from "types/image";
+import { IncusImageType, RemoteImage } from "types/image";
 import { IsoImage } from "types/iso";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 
 interface Props {
   primaryImage: IsoImage | null;
-  onSelect: (image: RemoteImage, type?: LxdImageType) => void;
+  onSelect: (image: RemoteImage, type?: IncusImageType) => void;
   onUpload: () => void;
   onCancel: () => void;
 }

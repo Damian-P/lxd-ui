@@ -16,7 +16,7 @@ import InstanceRestrictionForm from "pages/projects/forms/InstanceRestrictionFor
 import DeviceUsageRestrictionForm from "pages/projects/forms/DeviceUsageRestrictionForm";
 import NetworkRestrictionForm from "pages/projects/forms/NetworkRestrictionForm";
 import { FormikProps } from "formik/dist/types";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import NotificationRow from "components/NotificationRow";
 import { slugify } from "util/slugify";
 
@@ -24,7 +24,7 @@ interface Props {
   formik: FormikProps<ProjectFormValues>;
   updateSection: (val: string) => void;
   section: string;
-  project?: LxdProject;
+  project?: IncusProject;
   isEdit: boolean;
 }
 

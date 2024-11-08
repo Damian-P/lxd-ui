@@ -14,12 +14,12 @@ import * as Yup from "yup";
 import { createInstance, startInstance } from "api/instances";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
-import { LxdImageType, RemoteImage } from "types/image";
+import { IncusImageType, RemoteImage } from "types/image";
 import { isContainerOnlyImage, isVmOnlyImage, LOCAL_ISO } from "util/images";
 import { dump as dumpYaml } from "js-yaml";
 import { yamlToObject } from "util/yaml";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { Location } from "history";
 import InstanceCreateDetailsForm, {
   instanceDetailPayload,
@@ -205,7 +205,7 @@ const CreateInstance: FC = () => {
       void startInstance({
         name: instanceName,
         project: project,
-      } as LxdInstance)
+      } as IncusInstance)
         .then((operation) => {
           eventQueue.set(
             operation.metadata.id,
@@ -237,7 +237,7 @@ const CreateInstance: FC = () => {
   });
 
   const submit = (values: CreateInstanceFormValues, shouldStart = true) => {
-    const instancePayload: Partial<LxdInstance> = values.yaml
+    const instancePayload: Partial<IncusInstance> = values.yaml
       ? yamlToObject(values.yaml)
       : getPayload(values);
 
@@ -295,7 +295,7 @@ const CreateInstance: FC = () => {
 
   const isLocalIsoImage = formik.values.image?.server === LOCAL_ISO;
 
-  const handleSelectImage = (image: RemoteImage, type?: LxdImageType) => {
+  const handleSelectImage = (image: RemoteImage, type?: IncusImageType) => {
     void formik.setFieldValue("image", image);
 
     const devices = formik.values.devices.filter(
@@ -313,6 +313,10 @@ const CreateInstance: FC = () => {
       void formik.setFieldValue("instanceType", "virtual-machine");
     } else if (isContainerOnlyImage(image)) {
       void formik.setFieldValue("instanceType", "container");
+    }
+
+    if (image.profiles) {
+      void formik.setFieldValue("profiles", image.profiles);
     }
   };
 

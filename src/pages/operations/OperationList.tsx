@@ -10,7 +10,7 @@ import BaseLayout from "components/BaseLayout";
 import Loader from "components/Loader";
 import CancelOperationBtn from "pages/operations/actions/CancelOperationBtn";
 import { isoTimeToString } from "util/helpers";
-import { LxdOperationStatus } from "types/operation";
+import { IncusOperationStatus } from "types/operation";
 import OperationInstanceName from "pages/operations/OperationInstanceName";
 import NotificationRow from "components/NotificationRow";
 import { getProjectName } from "util/operations";
@@ -33,7 +33,7 @@ const OperationList: FC = () => {
     { "aria-label": "Actions", className: "cancel u-align--right" },
   ];
 
-  const getIconNameForStatus = (status: LxdOperationStatus) => {
+  const getIconNameForStatus = (status: IncusOperationStatus) => {
     return {
       Cancelled: "status-failed-small",
       Failure: "status-failed-small",

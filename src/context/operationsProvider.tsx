@@ -8,13 +8,13 @@ import {
   useEffect,
   useRef,
 } from "react";
-import { LxdOperation } from "types/operation";
+import { IncusOperation } from "types/operation";
 import { queryKeys } from "util/queryKeys";
 import { useAuth } from "context/auth";
 
 type OperationsContextType = {
-  operations: LxdOperation[];
-  runningOperations: LxdOperation[];
+  operations: IncusOperation[];
+  runningOperations: IncusOperation[];
   error: Error | null;
   isLoading: boolean;
   isFetching: boolean;

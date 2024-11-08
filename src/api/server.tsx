@@ -1,19 +1,19 @@
 import { handleResponse, handleTextResponse } from "util/helpers";
-import { LxdSettings } from "types/server";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdConfigOptions, LxdConfigPair } from "types/config";
-import { LxdResources } from "types/resources";
+import { IncusSettings } from "types/server";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusConfigOptions, IncusConfigPair } from "types/config";
+import { IncusResources } from "types/resources";
 
-export const fetchSettings = (): Promise<LxdSettings> => {
+export const fetchSettings = (): Promise<IncusSettings> => {
   return new Promise((resolve, reject) => {
     fetch("/1.0")
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdSettings>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusSettings>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
-export const updateSettings = (config: LxdConfigPair): Promise<void> => {
+export const updateSettings = (config: IncusConfigPair): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch("/1.0", {
       method: "PATCH",
@@ -27,18 +27,18 @@ export const updateSettings = (config: LxdConfigPair): Promise<void> => {
   });
 };
 
-export const fetchResources = (): Promise<LxdResources> => {
+export const fetchResources = (): Promise<IncusResources> => {
   return new Promise((resolve, reject) => {
     fetch("/1.0/resources")
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdResources>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusResources>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
 export const fetchConfigOptions = (
   hasMetadataConfiguration: boolean,
-): Promise<LxdConfigOptions | null> => {
+): Promise<IncusConfigOptions | null> => {
   if (!hasMetadataConfiguration) {
     return new Promise((resolve) => resolve(null));
   }
@@ -46,7 +46,7 @@ export const fetchConfigOptions = (
   return new Promise((resolve, reject) => {
     fetch("/1.0/metadata/configuration")
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdConfigOptions>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusConfigOptions>) => resolve(data.metadata))
       .catch(reject);
   });
 };

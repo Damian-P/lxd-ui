@@ -1,11 +1,11 @@
 import { handleResponse } from "util/helpers";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdPermission } from "types/permissions";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusPermission } from "types/permissions";
 
 export const fetchPermissions = (args: {
   resourceType: string;
   project?: string;
-}): Promise<LxdPermission[]> => {
+}): Promise<IncusPermission[]> => {
   const { resourceType, project } = args;
   let url = `/1.0/auth/permissions?entity-type=${resourceType}`;
   if (project) {
@@ -15,7 +15,7 @@ export const fetchPermissions = (args: {
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdPermission[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusPermission[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };

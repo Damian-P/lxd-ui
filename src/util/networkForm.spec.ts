@@ -1,14 +1,14 @@
 import { toNetwork } from "pages/networks/forms/NetworkForm";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 import { toNetworkFormValues } from "util/networkForm";
 
 describe("conversion to form values and back with toNetworkFormValues and toNetwork", () => {
   it("preserves custom top level network setting field", () => {
-    type CustomPayload = LxdNetwork & { "custom-key": string };
+    type CustomPayload = IncusNetwork & { "custom-key": string };
     const network = {
       config: {},
       "custom-key": "custom-value",
-    } as unknown as LxdNetwork;
+    } as unknown as IncusNetwork;
 
     const formValues = toNetworkFormValues(network);
     const payload = toNetwork(formValues) as CustomPayload;
@@ -22,7 +22,7 @@ describe("conversion to form values and back with toNetworkFormValues and toNetw
       config: {
         "user.key": "custom-config-value",
       },
-    } as unknown as LxdNetwork;
+    } as unknown as IncusNetwork;
 
     const formValues = toNetworkFormValues(network);
     const payload = toNetwork(formValues);

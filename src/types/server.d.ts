@@ -1,6 +1,6 @@
-import { LxdConfigPair } from "./config";
+import { IncusConfigPair } from "./config";
 
-type LXDAuthMethods = "tls" | "oidc" | "unix";
+type IncusAuthMethods = "tls" | "oidc" | "unix";
 
 type SupportedStorageDriver = {
   Name: string;
@@ -8,9 +8,9 @@ type SupportedStorageDriver = {
   Remote: boolean;
 };
 
-export interface LxdSettings {
+export interface IncusSettings {
   api_status: string;
-  config?: LxdConfigPair;
+  config?: IncusConfigPair;
   environment?: {
     architectures: string[];
     os_name?: string;
@@ -19,8 +19,8 @@ export interface LxdSettings {
     storage_supported_drivers: SupportedStorageDriver[];
   };
   auth?: "trusted" | "untrusted";
-  auth_methods?: LXDAuthMethods;
-  auth_user_method?: LXDAuthMethods;
+  auth_methods?: IncusAuthMethods;
+  auth_user_method?: IncusAuthMethods;
   auth_user_name?: string;
   api_extensions?: string[];
 }

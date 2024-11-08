@@ -1,17 +1,17 @@
 import { FC } from "react";
 import { Button } from "@canonical/react-components";
 import usePortal from "react-useportal";
-import { LxdImageType, RemoteImage } from "types/image";
+import { IncusImageType, RemoteImage } from "types/image";
 import ImageSelector from "pages/images/ImageSelector";
 
 interface Props {
-  onSelect: (image: RemoteImage, type?: LxdImageType) => void;
+  onSelect: (image: RemoteImage, type?: IncusImageType) => void;
 }
 
 const SelectImageBtn: FC<Props> = ({ onSelect }) => {
   const { openPortal, closePortal, isOpen, Portal } = usePortal();
 
-  const handleSelect = (image: RemoteImage, type?: LxdImageType) => {
+  const handleSelect = (image: RemoteImage, type?: IncusImageType) => {
     closePortal();
     onSelect(image, type);
   };

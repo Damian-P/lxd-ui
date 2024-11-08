@@ -4,13 +4,13 @@ import {
   InstanceAndProfileFormValues,
 } from "components/forms/instanceAndProfileFormValues";
 import { getInheritedRootStorage } from "util/configInheritance";
-import { LxdProfile } from "types/profile";
-import { LxdNicDevice } from "types/device";
+import { IncusProfile } from "types/profile";
+import { IncusNicDevice } from "types/device";
 import { FormikTouched } from "formik";
 
 export const hasNoRootDisk = (
   values: InstanceAndProfileFormValues & { profiles?: string[] },
-  profiles: LxdProfile[],
+  profiles: IncusProfile[],
 ): boolean => {
   if (values.entityType !== "instance") {
     return false;
@@ -24,7 +24,7 @@ const missingRoot = (devices: FormDevice[]): boolean => {
 
 const inheritsRoot = (
   values: InstanceAndProfileFormValues,
-  profiles: LxdProfile[],
+  profiles: IncusProfile[],
 ): boolean => {
   const [inheritValue] = getInheritedRootStorage(values, profiles);
 
@@ -65,7 +65,7 @@ export const isNicDeviceNameMissing = (
   formik: InstanceAndProfileFormikProps,
   index: number,
 ): boolean => {
-  const formDevice = formik.values.devices[index] as LxdNicDevice;
+  const formDevice = formik.values.devices[index] as IncusNicDevice;
   if (formDevice.name || formDevice.type !== "nic") {
     return false;
   }
@@ -73,7 +73,7 @@ export const isNicDeviceNameMissing = (
   const hasTouched =
     formik.touched.devices &&
     formik.touched.devices[index] &&
-    (formik.touched.devices[index] as FormikTouched<LxdNicDevice>).name;
+    (formik.touched.devices[index] as FormikTouched<IncusNicDevice>).name;
 
   return Boolean(hasTouched);
 };

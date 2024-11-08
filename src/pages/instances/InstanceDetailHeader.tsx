@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DeleteInstanceBtn from "./actions/DeleteInstanceBtn";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import RenameHeader, { RenameHeaderValues } from "components/RenameHeader";
 import { renameInstance } from "api/instances";
 import InstanceStateActions from "pages/instances/actions/InstanceStateActions";
@@ -19,7 +19,7 @@ import InstanceLink from "pages/instances/InstanceLink";
 
 interface Props {
   name: string;
-  instance?: LxdInstance;
+  instance?: IncusInstance;
   project: string;
   isLoading: boolean;
 }

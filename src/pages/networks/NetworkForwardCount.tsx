@@ -1,16 +1,16 @@
 import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 import { fetchNetworkForwards } from "api/network-forwards";
 
 interface Props {
-  network: LxdNetwork;
+  network: IncusNetwork;
   project: string;
 }
 
 const NetworkForwardCount: FC<Props> = ({ network, project }) => {
-  if (network.managed === false) {
+  if (network.managed === false || (network.type != "bridge" && network.type != "ovn")) {
     return <>-</>;
   }
 

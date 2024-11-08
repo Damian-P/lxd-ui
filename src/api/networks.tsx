@@ -1,14 +1,14 @@
 import { handleEtagResponse, handleResponse } from "util/helpers";
-import { LxdNetwork, LxdNetworkState } from "types/network";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdClusterMember } from "types/cluster";
+import { IncusNetwork, IncusNetworkState } from "types/network";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusClusterMember } from "types/cluster";
 import { areNetworksEqual } from "util/networks";
 
-export const fetchNetworks = (project: string): Promise<LxdNetwork[]> => {
+export const fetchNetworks = (project: string): Promise<IncusNetwork[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/networks?project=${project}&recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdNetwork[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusNetwork[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
@@ -16,11 +16,11 @@ export const fetchNetworks = (project: string): Promise<LxdNetwork[]> => {
 export const fetchNetwork = (
   name: string,
   project: string,
-): Promise<LxdNetwork> => {
+): Promise<IncusNetwork> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/networks/${name}?project=${project}`)
       .then(handleEtagResponse)
-      .then((data) => resolve(data as LxdNetwork))
+      .then((data) => resolve(data as IncusNetwork))
       .catch(reject);
   });
 };
@@ -28,19 +28,19 @@ export const fetchNetwork = (
 export const fetchNetworkState = (
   name: string,
   project: string,
-): Promise<LxdNetworkState> => {
+): Promise<IncusNetworkState> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/networks/${name}/state?project=${project}`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdNetworkState>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusNetworkState>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
 export const createClusterNetwork = (
-  network: Partial<LxdNetwork>,
+  network: Partial<IncusNetwork>,
   project: string,
-  clusterMembers: LxdClusterMember[],
+  clusterMembers: IncusClusterMember[],
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const memberNetwork = {
@@ -77,7 +77,7 @@ export const createClusterNetwork = (
 };
 
 export const createNetwork = (
-  network: Partial<LxdNetwork>,
+  network: Partial<IncusNetwork>,
   project: string,
   target?: string,
 ): Promise<void> => {
@@ -104,7 +104,7 @@ export const createNetwork = (
 };
 
 export const updateNetwork = (
-  network: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">>,
+  network: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">>,
   project: string,
 ): Promise<void> => {
   return new Promise((resolve, reject) => {

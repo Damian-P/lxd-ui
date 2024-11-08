@@ -2,12 +2,12 @@ import { FC } from "react";
 import { fetchStoragePoolResources } from "api/storage-pools";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
-import { LxdStoragePool } from "types/storage";
+import { IncusStoragePool } from "types/storage";
 import { humanFileSize } from "util/helpers";
 import Meter from "components/Meter";
 
 interface Props {
-  pool: LxdStoragePool;
+  pool: IncusStoragePool;
 }
 
 const StoragePoolSize: FC<Props> = ({ pool }) => {

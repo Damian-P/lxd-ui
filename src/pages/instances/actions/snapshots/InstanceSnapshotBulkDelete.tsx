@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { deleteInstanceSnapshotBulk } from "api/instance-snapshots";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
@@ -10,7 +10,7 @@ import { useEventQueue } from "context/eventQueue";
 import { getPromiseSettledCounts } from "util/helpers";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   snapshotNames: string[];
   onStart: () => void;
   onFinish: () => void;

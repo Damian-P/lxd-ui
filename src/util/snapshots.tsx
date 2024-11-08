@@ -1,6 +1,6 @@
 import { AnyObject, TestFunction } from "yup";
 import { getTomorrow } from "./helpers";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 
 /*** General snapshot utils ***/
 export type SnapshotFormValues<AdditionalProps = unknown> = {
@@ -71,7 +71,7 @@ export const testValidTime = (): [
   ];
 };
 
-export const isSnapshotsDisabled = (project?: LxdProject): boolean => {
+export const isSnapshotsDisabled = (project?: IncusProject): boolean => {
   if (!project) {
     return false;
   }

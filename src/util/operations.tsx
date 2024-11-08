@@ -1,6 +1,6 @@
-import { LxdOperation } from "types/operation";
+import { IncusOperation } from "types/operation";
 
-export const getInstanceName = (operation?: LxdOperation): string => {
+export const getInstanceName = (operation?: IncusOperation): string => {
   // the url can be one of below formats
   // /1.0/instances/<instance_name>
   // /1.0/instances/<instance_name>?project=<project_name>
@@ -14,7 +14,7 @@ export const getInstanceName = (operation?: LxdOperation): string => {
   );
 };
 
-export const getProjectName = (operation: LxdOperation): string => {
+export const getProjectName = (operation: IncusOperation): string => {
   // the url can be
   // /1.0/instances/<instance_name>?project=<project_name>
   // /1.0/instances/<instance_name>?other=params&project=<project_name>

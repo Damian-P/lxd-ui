@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import SnapshotForm from "components/forms/SnapshotForm";
 import { useNotify } from "@canonical/react-components";
 import { useQueryClient } from "@tanstack/react-query";
@@ -15,7 +15,7 @@ import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
   close: () => void;
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
 }
 
 const CreateVolumeSnapshotForm: FC<Props> = ({ close, volume }) => {

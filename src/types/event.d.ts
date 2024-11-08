@@ -1,4 +1,4 @@
-export interface LxdEvent {
+export interface IncusEvent {
   type: string;
   timestamp: string;
   metadata: {

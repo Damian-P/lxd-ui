@@ -1,4 +1,4 @@
-export interface LxdResources {
+export interface IncusResources {
   cpu: Cpu;
   gpu: Gpu;
   memory: Memory;

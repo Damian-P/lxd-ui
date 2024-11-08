@@ -18,7 +18,7 @@ import StoragePoolFormMenu, {
 } from "./StoragePoolFormMenu";
 import useEventListener from "@use-it/event-listener";
 import { updateMaxHeight } from "util/updateMaxHeight";
-import { LxdStoragePool } from "types/storage";
+import { IncusStoragePool } from "types/storage";
 import {
   btrfsDriver,
   cephDriver,
@@ -65,7 +65,7 @@ export interface StoragePoolFormValues {
   zfs_export?: string;
   zfs_pool_name?: string;
   yaml?: string;
-  barePool?: LxdStoragePool;
+  barePool?: IncusStoragePool;
 }
 
 interface Props {
@@ -76,7 +76,7 @@ interface Props {
 
 export const toStoragePool = (
   values: StoragePoolFormValues,
-): LxdStoragePool => {
+): IncusStoragePool => {
   const isCephDriver = values.driver === cephDriver;
   const isPowerFlexDriver = values.driver === powerFlex;
   const isZFSDriver = values.driver === zfsDriver;

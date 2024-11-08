@@ -1,7 +1,7 @@
 import { FC } from "react";
 import classnames from "classnames";
 import { List } from "@canonical/react-components";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import DeleteStorageVolumeBtn from "./DeleteStorageVolumeBtn";
 import VolumeAddSnapshotBtn from "./snapshots/VolumeAddSnapshotBtn";
 import { useToastNotification } from "context/toastNotificationProvider";
@@ -9,7 +9,7 @@ import { isSnapshotsDisabled } from "util/snapshots";
 import { useProject } from "context/project";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   className?: string;
 }
 

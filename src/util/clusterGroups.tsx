@@ -1,4 +1,4 @@
-import { LxdClusterMember } from "types/cluster";
+import { IncusClusterMember } from "types/cluster";
 import EvacuateClusterMemberBtn from "pages/cluster/actions/EvacuateClusterMemberBtn";
 import RestoreClusterMemberBtn from "pages/cluster/actions/RestoreClusterMemberBtn";
 import {
@@ -46,7 +46,7 @@ export const getClusterHeaders = (activeGroup?: string): MainTableHeader[] => [
 ];
 
 export const getClusterRows = (
-  members: LxdClusterMember[],
+  members: IncusClusterMember[],
   activeGroup?: string,
 ): MainTableRow[] =>
   members.map((member) => {

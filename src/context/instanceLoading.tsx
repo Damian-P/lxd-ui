@@ -1,12 +1,12 @@
 import { createContext, FC, ReactNode, useContext, useState } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 
 type LoadingTypes = "Starting" | "Stopping" | "Restarting" | "Freezing";
 
 export interface InstanceLoadingType {
-  getType: (instance: LxdInstance) => LoadingTypes | undefined;
-  setLoading: (instance: LxdInstance, loadingType: LoadingTypes) => void;
-  setFinish: (instance: LxdInstance) => void;
+  getType: (instance: IncusInstance) => LoadingTypes | undefined;
+  setLoading: (instance: IncusInstance, loadingType: LoadingTypes) => void;
+  setFinish: (instance: IncusInstance) => void;
 }
 
 const InstanceLoadingContext = createContext<InstanceLoadingType>({
@@ -24,7 +24,7 @@ export const InstanceLoadingProvider: FC<Props> = ({ children }) => {
     new Map<string, LoadingTypes>(),
   );
 
-  const setLoading = (instance: LxdInstance, loadingType: LoadingTypes) => {
+  const setLoading = (instance: IncusInstance, loadingType: LoadingTypes) => {
     setInstanceStates((oldMap) => {
       const newMap = new Map(oldMap);
       newMap.set(instance.name, loadingType);
@@ -32,7 +32,7 @@ export const InstanceLoadingProvider: FC<Props> = ({ children }) => {
     });
   };
 
-  const setFinish = (instance: LxdInstance) => {
+  const setFinish = (instance: IncusInstance) => {
     setInstanceStates((oldMap) => {
       const newMap = new Map(oldMap);
       newMap.delete(instance.name);
@@ -43,7 +43,7 @@ export const InstanceLoadingProvider: FC<Props> = ({ children }) => {
   return (
     <InstanceLoadingContext.Provider
       value={{
-        getType: (instance: LxdInstance) => instanceStates.get(instance.name),
+        getType: (instance: IncusInstance) => instanceStates.get(instance.name),
         setLoading,
         setFinish,
       }}

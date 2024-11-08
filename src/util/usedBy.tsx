@@ -1,5 +1,5 @@
 import { extractResourceDetailsFromUrl } from "./resourceDetails";
-export interface LxdUsedBy {
+export interface IncusUsedBy {
   name: string;
   project: string;
   instance?: string;
@@ -8,7 +8,7 @@ export interface LxdUsedBy {
 }
 
 /**
- * filter a usedBy path list by a specific type and parse into a LxdUsedBy object list
+ * filter a usedBy path list by a specific type and parse into a IncusUsedBy object list
  *
  * examples for usedByPaths
  * "/1.0/instances/pet-lark"
@@ -19,7 +19,7 @@ export interface LxdUsedBy {
 export const filterUsedByType = (
   type: "instance" | "profile" | "snapshot" | "image" | "volume",
   usedByPaths?: string[],
-): LxdUsedBy[] => {
+): IncusUsedBy[] => {
   return (
     usedByPaths
       ?.filter((path) => {
@@ -70,7 +70,7 @@ export const getProfileInstances = (
   project: string,
   isDefaultProject: boolean,
   usedByPaths?: string[],
-): LxdUsedBy[] => {
+): IncusUsedBy[] => {
   return filterUsedByType("instance", usedByPaths).filter((instance) => {
     if (isDefaultProject) {
       return true;

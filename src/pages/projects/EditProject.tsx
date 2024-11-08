@@ -7,7 +7,7 @@ import { PROJECT_DETAILS } from "pages/projects/forms/ProjectFormMenu";
 import { useFormik } from "formik";
 import { ProjectFormValues } from "pages/projects/CreateProject";
 import * as Yup from "yup";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import useEventListener from "@use-it/event-listener";
 import { getProjectEditValues, getProjectPayload } from "util/projectEdit";
@@ -23,7 +23,7 @@ import { useToastNotification } from "context/toastNotificationProvider";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 
 interface Props {
-  project: LxdProject;
+  project: IncusProject;
 }
 
 const EditProject: FC<Props> = ({ project }) => {
@@ -60,7 +60,7 @@ const EditProject: FC<Props> = ({ project }) => {
         values.features_storage_buckets = undefined;
       }
 
-      const projectPayload = getProjectPayload(project, values) as LxdProject;
+      const projectPayload = getProjectPayload(project, values) as IncusProject;
 
       projectPayload.etag = project.etag;
 

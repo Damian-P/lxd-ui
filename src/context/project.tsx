@@ -2,11 +2,11 @@ import { createContext, FC, ReactNode, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { fetchProject } from "api/projects";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { useLocation } from "react-router-dom";
 
 interface ContextProps {
-  project?: LxdProject;
+  project?: IncusProject;
   isLoading: boolean;
 }
 

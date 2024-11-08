@@ -3,7 +3,7 @@ import { updateInstanceBulkAction } from "api/instances";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import ConfirmationForce from "components/ConfirmationForce";
-import { LxdInstance, LxdInstanceAction } from "types/instance";
+import { IncusInstance, IncusInstanceAction } from "types/instance";
 import {
   instanceActionLabel,
   instanceActions,
@@ -15,7 +15,7 @@ import { useEventQueue } from "context/eventQueue";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  instances: LxdInstance[];
+  instances: IncusInstance[];
   onStart: () => void;
   onFinish: () => void;
 }
@@ -24,12 +24,12 @@ const InstanceBulkActions: FC<Props> = ({ instances, onStart, onFinish }) => {
   const eventQueue = useEventQueue();
   const toastNotify = useToastNotification();
   const queryClient = useQueryClient();
-  const [activeAction, setActiveAction] = useState<LxdInstanceAction | null>(
+  const [activeAction, setActiveAction] = useState<IncusInstanceAction | null>(
     null,
   );
   const [isForce, setForce] = useState(false);
 
-  const handleAction = (desiredAction: LxdInstanceAction) => {
+  const handleAction = (desiredAction: IncusInstanceAction) => {
     setActiveAction(desiredAction);
     onStart();
     const actions = instanceActions(instances, desiredAction);

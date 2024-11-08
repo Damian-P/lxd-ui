@@ -1,12 +1,12 @@
 import { getInstanceName, getProjectName } from "./operations";
-import { LxdOperation } from "types/operation";
+import { IncusOperation } from "types/operation";
 
 const craftOperation = (url: string) => {
   return {
     resources: {
       instances: [url],
     },
-  } as LxdOperation;
+  } as IncusOperation;
 };
 
 describe("getInstanceName", () => {

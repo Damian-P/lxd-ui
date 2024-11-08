@@ -4,39 +4,39 @@ import {
   pushFailure,
   pushSuccess,
 } from "util/helpers";
-import { LxdImage } from "types/image";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdOperationResponse } from "types/operation";
+import { IncusImage } from "types/image";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusOperationResponse } from "types/operation";
 import { EventQueue } from "context/eventQueue";
-import { LxdInstance, LxdInstanceSnapshot } from "types/instance";
+import { IncusInstance, IncusInstanceSnapshot } from "types/instance";
 
 export const fetchImage = (
   image: string,
   project: string,
-): Promise<LxdImage> => {
+): Promise<IncusImage> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/images/${image}?project=${project}`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdImage>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusImage>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
-export const fetchImageList = (project?: string): Promise<LxdImage[]> => {
+export const fetchImageList = (project?: string): Promise<IncusImage[]> => {
   const url =
     "/1.0/images?recursion=1" + (project ? `&project=${project}` : "");
   return new Promise((resolve, reject) => {
     fetch(url)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdImage[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusImage[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
 export const deleteImage = (
-  image: LxdImage,
+  image: IncusImage,
   project: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/images/${image.fingerprint}?project=${project}`, {
       method: "DELETE",
@@ -56,7 +56,7 @@ export const deleteImageBulk = (
   return new Promise((resolve) => {
     void Promise.allSettled(
       fingerprints.map((name) => {
-        const image = { fingerprint: name } as LxdImage;
+        const image = { fingerprint: name } as IncusImage;
         return deleteImage(image, project)
           .then((operation) => {
             eventQueue.set(
@@ -76,10 +76,10 @@ export const deleteImageBulk = (
 };
 
 export const createImageFromInstanceSnapshot = (
-  instance: LxdInstance,
-  snapshot: LxdInstanceSnapshot,
+  instance: IncusInstance,
+  snapshot: IncusInstanceSnapshot,
   isPublic: boolean,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch("/1.0/images", {
       method: "POST",

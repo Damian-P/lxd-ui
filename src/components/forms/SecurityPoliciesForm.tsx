@@ -24,8 +24,8 @@ export interface SecurityPoliciesFormValues {
   security_idmap_base?: string;
   security_idmap_size?: number;
   security_idmap_isolated?: string;
-  security_devlxd?: string;
-  security_devlxd_images?: string;
+  security_guestapi?: string;
+  security_guestapi_images?: string;
   security_secureboot?: string;
 }
 
@@ -43,8 +43,8 @@ export const securityPoliciesPayload = (
     [getInstanceKey("security_idmap_size")]:
       values.security_idmap_size?.toString(),
     [getInstanceKey("security_idmap_isolated")]: values.security_idmap_isolated,
-    [getInstanceKey("security_devlxd")]: values.security_devlxd,
-    [getInstanceKey("security_devlxd_images")]: values.security_devlxd_images,
+    [getInstanceKey("security_guestapi")]: values.security_guestapi,
+    [getInstanceKey("security_guestapi_images")]: values.security_guestapi_images,
     [getInstanceKey("security_secureboot")]: values.security_secureboot,
   };
 };
@@ -168,8 +168,8 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
 
         getConfigurationRow({
           formik,
-          label: "Allow /dev/lxd in the instance (Containers only)",
-          name: "security_devlxd",
+          label: "Allow /dev/incus in the instance",
+          name: "security_guestapi",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),
@@ -181,8 +181,8 @@ const SecurityPoliciesForm: FC<Props> = ({ formik }) => {
         getConfigurationRow({
           formik,
           label:
-            "Make /1.0/images API available over /dev/lxd (Containers only)",
-          name: "security_devlxd_images",
+            "Make /1.0/images API available over /dev/incus (Containers only)",
+          name: "security_guestapi_images",
           defaultValue: "",
           disabled: isContainerOnlyDisabled,
           readOnlyRenderer: (val) => optionRenderer(val, optionYesNo),

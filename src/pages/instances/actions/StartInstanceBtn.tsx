@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { Button, Icon } from "@canonical/react-components";
 import classnames from "classnames";
 import { useInstanceStart } from "util/instanceStart";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const StartInstanceBtn: FC<Props> = ({ instance }) => {

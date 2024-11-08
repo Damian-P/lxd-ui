@@ -140,8 +140,8 @@ const ClusterList: FC = () => {
             title="This server is not clustered"
           >
             <p>
-              Creating cluster members is not supported in LXD UI. Create one
-              using LXD CLI
+              Creating cluster members is not supported in Incus UI. Create one
+              using Incus CLI
             </p>
             <p>
               <a

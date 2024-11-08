@@ -1,8 +1,8 @@
 import { FC, Fragment, ReactNode } from "react";
 import {
-  LxdInstance,
-  LxdInstanceAction,
-  LxdInstanceStatus,
+  IncusInstance,
+  IncusInstanceAction,
+  IncusInstanceStatus,
 } from "types/instance";
 import {
   instanceAction,
@@ -12,12 +12,12 @@ import {
 import { ConfirmationButton, Icon } from "@canonical/react-components";
 
 interface Props {
-  action: LxdInstanceAction;
+  action: IncusInstanceAction;
   confirmAppearance?: string;
   confirmExtra?: ReactNode;
   confirmLabel: string;
   icon: string;
-  instances: LxdInstance[];
+  instances: IncusInstance[];
   isLoading: boolean;
   isDisabled: boolean;
   onClick: () => void;
@@ -50,8 +50,8 @@ const InstanceBulkAction: FC<Props> = ({
   );
 
   const statusLine = (
-    currentState: LxdInstanceStatus,
-    desiredAction: LxdInstanceAction,
+    currentState: IncusInstanceStatus,
+    desiredAction: IncusInstanceAction,
   ) => {
     const count = instances.filter(
       (instance) => instance.status === currentState,
@@ -89,7 +89,7 @@ const InstanceBulkAction: FC<Props> = ({
   };
 
   // no action states should be last
-  const getLineOrder = (): LxdInstanceStatus[] => {
+  const getLineOrder = (): IncusInstanceStatus[] => {
     switch (action) {
       case "start":
         return ["Frozen", "Stopped", "Running"];

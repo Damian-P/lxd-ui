@@ -15,7 +15,7 @@ import NetworkForm, {
   NetworkFormValues,
   toNetwork,
 } from "pages/networks/forms/NetworkForm";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 import { yamlToObject } from "util/yaml";
 import { dump as dumpYaml } from "js-yaml";
 import { toNetworkFormValues } from "util/networkForm";
@@ -26,7 +26,7 @@ import FormFooterLayout from "components/forms/FormFooterLayout";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  network: LxdNetwork;
+  network: IncusNetwork;
   project: string;
 }
 
@@ -72,7 +72,7 @@ const EditNetwork: FC<Props> = ({ network, project }) => {
     validationSchema: NetworkSchema,
     onSubmit: (values) => {
       const yaml = values.yaml ? values.yaml : getYaml();
-      const saveNetwork = yamlToObject(yaml) as LxdNetwork;
+      const saveNetwork = yamlToObject(yaml) as IncusNetwork;
       updateNetwork({ ...saveNetwork, etag: network.etag }, project)
         .then(() => {
           void formik.setValues(toNetworkFormValues(saveNetwork));

@@ -1,25 +1,25 @@
-import { LxdConfigPair } from "./config";
-import { LxdDevices } from "./device";
+import { IncusConfigPair } from "./config";
+import { IncusDevices } from "./device";
 
-interface LxdInstanceUsageProp {
+interface IncusInstanceUsageProp {
   usage: number;
 }
 
-interface LxdInstanceMemory {
+interface IncusInstanceMemory {
   swap_usage: number;
   swap_usage_peak: number;
   usage: number;
   usage_peak: number;
 }
 
-interface LxdInstanceNetworkAddress {
+interface IncusInstanceNetworkAddress {
   address: string;
   family: string;
   netmask: string;
   scope: string;
 }
 
-interface LxdInstanceNetworkCounters {
+interface IncusInstanceNetworkCounters {
   bytes_received: number;
   bytes_sent: number;
   errors_received: number;
@@ -30,9 +30,9 @@ interface LxdInstanceNetworkCounters {
   packets_sent: number;
 }
 
-interface LxdInstanceNetwork {
-  addresses: LxdInstanceNetworkAddress[];
-  counters: LxdInstanceNetworkCounters;
+interface IncusInstanceNetwork {
+  addresses: IncusInstanceNetworkAddress[];
+  counters: IncusInstanceNetworkCounters;
   host_name: string;
   hwaddr: string;
   mtu: number;
@@ -40,33 +40,33 @@ interface LxdInstanceNetwork {
   type: string;
 }
 
-interface LxdInstanceState {
-  cpu: LxdInstanceUsageProp;
+interface IncusInstanceState {
+  cpu: IncusInstanceUsageProp;
   disk: {
-    root: LxdInstanceUsageProp;
-  } & Record<string, LxdInstanceUsageProp>;
-  memory: LxdInstanceMemory;
-  network?: Record<string, LxdInstanceNetwork>;
+    root: IncusInstanceUsageProp;
+  } & Record<string, IncusInstanceUsageProp>;
+  memory: IncusInstanceMemory;
+  network?: Record<string, IncusInstanceNetwork>;
   pid: number;
   processes: number;
   status: string;
 }
 
-interface LxdInstanceSnapshot {
+interface IncusInstanceSnapshot {
   name: string;
   created_at: string;
   expires_at: string;
   stateful: boolean;
 }
 
-export type LxdInstanceAction =
+export type IncusInstanceAction =
   | "freeze"
   | "restart"
   | "start"
   | "stop"
   | "unfreeze";
 
-export type LxdInstanceStatus =
+export type IncusInstanceStatus =
   | "Error"
   | "Freezing"
   | "Frozen"
@@ -76,27 +76,27 @@ export type LxdInstanceStatus =
   | "Stopped"
   | "Stopping";
 
-export interface LxdInstance {
+export interface IncusInstance {
   architecture: string;
   config: {
     "image.description"?: string;
-  } & LxdConfigPair;
+  } & IncusConfigPair;
   created_at: string;
   description: string;
-  devices: LxdDevices;
+  devices: IncusDevices;
   ephemeral: boolean;
-  expanded_config: LxdConfigPair;
-  expanded_devices?: LxdDevices;
+  expanded_config: IncusConfigPair;
+  expanded_devices?: IncusDevices;
   last_used_at: string;
   location: string;
   name: string;
   profiles: string[];
   project: string;
   restore?: string;
-  snapshots: LxdInstanceSnapshot[] | null;
-  state?: LxdInstanceState;
+  snapshots: IncusInstanceSnapshot[] | null;
+  state?: IncusInstanceState;
   stateful: boolean;
-  status: LxdInstanceStatus;
+  status: IncusInstanceStatus;
   type: string;
   etag?: string;
 }

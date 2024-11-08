@@ -7,11 +7,11 @@ import { ConfirmationButton, Icon } from "@canonical/react-components";
 import classnames from "classnames";
 import { useEventQueue } from "context/eventQueue";
 import { getPromiseSettledCounts } from "util/helpers";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   snapshotNames: string[];
   onStart: () => void;
   onFinish: () => void;

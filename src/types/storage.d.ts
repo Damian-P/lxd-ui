@@ -1,6 +1,6 @@
-import { LxdConfigPair } from "./config";
+import { IncusConfigPair } from "./config";
 
-export interface LxdStoragePool {
+export interface IncusStoragePool {
   config: {
     size?: string;
     source?: string;
@@ -14,15 +14,15 @@ export interface LxdStoragePool {
   used_by?: string[];
 }
 
-export type LxdStorageVolumeContentType = "filesystem" | "block" | "iso";
+export type IncusStorageVolumeContentType = "filesystem" | "block" | "iso";
 
-export type LxdStorageVolumeType =
+export type IncusStorageVolumeType =
   | "container"
   | "virtual-machine"
   | "image"
   | "custom";
 
-export interface LxdStorageVolume {
+export interface IncusStorageVolume {
   config: {
     "block.filesystem"?: string;
     "block.mount_options"?: string;
@@ -40,27 +40,27 @@ export interface LxdStorageVolume {
     "zfs.use_refquota"?: string;
     "zfs.reserve_space"?: string;
     size?: string;
-  } & LxdConfigPair;
-  content_type: LxdStorageVolumeContentType;
+  } & IncusConfigPair;
+  content_type: IncusStorageVolumeContentType;
   created_at: string;
   description: string;
   location: string;
   name: string;
   pool: string;
   project: string;
-  type: LxdStorageVolumeType;
+  type: IncusStorageVolumeType;
   used_by?: string[];
   etag?: string;
 }
 
-export interface LxdStorageVolumeState {
+export interface IncusStorageVolumeState {
   usage: {
     used: number;
     total: number;
   };
 }
 
-export interface LxdStoragePoolResources {
+export interface IncusStoragePoolResources {
   inodes: {
     used: number;
     total: number;
@@ -77,7 +77,7 @@ export interface UploadState {
   total?: number;
 }
 
-export interface LxdVolumeSnapshot {
+export interface IncusVolumeSnapshot {
   name: string;
   created_at: string;
   expires_at?: string;

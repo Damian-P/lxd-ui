@@ -1,6 +1,6 @@
-import { LxdIdentity, LxdPermission } from "types/permissions";
+import { IncusIdentity, IncusPermission } from "types/permissions";
 import { OptionHTMLAttributes } from "react";
-import { LxdImage } from "types/image";
+import { IncusImage } from "types/image";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
 import {
   ResourceDetail,
@@ -19,8 +19,8 @@ export const noneAvailableOption = {
   value: "",
 };
 
-// the resource types comes from the openFGA authorisation model in lxd
-// ref: https://discourse.ubuntu.com/t/identity-and-access-management-for-lxd/41516
+// the resource types comes from the openFGA authorisation model in incus
+// ref: https://discourse.ubuntu.com/t/identity-and-access-management-for-incus/41516
 export const resourceTypeOptions = [
   {
     ...defaultOption,
@@ -100,7 +100,7 @@ const sortOptions = (
 
 export const generateResourceOptions = (
   resourceType: string,
-  permissions: LxdPermission[],
+  permissions: IncusPermission[],
   imageNamesLookup: Record<string, string>,
   identityNamesLookup: Record<string, string>,
 ): OptionHTMLAttributes<HTMLOptionElement>[] => {
@@ -140,7 +140,7 @@ export const generateResourceOptions = (
 
 export const generateEntitlementOptions = (
   resourceType: string,
-  permissions?: LxdPermission[],
+  permissions?: IncusPermission[],
 ): (
   | OptionHTMLAttributes<HTMLOptionElement>
   | {
@@ -218,12 +218,12 @@ export const constructResourceSelectorLabel = (
   return `${resource.name}${targetName}${poolName}${projectName}`;
 };
 
-export const getPermissionId = (permission: LxdPermission): string => {
+export const getPermissionId = (permission: IncusPermission): string => {
   return permission.entity_type + permission.url + permission.entitlement;
 };
 
 export const generateImageNamesLookup = (
-  images: LxdImage[],
+  images: IncusImage[],
 ): Record<string, string> => {
   const nameLookup: Record<string, string> = {};
   for (const image of images) {
@@ -235,7 +235,7 @@ export const generateImageNamesLookup = (
 };
 
 export const generateIdentityNamesLookup = (
-  identities: LxdIdentity[],
+  identities: IncusIdentity[],
 ): Record<string, string> => {
   const nameLookup: Record<string, string> = {};
   for (const identity of identities) {
@@ -258,8 +258,8 @@ const resourceTypeSortOrder = getResourceTypeSortOrder();
 export const generatePermissionSort = (
   imageNamesLookup: Record<string, string>,
   identityNamesLookup: Record<string, string>,
-): ((permissionA: LxdPermission, permissionB: LxdPermission) => number) => {
-  return (permissionA: LxdPermission, permissionB: LxdPermission) => {
+): ((permissionA: IncusPermission, permissionB: IncusPermission) => number) => {
+  return (permissionA: IncusPermission, permissionB: IncusPermission) => {
     const resourceTypeComparison =
       resourceTypeSortOrder[permissionA.entity_type] -
       resourceTypeSortOrder[permissionB.entity_type];

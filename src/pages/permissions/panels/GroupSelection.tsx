@@ -1,7 +1,7 @@
 import { DependencyList, FC, useState } from "react";
 import PermissionGroupsFilter from "../PermissionGroupsFilter";
 import ScrollableContainer from "components/ScrollableContainer";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import { EmptyState, Icon } from "@canonical/react-components";
 import ScrollableTable from "components/ScrollableTable";
 import SelectableMainTable from "components/SelectableMainTable";
@@ -10,7 +10,7 @@ import { pluralize } from "util/instanceBulkActions";
 import useSortTableData from "util/useSortTableData";
 
 interface Props {
-  groups: LxdGroup[];
+  groups: IncusGroup[];
   modifiedGroups: Set<string>;
   parentItemName: string;
   parentItems?: { name: string }[];

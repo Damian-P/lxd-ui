@@ -1,5 +1,5 @@
 import { OptionHTMLAttributes } from "react";
-import { LxdSettings } from "types/server";
+import { IncusSettings } from "types/server";
 
 export const dirDriver = "dir";
 export const btrfsDriver = "btrfs";
@@ -7,6 +7,7 @@ export const lvmDriver = "lvm";
 export const zfsDriver = "zfs";
 export const cephDriver = "ceph";
 export const powerFlex = "powerflex";
+export const lvmClusterDriver = "lvmcluster";
 
 const storageDriverLabels: { [key: string]: string } = {
   [dirDriver]: "Directory",
@@ -15,10 +16,11 @@ const storageDriverLabels: { [key: string]: string } = {
   [zfsDriver]: "ZFS",
   [cephDriver]: "Ceph",
   [powerFlex]: "Dell PowerFlex",
+  [lvmClusterDriver]: "LVM Cluster",
 };
 
 export const getStorageDriverOptions = (
-  settings?: LxdSettings,
+  settings?: IncusSettings,
 ): OptionHTMLAttributes<HTMLOptionElement>[] => {
   const serverSupportedStorageDrivers =
     settings?.environment?.storage_supported_drivers || [];
@@ -36,7 +38,7 @@ export const getStorageDriverOptions = (
 };
 
 export const getSupportedStorageDrivers = (
-  settings?: LxdSettings,
+  settings?: IncusSettings,
 ): Set<string> => {
   return new Set(
     getStorageDriverOptions(settings).map((driver) => driver.value as string),

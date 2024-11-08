@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import { updateInstance } from "api/instances";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { useParams } from "react-router-dom";
 import { ActionButton } from "@canonical/react-components";
 import { getInstanceEditValues, getInstancePayload } from "util/instanceEdit";
-import { LxdIsoDevice } from "types/device";
+import { IncusIsoDevice } from "types/device";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import usePortal from "react-useportal";
@@ -16,7 +16,7 @@ import { useToastNotification } from "context/toastNotificationProvider";
 import { instanceLinkFromOperation } from "util/instances";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const AttachIsoBtn: FC<Props> = ({ instance }) => {
@@ -28,7 +28,7 @@ const AttachIsoBtn: FC<Props> = ({ instance }) => {
   const [isLoading, setLoading] = useState(false);
 
   const attachedIso = instance.devices["iso-volume"] as
-    | LxdIsoDevice
+    | IncusIsoDevice
     | undefined;
 
   const detachIso = () => {
@@ -40,7 +40,7 @@ const AttachIsoBtn: FC<Props> = ({ instance }) => {
     const instanceMinusIso = getInstancePayload(
       instance,
       values,
-    ) as LxdInstance;
+    ) as IncusInstance;
     void updateInstance(instanceMinusIso, project ?? "")
       .then((operation) => {
         const instanceLink = instanceLinkFromOperation({
@@ -82,7 +82,7 @@ const AttachIsoBtn: FC<Props> = ({ instance }) => {
     const values = getInstanceEditValues(instance);
     const isoDevice = remoteImageToIsoDevice(image);
     values.devices.push(isoDevice);
-    const instancePlusIso = getInstancePayload(instance, values) as LxdInstance;
+    const instancePlusIso = getInstancePayload(instance, values) as IncusInstance;
     void updateInstance(instancePlusIso, project ?? "")
       .then((operation) => {
         const instanceLink = instanceLinkFromOperation({

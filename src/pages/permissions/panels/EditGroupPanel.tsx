@@ -11,11 +11,11 @@ import { renameGroup, updateGroup } from "api/auth-groups";
 import { queryKeys } from "util/queryKeys";
 import { testDuplicateGroupName } from "util/permissionGroups";
 import NotificationRow from "components/NotificationRow";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import ScrollableContainer from "components/ScrollableContainer";
 
 interface Props {
-  group: LxdGroup;
+  group: IncusGroup;
 }
 
 const EditGroupPanel: FC<Props> = ({ group }) => {
@@ -57,11 +57,11 @@ const EditGroupPanel: FC<Props> = ({ group }) => {
       mutationPromise
         .then(() => {
           panelParams.clear();
-          toastNotify.success(`LXD group ${values.name} updated.`);
+          toastNotify.success(`Incus group ${values.name} updated.`);
           notify.clear();
         })
         .catch((e) => {
-          notify.failure(`LXD group update failed`, e);
+          notify.failure(`Incus group update failed`, e);
         })
         .finally(() => {
           formik.setSubmitting(false);

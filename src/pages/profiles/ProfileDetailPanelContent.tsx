@@ -1,16 +1,16 @@
 import { FC } from "react";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import ProfileLink from "./ProfileLink";
 import { getProfileInstances } from "util/usedBy";
 import ProfileNetworkList from "./ProfileNetworkList";
 import ProfileStorageList from "./ProfileStorageList";
 import ProfileInstances from "./ProfileInstances";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { isProjectWithProfiles } from "util/projects";
 
 interface Props {
-  profile: LxdProfile;
-  project: LxdProject;
+  profile: IncusProfile;
+  project: IncusProject;
 }
 
 const ProfileDetailPanelContent: FC<Props> = ({ profile, project }) => {

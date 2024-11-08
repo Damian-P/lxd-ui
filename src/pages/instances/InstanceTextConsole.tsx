@@ -8,7 +8,7 @@ import {
 import { getWsErrorMsg } from "util/helpers";
 import Loader from "components/Loader";
 import useEventListener from "@use-it/event-listener";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import { unstable_usePrompt as usePrompt } from "react-router-dom";
 import Xterm from "components/Xterm";
@@ -16,7 +16,7 @@ import { Terminal } from "xterm";
 import { useNotify } from "@canonical/react-components";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   onFailure: (title: string, e: unknown, message?: string) => void;
   showNotRunningInfo: () => void;
 }

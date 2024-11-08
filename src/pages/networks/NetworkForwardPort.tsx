@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { LxdNetworkForwardPort } from "types/network";
+import { IncusNetworkForwardPort } from "types/network";
 
 interface Props {
-  port: LxdNetworkForwardPort;
+  port: IncusNetworkForwardPort;
 }
 
 const NetworkForwardPort: FC<Props> = ({ port }) => {

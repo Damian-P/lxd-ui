@@ -2,10 +2,10 @@ import { FC, ReactNode } from "react";
 import usePortal from "react-useportal";
 import InstanceConfigureSnapshotModal from "./InstanceConfigureSnapshotModal";
 import { Button } from "@canonical/react-components";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   onSuccess: (message: ReactNode) => void;
   onFailure: (title: string, e: unknown, message?: ReactNode) => void;
   isDisabled?: boolean;

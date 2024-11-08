@@ -1,9 +1,9 @@
 import { InstanceAndProfileFormValues } from "components/forms/instanceAndProfileFormValues";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import { CreateInstanceFormValues } from "pages/instances/CreateInstance";
 import { EditInstanceFormValues } from "pages/instances/EditInstance";
 import { isDiskDevice, isNicDevice } from "util/devices";
-import { LxdDiskDevice, LxdNicDevice } from "types/device";
+import { IncusDiskDevice, IncusNicDevice } from "types/device";
 import { ProjectFormValues } from "pages/projects/CreateProject";
 import { ConfigurationRowFormikValues } from "components/ConfigurationRow";
 import { ConfigField } from "types/config";
@@ -129,12 +129,12 @@ const getStorageVolumeRowMetadata = (
   const configKey = getVolumeKey(name);
   const configField = configFields.find((item) => item.key === configKey);
 
-  const lxdDefault =
+  const incusDefault =
     configField?.default && configField?.default.length > 0
       ? configField?.default
       : "-";
 
-  return { value: lxdDefault, source: "LXD", configField };
+  return { value: incusDefault, source: "Incus", configField };
 };
 
 const getNetworkRowMetadata = (
@@ -148,12 +148,12 @@ const getNetworkRowMetadata = (
   const configKey = getNetworkKey(name);
   const configField = configFields.find((item) => item.key === configKey);
 
-  const lxdDefault =
+  const incusDefault =
     configField?.default && configField?.default.length > 0
       ? configField?.default
       : "-";
 
-  return { value: lxdDefault, source: "LXD", configField };
+  return { value: incusDefault, source: "Incus", configField };
 };
 
 // NOTE: this is only relevant for Ceph RBD storage pools at the moment
@@ -168,12 +168,12 @@ const getStoragePoolRowMetadata = (
   const configKey = getPoolKey(name);
   const configField = configFields.find((item) => item.key === configKey);
 
-  const lxdDefault =
+  const incusDefault =
     configField?.default && configField?.default.length > 0
       ? configField?.default
       : "-";
 
-  return { value: lxdDefault, source: "LXD", configField };
+  return { value: incusDefault, source: "Incus", configField };
 };
 
 const getInstanceProfileProjectDefaults = (
@@ -183,22 +183,22 @@ const getInstanceProfileProjectDefaults = (
 ): ConfigRowMetadata => {
   if (configKey === "limits.cpu" && values.entityType === "instance") {
     if (values.instanceType === "container") {
-      return { value: "-", source: "LXD (container)", configField };
+      return { value: "-", source: "Incus (container)", configField };
     } else {
-      return { value: "1", source: "LXD (VM)", configField };
+      return { value: "1", source: "Incus (VM)", configField };
     }
   }
 
   if (configKey === "limits.memory" && values.entityType === "instance") {
     if (values.instanceType === "container") {
-      return { value: "-", source: "LXD (container)", configField };
+      return { value: "-", source: "Incus (container)", configField };
     } else {
-      return { value: "1GB", source: "LXD (VM)", configField };
+      return { value: "1GB", source: "Incus (VM)", configField };
     }
   }
 
   // migration.stateful is inherited through 4 levels:
-  // 1. LXD default
+  // 1. Incus default
   // 2. server setting "instances.migration.stateful"
   // 3. by a profile
   // 4. by the instance itself
@@ -212,18 +212,18 @@ const getInstanceProfileProjectDefaults = (
     }
   }
 
-  const lxdDefault =
+  const incusDefault =
     configField?.default && configField?.default.length > 0
       ? configField?.default
       : "-";
 
-  return { value: lxdDefault, source: "LXD", configField };
+  return { value: incusDefault, source: "Incus", configField };
 };
 
 export const getInheritedRootStorage = (
   values: InstanceAndProfileFormValues,
-  profiles: LxdProfile[],
-): [LxdDiskDevice | null, string] => {
+  profiles: IncusProfile[],
+): [IncusDiskDevice | null, string] => {
   if (values.entityType === "instance") {
     const appliedProfiles = getAppliedProfiles(values, profiles);
     for (const profile of appliedProfiles) {
@@ -236,18 +236,18 @@ export const getInheritedRootStorage = (
     }
   }
 
-  return [null, "LXD"];
+  return [null, "Incus"];
 };
 
 export interface InheritedVolume {
   key: string;
-  disk: LxdDiskDevice;
+  disk: IncusDiskDevice;
   source: string;
 }
 
 export const getInheritedVolumes = (
   values: InstanceAndProfileFormValues,
-  profiles: LxdProfile[],
+  profiles: IncusProfile[],
 ): InheritedVolume[] => {
   const inheritedVolumes: InheritedVolume[] = [];
   if (values.entityType === "instance") {
@@ -258,7 +258,7 @@ export const getInheritedVolumes = (
         .map(([key, disk]) => {
           inheritedVolumes.push({
             key: key,
-            disk: disk as LxdDiskDevice,
+            disk: disk as IncusDiskDevice,
             source: `${profile.name} profile`,
           });
         });
@@ -270,13 +270,13 @@ export const getInheritedVolumes = (
 
 interface InheritedNetwork {
   key: string;
-  network: LxdNicDevice | null;
+  network: IncusNicDevice | null;
   source: string;
 }
 
 export const getInheritedNetworks = (
   values: InstanceAndProfileFormValues,
-  profiles: LxdProfile[],
+  profiles: IncusProfile[],
 ): InheritedNetwork[] => {
   const inheritedNetworks: InheritedNetwork[] = [];
   if (values.entityType === "instance") {
@@ -287,7 +287,7 @@ export const getInheritedNetworks = (
         .map(([key, network]) => {
           inheritedNetworks.push({
             key: key,
-            network: network as LxdNicDevice,
+            network: network as IncusNicDevice,
             source: `${profile.name} profile`,
           });
         });
@@ -299,7 +299,7 @@ export const getInheritedNetworks = (
 
 const getAppliedProfiles = (
   values: CreateInstanceFormValues | EditInstanceFormValues,
-  profiles: LxdProfile[],
+  profiles: IncusProfile[],
 ) => {
   return profiles
     .filter((profile) => values.profiles.includes(profile.name))

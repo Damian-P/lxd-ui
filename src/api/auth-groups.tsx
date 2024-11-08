@@ -1,26 +1,26 @@
 import { handleResponse, handleSettledResult } from "util/helpers";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdGroup } from "types/permissions";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusGroup } from "types/permissions";
 
-export const fetchGroups = (): Promise<LxdGroup[]> => {
+export const fetchGroups = (): Promise<IncusGroup[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/auth/groups?recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdGroup[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusGroup[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
-export const fetchGroup = (name: string): Promise<LxdGroup> => {
+export const fetchGroup = (name: string): Promise<IncusGroup> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/auth/groups/${name}`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdGroup>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusGroup>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
-export const createGroup = (group: Partial<LxdGroup>): Promise<void> => {
+export const createGroup = (group: Partial<IncusGroup>): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/auth/groups`, {
       method: "POST",
@@ -52,7 +52,7 @@ export const deleteGroups = (groups: string[]): Promise<void> => {
   });
 };
 
-export const updateGroup = (group: Partial<LxdGroup>): Promise<void> => {
+export const updateGroup = (group: Partial<IncusGroup>): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/auth/groups/${group.name}`, {
       method: "PUT",

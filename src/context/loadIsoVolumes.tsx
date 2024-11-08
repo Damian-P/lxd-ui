@@ -5,7 +5,7 @@ import {
 } from "api/storage-pools";
 import { isoToRemoteImage } from "util/images";
 import { RemoteImage } from "types/image";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 
 export const loadIsoVolumes = async (
   project: string,
@@ -26,7 +26,7 @@ export const loadIsoVolumes = async (
 export const loadVolumes = async (
   project: string,
   hasStorageVolumesAll: boolean,
-): Promise<LxdStorageVolume[]> => {
+): Promise<IncusStorageVolume[]> => {
   return hasStorageVolumesAll
     ? fetchAllStorageVolumes(project)
     : collectAllStorageVolumes(project);
@@ -34,8 +34,8 @@ export const loadVolumes = async (
 
 export const collectAllStorageVolumes = async (
   project: string,
-): Promise<LxdStorageVolume[]> => {
-  const allVolumes: LxdStorageVolume[] = [];
+): Promise<IncusStorageVolume[]> => {
+  const allVolumes: IncusStorageVolume[] = [];
   const pools = await fetchStoragePools(project);
 
   const poolVolumes = await Promise.allSettled(

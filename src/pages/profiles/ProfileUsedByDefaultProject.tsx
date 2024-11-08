@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { LxdUsedBy } from "util/usedBy";
+import { IncusUsedBy } from "util/usedBy";
 import ViewProfileInstancesLink from "./actions/ViewProfileInstancesLink";
 
 interface Props {
   profile: string;
   affectedProjects?: {
     name: string;
-    instances: LxdUsedBy[];
+    instances: IncusUsedBy[];
   }[];
   headingClassName?: string;
 }

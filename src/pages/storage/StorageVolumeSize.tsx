@@ -2,12 +2,12 @@ import { FC } from "react";
 import { fetchStorageVolumeState } from "api/storage-pools";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { humanFileSize } from "util/helpers";
 import { fetchImageList } from "api/images";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
 }
 
 const StorageVolumeSize: FC<Props> = ({ volume }) => {

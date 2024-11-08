@@ -6,7 +6,7 @@ import { ProjectFormValues } from "pages/projects/CreateProject";
 import { FormikProps } from "formik/dist/types";
 import DiskSizeSelector from "components/forms/DiskSizeSelector";
 import { getProjectKey } from "util/projectConfigFields";
-import { LxdConfigPair } from "types/config";
+import { IncusConfigPair } from "types/config";
 
 export interface ProjectResourceLimitsFormValues {
   limits_instances?: number;
@@ -21,7 +21,7 @@ export interface ProjectResourceLimitsFormValues {
 
 export const resourceLimitsPayload = (
   values: ProjectFormValues,
-): LxdConfigPair => {
+): IncusConfigPair => {
   return {
     [getProjectKey("limits_instances")]: values.limits_instances?.toString(),
     [getProjectKey("limits_containers")]: values.limits_containers?.toString(),

@@ -1,22 +1,22 @@
 import { handleEtagResponse, handleResponse } from "util/helpers";
-import { LxdProject } from "types/project";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdOperationResponse } from "types/operation";
+import { IncusProject } from "types/project";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusOperationResponse } from "types/operation";
 
-export const fetchProjects = (): Promise<LxdProject[]> => {
+export const fetchProjects = (): Promise<IncusProject[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/projects?recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdProject[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusProject[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
-export const fetchProject = (name: string): Promise<LxdProject> => {
+export const fetchProject = (name: string): Promise<IncusProject> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/projects/${name}`)
       .then(handleEtagResponse)
-      .then((data) => resolve(data as LxdProject))
+      .then((data) => resolve(data as IncusProject))
       .catch(reject);
   });
 };
@@ -33,7 +33,7 @@ export const createProject = (body: string): Promise<void> => {
   });
 };
 
-export const updateProject = (project: LxdProject): Promise<void> => {
+export const updateProject = (project: IncusProject): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/projects/${project.name}`, {
       method: "PUT",
@@ -51,7 +51,7 @@ export const updateProject = (project: LxdProject): Promise<void> => {
 export const renameProject = (
   oldName: string,
   newName: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/projects/${oldName}`, {
       method: "POST",
@@ -65,7 +65,7 @@ export const renameProject = (
   });
 };
 
-export const deleteProject = (project: LxdProject): Promise<void> => {
+export const deleteProject = (project: IncusProject): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/projects/${project.name}`, {
       method: "DELETE",

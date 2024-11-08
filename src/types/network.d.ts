@@ -1,26 +1,26 @@
-export type LxdNetworkBridgeDriver = "native" | "openvswitch";
-export type LxdNetworkType =
+export type IncusNetworkBridgeDriver = "native" | "openvswitch";
+export type IncusNetworkType =
   | "bridge"
   | "ovn"
   | "physical"
   | "macvlan"
   | "sriov";
-export type LxdNetworkDnsMode = "none" | "managed" | "dynamic";
-export type LxdNetworkFanType = "vxlan" | "ipip";
+export type IncusNetworkDnsMode = "none" | "managed" | "dynamic";
+export type IncusNetworkFanType = "vxlan" | "ipip";
 
-export interface LxdNetworkConfig {
-  "bridge.driver"?: LxdNetworkBridgeDriver;
+export interface IncusNetworkConfig {
+  "bridge.driver"?: IncusNetworkBridgeDriver;
   "bridge.external_interfaces"?: string;
   "bridge.hwaddr"?: string;
   "bridge.mtu"?: string;
   "dns.domain"?: string;
-  "dns.mode"?: LxdNetworkDnsMode;
+  "dns.mode"?: IncusNetworkDnsMode;
   "dns.nameservers"?: string;
   "dns.search"?: string;
   "dns.zone.forward"?: string;
   "dns.zone.reverse.ipv4"?: string;
   "dns.zone.reverse.ipv6"?: string;
-  "fan.type"?: LxdNetworkFanType;
+  "fan.type"?: IncusNetworkFanType;
   "fan.overlay_subnet"?: string;
   "fan.underlay_subnet"?: string;
   "ipv4.address"?: string;
@@ -59,27 +59,27 @@ export interface LxdNetworkConfig {
   [key: `user.${string}`]: string;
 }
 
-export interface LxdNetwork {
-  config: LxdNetworkConfig;
+export interface IncusNetwork {
+  config: IncusNetworkConfig;
   description?: string;
   locations?: string[];
   managed?: boolean;
   name: string;
   status?: string;
-  type: LxdNetworkType;
+  type: IncusNetworkType;
   used_by?: string[];
   etag?: string;
 }
 
-export interface LxdNetworkStateAddress {
+export interface IncusNetworkStateAddress {
   family: string;
   address: string;
   netmask: string;
   scope: string;
 }
 
-export interface LxdNetworkState {
-  addresses: LxdNetworkStateAddress[];
+export interface IncusNetworkState {
+  addresses: IncusNetworkStateAddress[];
   bond?: string;
   bridge: {
     forward_delay: number;
@@ -103,7 +103,7 @@ export interface LxdNetworkState {
   vlan?: string;
 }
 
-export interface LxdNetworkForwardPort {
+export interface IncusNetworkForwardPort {
   description?: string;
   listen_port: string;
   protocol: "tcp" | "udp";
@@ -111,12 +111,12 @@ export interface LxdNetworkForwardPort {
   target_port?: string;
 }
 
-export interface LxdNetworkForward {
+export interface IncusNetworkForward {
   listen_address: string;
   config: {
     target_address?: string;
   };
   description?: string;
   location?: string;
-  ports: LxdNetworkForwardPort[];
+  ports: IncusNetworkForwardPort[];
 }

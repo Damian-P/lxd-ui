@@ -8,12 +8,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { deleteGroup, deleteGroups } from "api/auth-groups";
 import { useToastNotification } from "context/toastNotificationProvider";
 import { ChangeEvent, FC, useState } from "react";
-import { LxdGroup } from "types/permissions";
+import { IncusGroup } from "types/permissions";
 import { pluralize } from "util/instanceBulkActions";
 import { queryKeys } from "util/queryKeys";
 
 interface Props {
-  groups: LxdGroup[];
+  groups: IncusGroup[];
   close: () => void;
 }
 
@@ -109,7 +109,7 @@ const DeleteGroupModal: FC<Props> = ({ groups, close }) => {
       </p>
       <p>
         This action cannot be undone and may result in users losing access to
-        LXD, including the possibility that all users lose admin access.
+        Incus, including the possibility that all users lose admin access.
       </p>
       <p>To continue, please type the confirmation text below.</p>
       <p>

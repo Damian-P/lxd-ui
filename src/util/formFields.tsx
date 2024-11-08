@@ -1,17 +1,17 @@
-import { LxdProfile } from "types/profile";
-import { LxdInstance } from "types/instance";
+import { IncusProfile } from "types/profile";
+import { IncusInstance } from "types/instance";
 import { OptionHTMLAttributes } from "react";
-import { LxdConfigPair } from "types/config";
-import { LxdProject } from "types/project";
-import { LxdStorageVolume } from "types/storage";
+import { IncusConfigPair } from "types/config";
+import { IncusProject } from "types/project";
+import { IncusStorageVolume } from "types/storage";
 
 export const getUnhandledKeyValues = (
   item:
-    | LxdConfigPair
-    | LxdInstance
-    | LxdProfile
-    | LxdProject
-    | LxdStorageVolume,
+    | IncusConfigPair
+    | IncusInstance
+    | IncusProfile
+    | IncusProject
+    | IncusStorageVolume,
   handledKeys: Set<string>,
 ) => {
   return Object.fromEntries(

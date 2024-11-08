@@ -2,13 +2,13 @@ import { useQueryClient } from "@tanstack/react-query";
 import { unfreezeInstance, startInstance } from "api/instances";
 import { useInstanceLoading } from "context/instanceLoading";
 import InstanceLink from "pages/instances/InstanceLink";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { queryKeys } from "./queryKeys";
 import { useEventQueue } from "context/eventQueue";
 import ItemName from "components/ItemName";
 import { useToastNotification } from "context/toastNotificationProvider";
 
-export const useInstanceStart = (instance: LxdInstance) => {
+export const useInstanceStart = (instance: IncusInstance) => {
   const eventQueue = useEventQueue();
   const instanceLoading = useInstanceLoading();
   const toastNotify = useToastNotification();

@@ -1,14 +1,14 @@
 import { getInstanceEditValues, getInstancePayload } from "./instanceEdit";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 
 describe("conversion to form values and back with getInstanceEditValues and getInstancePayload", () => {
   it("preserves custom top level instance setting field", () => {
-    type CustomPayload = LxdInstance & { "custom-key": string };
+    type CustomPayload = IncusInstance & { "custom-key": string };
     const instance = {
       config: {},
       devices: {},
       "custom-key": "custom-value",
-    } as unknown as LxdInstance;
+    } as unknown as IncusInstance;
 
     const formValues = getInstanceEditValues(instance);
     const payload = getInstancePayload(instance, formValues) as CustomPayload;
@@ -22,7 +22,7 @@ describe("conversion to form values and back with getInstanceEditValues and getI
       config: {
         "custom-config-key": "custom-config-value",
       },
-    } as unknown as LxdInstance;
+    } as unknown as IncusInstance;
 
     const formValues = getInstanceEditValues(instance);
     const payload = getInstancePayload(instance, formValues);
@@ -37,7 +37,7 @@ describe("conversion to form values and back with getInstanceEditValues and getI
         "limits.memory": "2GB",
         "limits.cpu": "2-3",
       },
-    } as unknown as LxdInstance;
+    } as unknown as IncusInstance;
 
     const formValues = getInstanceEditValues(instance);
     const payload = getInstancePayload(instance, formValues);
@@ -47,7 +47,7 @@ describe("conversion to form values and back with getInstanceEditValues and getI
   });
 
   it("preserves custom devices on instance settings", () => {
-    type DevicePayload = LxdInstance & {
+    type DevicePayload = IncusInstance & {
       devices: { grafananat: { connect: string } };
     };
     const instance = {
@@ -57,7 +57,7 @@ describe("conversion to form values and back with getInstanceEditValues and getI
           connect: "tcp:1.2.3.4:3000",
         },
       },
-    } as unknown as LxdInstance;
+    } as unknown as IncusInstance;
 
     const formValues = getInstanceEditValues(instance);
     const payload = getInstancePayload(instance, formValues) as DevicePayload;

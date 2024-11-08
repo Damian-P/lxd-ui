@@ -4,7 +4,7 @@ import {
   checkDuplicateName,
 } from "./helpers";
 import { AnyObject, TestContext, TestFunction } from "yup";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { StorageVolumeFormValues } from "pages/storage/forms/StorageVolumeForm";
 
 export const testDuplicateStorageVolumeName = (
@@ -73,19 +73,19 @@ export const getVolumeConfigKeys = (): Set<string> => {
   return new Set(Object.values(storageVolumeFormFieldToPayloadName));
 };
 
-export const renderVolumeType = (volume: LxdStorageVolume): string => {
+export const renderVolumeType = (volume: IncusStorageVolume): string => {
   return volume.type === "virtual-machine"
     ? "VM"
     : capitalizeFirstLetter(volume.type);
 };
 
-export const renderContentType = (volume: LxdStorageVolume): string => {
+export const renderContentType = (volume: IncusStorageVolume): string => {
   return volume.content_type === "iso"
     ? "ISO"
     : capitalizeFirstLetter(volume.content_type);
 };
 
-export const isSnapshot = (volume: LxdStorageVolume): boolean => {
+export const isSnapshot = (volume: IncusStorageVolume): boolean => {
   return volume.name.includes("/");
 };
 
@@ -101,7 +101,7 @@ export const splitVolumeSnapshotName = (
   };
 };
 
-export const getSnapshotsPerVolume = (volumes: LxdStorageVolume[]) => {
+export const getSnapshotsPerVolume = (volumes: IncusStorageVolume[]) => {
   const snapshotPerVolumeLookup: { [volumeName: string]: string[] } = {};
   for (const volume of volumes) {
     if (isSnapshot(volume)) {
@@ -122,7 +122,7 @@ export const figureCollapsedScreen = (): boolean =>
   window.innerWidth <= collapsedViewMaxWidth;
 
 export const generateLinkForVolumeDetail = (
-  volume: LxdStorageVolume,
+  volume: IncusStorageVolume,
   project: string,
 ): string => {
   // NOTE: name of a volume created from an instance is exactly the same as the instance name
@@ -141,6 +141,6 @@ export const generateLinkForVolumeDetail = (
   return `/ui/project/${project}/storage/pool/${volume.pool}/volumes/${volume.type}/${volume.name}`;
 };
 
-export const hasVolumeDetailPage = (volume: LxdStorageVolume): boolean => {
+export const hasVolumeDetailPage = (volume: IncusStorageVolume): boolean => {
   return generateLinkForVolumeDetail(volume, "").includes("/storage/pool/");
 };

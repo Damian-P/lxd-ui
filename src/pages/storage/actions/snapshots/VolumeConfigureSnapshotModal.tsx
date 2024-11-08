@@ -8,7 +8,7 @@ import {
 import { useFormik } from "formik";
 import { queryKeys } from "util/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import {
   StorageVolumeFormValues,
   volumeFormToPayload,
@@ -19,7 +19,7 @@ import StorageVolumeFormSnapshots from "pages/storage/forms/StorageVolumeFormSna
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   close: () => void;
 }
 

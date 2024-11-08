@@ -1,12 +1,12 @@
-export type LxdConfigPair = Record<string, string | undefined>;
+export type IncusConfigPair = Record<string, string | undefined>;
 
-export type ConfigField = LxdConfigOption & {
+export type ConfigField = IncusConfigOption & {
   category: string;
   default: string;
   key: string;
 };
 
-export interface LxdConfigOption {
+export interface IncusConfigOption {
   default?: string;
   defaultdesc?: string;
   longdesc?: string;
@@ -18,12 +18,12 @@ export interface LxdConfigOption {
 export interface LxcConfigOptionCategories {
   [category: string]: {
     keys: {
-      [key: string]: LxdConfigOption;
+      [key: string]: IncusConfigOption;
     }[];
   };
 }
 
-export interface LxdConfigOptions {
+export interface IncusConfigOptions {
   configs: {
     cluster: LxcConfigOptionCategories;
     instance: LxcConfigOptionCategories;
@@ -42,7 +42,8 @@ export interface LxdConfigOptions {
     "storage-lvm": LxcConfigOptionCategories;
     "storage-powerflex": LxcConfigOptionCategories;
     "storage-zfs": LxcConfigOptionCategories;
+    "storage-lvmcluster": LxcConfigOptionCategories;
   };
 }
 
-export type LxdConfigOptionsKeys = keyof LxdConfigOptions["configs"];
+export type IncusConfigOptionsKeys = keyof IncusConfigOptions["configs"];

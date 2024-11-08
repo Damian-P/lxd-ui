@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { deleteImage } from "api/images";
-import { LxdImage } from "types/image";
+import { IncusImage } from "types/image";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { ConfirmationButton, Icon } from "@canonical/react-components";
@@ -8,7 +8,7 @@ import { useEventQueue } from "context/eventQueue";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  image: LxdImage;
+  image: IncusImage;
   project: string;
 }
 

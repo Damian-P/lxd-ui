@@ -159,7 +159,7 @@ const PermissionIdpGroups: FC = () => {
     <>
       <p className={infoStyle}>
         Identity provider groups map authentication entities from your identity
-        provider to groups within LXD.
+        provider to groups within Incus.
       </p>
       {!hasCustomClaim ? (
         <p className={infoStyle}>

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import RenameHeader, { RenameHeaderValues } from "components/RenameHeader";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { renameStorageVolume } from "api/storage-pools";
 import { testDuplicateStorageVolumeName } from "util/storageVolume";
 import { useNotify } from "@canonical/react-components";
@@ -11,7 +11,7 @@ import DeleteStorageVolumeBtn from "pages/storage/actions/DeleteStorageVolumeBtn
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   project: string;
 }
 

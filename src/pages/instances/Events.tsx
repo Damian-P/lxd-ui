@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { LxdEvent } from "types/event";
+import { IncusEvent } from "types/event";
 import { useEventQueue } from "context/eventQueue";
 import { useAuth } from "context/auth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -13,7 +13,7 @@ const Events: FC = () => {
   const [eventWs, setEventWs] = useState<WebSocket | null>(null);
   const { refetchOperations } = useOperations();
 
-  const handleEvent = (event: LxdEvent) => {
+  const handleEvent = (event: IncusEvent) => {
     const eventCallback = eventQueue.get(event.metadata.id);
     if (!eventCallback) {
       return;
@@ -44,7 +44,7 @@ const Events: FC = () => {
         console.log("Invalid format on event api: ", message.data);
         return;
       }
-      const event = JSON.parse(message.data) as LxdEvent;
+      const event = JSON.parse(message.data) as IncusEvent;
       if (event.type === "operation") {
         void queryClient.invalidateQueries({
           queryKey: [queryKeys.operations, event.project],

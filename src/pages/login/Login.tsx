@@ -11,6 +11,7 @@ const Login: FC = () => {
   const navigate = useNavigate();
   const { data: settings } = useSettings();
   const hasOidc = settings?.auth_methods?.includes("oidc");
+  const hasSSOOnly = settings?.config?.["user.ui.sso_only"] == "true";
 
   if (isAuthLoading) {
     return <Loader />;
@@ -23,14 +24,19 @@ const Login: FC = () => {
   return (
     <CustomLayout>
       <div className="empty-state login">
-        <Icon name="containers" className="empty-state-icon lxd-icon" />
         <h1 className="p-heading--4 u-sv-2">Login</h1>
         {hasOidc && (
           <>
+	    {!hasSSOOnly && (
+            <>
             <p className="u-sv1">Choose your login method</p>
+            </>
+            )}
             <a className="p-button--positive" href="/oidc/login">
               Login with SSO
             </a>
+	    {!hasSSOOnly && (
+            <>
             <h2 className="p-heading--5 u-sv-2">Other methods</h2>
             <div>
               Either{" "}
@@ -45,6 +51,8 @@ const Login: FC = () => {
               </Link>{" "}
               already added to your browser
             </div>
+            </>
+            )}
           </>
         )}
         {!hasOidc && (

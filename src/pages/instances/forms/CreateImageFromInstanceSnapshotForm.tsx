@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { LxdInstance, LxdInstanceSnapshot } from "types/instance";
+import { IncusInstance, IncusInstanceSnapshot } from "types/instance";
 import { useEventQueue } from "context/eventQueue";
 import { useFormik } from "formik";
 import { useToastNotification } from "context/toastNotificationProvider";
@@ -15,8 +15,8 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 
 interface Props {
-  instance: LxdInstance;
-  snapshot: LxdInstanceSnapshot;
+  instance: IncusInstance;
+  snapshot: IncusInstanceSnapshot;
   close: () => void;
 }
 

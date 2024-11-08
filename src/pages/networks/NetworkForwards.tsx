@@ -8,7 +8,7 @@ import {
 } from "@canonical/react-components";
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 import Loader from "components/Loader";
 import { fetchNetworkForwards } from "api/network-forwards";
 import { useDocs } from "context/useDocs";
@@ -19,7 +19,7 @@ import NetworkForwardPort from "pages/networks/NetworkForwardPort";
 import ScrollableTable from "components/ScrollableTable";
 
 interface Props {
-  network: LxdNetwork;
+  network: IncusNetwork;
   project: string;
 }
 

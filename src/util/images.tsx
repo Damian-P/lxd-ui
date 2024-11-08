@@ -1,5 +1,5 @@
-import { LxdImage, RemoteImage } from "types/image";
-import { LxdStorageVolume } from "types/storage";
+import { IncusImage, RemoteImage } from "types/image";
+import { IncusStorageVolume } from "types/storage";
 
 export const isVmOnlyImage = (image: RemoteImage): boolean | undefined => {
   if (image.server === LOCAL_ISO || image.type === "virtual-machine") {
@@ -24,7 +24,7 @@ export const isContainerOnlyImage = (image: RemoteImage): boolean => {
 
 export const LOCAL_ISO = "local-iso";
 
-export const isoToRemoteImage = (volume: LxdStorageVolume): RemoteImage => {
+export const isoToRemoteImage = (volume: IncusStorageVolume): RemoteImage => {
   return {
     aliases: volume.name,
     arch: "",
@@ -41,7 +41,7 @@ export const isoToRemoteImage = (volume: LxdStorageVolume): RemoteImage => {
 
 export const LOCAL_IMAGE = "local-image";
 
-export const localLxdToRemoteImage = (image: LxdImage): RemoteImage => {
+export const localIncusToRemoteImage = (image: IncusImage): RemoteImage => {
   return {
     aliases: image.update_source?.alias ?? image.aliases?.[0]?.name ?? "",
     fingerprint: image.fingerprint,
@@ -49,6 +49,7 @@ export const localLxdToRemoteImage = (image: LxdImage): RemoteImage => {
     os: image.properties?.os ?? "",
     created_at: new Date(image.uploaded_at).getTime(),
     release: image.properties?.release ?? "",
+    profiles: image.profiles ?? ["default"],
     server: LOCAL_IMAGE,
     type: image.type,
   };

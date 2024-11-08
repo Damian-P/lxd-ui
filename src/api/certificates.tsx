@@ -1,12 +1,12 @@
 import { handleResponse } from "util/helpers";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdCertificate } from "types/certificate";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusCertificate } from "types/certificate";
 
-export const fetchCertificates = (): Promise<LxdCertificate[]> => {
+export const fetchCertificates = (): Promise<IncusCertificate[]> => {
   return new Promise((resolve, reject) => {
     fetch("/1.0/certificates?recursion=1")
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdCertificate[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusCertificate[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };

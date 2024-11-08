@@ -1,12 +1,12 @@
 import { AnyObject, TestFunction } from "yup";
 import { AbortControllerState, checkDuplicateName } from "./helpers";
 import * as Yup from "yup";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { testFutureDate, testValidDate, testValidTime } from "./snapshots";
 
 /*** Volume snapshot utils ***/
 export const testDuplicateVolumeSnapshotName = (
-  volume: LxdStorageVolume,
+  volume: IncusStorageVolume,
   controllerState: AbortControllerState,
   excludeName?: string,
 ): [string, string, TestFunction<string | undefined, AnyObject>] => {
@@ -28,7 +28,7 @@ export const testDuplicateVolumeSnapshotName = (
 };
 
 export const getVolumeSnapshotSchema = (
-  volume: LxdStorageVolume,
+  volume: IncusStorageVolume,
   controllerState: AbortControllerState,
   snapshotName?: string,
 ) => {

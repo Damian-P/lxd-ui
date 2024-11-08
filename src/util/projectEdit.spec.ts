@@ -1,13 +1,13 @@
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { getProjectEditValues, getProjectPayload } from "util/projectEdit";
 
 describe("conversion to form values and back with getProjectEditValues and getProjectPayload", () => {
   it("preserves custom main level field", () => {
-    type CustomPayload = LxdProject & { "custom-key": string };
+    type CustomPayload = IncusProject & { "custom-key": string };
     const project = {
       config: {},
       "custom-key": "custom-value",
-    } as unknown as LxdProject;
+    } as unknown as IncusProject;
 
     const formValues = getProjectEditValues(project);
     const payload = getProjectPayload(project, formValues) as CustomPayload;
@@ -21,7 +21,7 @@ describe("conversion to form values and back with getProjectEditValues and getPr
       config: {
         "user.key": "custom-config-value",
       },
-    } as unknown as LxdProject;
+    } as unknown as IncusProject;
 
     const formValues = getProjectEditValues(project);
     const payload = getProjectPayload(project, formValues);

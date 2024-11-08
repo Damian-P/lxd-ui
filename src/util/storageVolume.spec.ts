@@ -1,9 +1,9 @@
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { getSnapshotsPerVolume } from "./storageVolume";
 
 describe("getSnapshotsPerVolume", () => {
   it("no snapshot volumes", () => {
-    const volumes: LxdStorageVolume[] = [
+    const volumes: IncusStorageVolume[] = [
       {
         config: {},
         description: "",
@@ -62,7 +62,7 @@ describe("getSnapshotsPerVolume", () => {
   });
 
   it("have snapshot volumes", () => {
-    const volumes: LxdStorageVolume[] = [
+    const volumes: IncusStorageVolume[] = [
       {
         config: {},
         description: "",

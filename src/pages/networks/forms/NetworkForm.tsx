@@ -8,11 +8,11 @@ import {
   useNotify,
 } from "@canonical/react-components";
 import {
-  LxdNetwork,
-  LxdNetworkBridgeDriver,
-  LxdNetworkConfig,
-  LxdNetworkDnsMode,
-  LxdNetworkType,
+  IncusNetwork,
+  IncusNetworkBridgeDriver,
+  IncusNetworkConfig,
+  IncusNetworkDnsMode,
+  IncusNetworkType,
 } from "types/network";
 import NetworkFormMenu, {
   BRIDGE,
@@ -43,12 +43,12 @@ export interface NetworkFormValues {
   isCreating: boolean;
   name: string;
   description?: string;
-  networkType: LxdNetworkType;
-  bridge_driver?: LxdNetworkBridgeDriver;
+  networkType: IncusNetworkType;
+  bridge_driver?: IncusNetworkBridgeDriver;
   bridge_hwaddr?: string;
   bridge_mtu?: string;
   dns_domain?: string;
-  dns_mode?: LxdNetworkDnsMode;
+  dns_mode?: IncusNetworkDnsMode;
   dns_nameservers?: string;
   dns_search?: string;
   ipv4_address?: string;
@@ -79,10 +79,10 @@ export interface NetworkFormValues {
   parent?: string;
   yaml?: string;
   entityType: "network";
-  bareNetwork?: LxdNetwork;
+  bareNetwork?: IncusNetwork;
 }
 
-export const toNetwork = (values: NetworkFormValues): Partial<LxdNetwork> => {
+export const toNetwork = (values: NetworkFormValues): Partial<IncusNetwork> => {
   const excludeMainKeys = new Set([
     "used_by",
     "etag",
@@ -104,7 +104,7 @@ export const toNetwork = (values: NetworkFormValues): Partial<LxdNetwork> => {
   const missingConfigFields = Object.fromEntries(
     Object.entries(values.bareNetwork?.config ?? {}).filter(
       (e) =>
-        !excludeConfigKeys.has(e[0] as keyof LxdNetworkConfig) &&
+        !excludeConfigKeys.has(e[0] as keyof IncusNetworkConfig) &&
         !e[0].startsWith("volatile"),
     ),
   );

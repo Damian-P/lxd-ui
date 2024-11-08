@@ -18,7 +18,7 @@ import {
 import { instanceCreationTypes } from "util/instanceOptions";
 import { FormikProps } from "formik/dist/types";
 import { CreateInstanceFormValues } from "pages/instances/CreateInstance";
-import { LxdImageType, RemoteImage } from "types/image";
+import { IncusImageType, RemoteImage } from "types/image";
 import InstanceLocationSelect from "pages/instances/forms/InstanceLocationSelect";
 import UseCustomIsoBtn from "pages/images/actions/UseCustomIsoBtn";
 import AutoExpandingTextArea from "components/AutoExpandingTextArea";
@@ -73,7 +73,7 @@ export const instanceDetailPayload = (values: CreateInstanceFormValues) => {
 
 interface Props {
   formik: FormikProps<CreateInstanceFormValues>;
-  onSelectImage: (image: RemoteImage, type?: LxdImageType) => void;
+  onSelectImage: (image: RemoteImage, type?: IncusImageType) => void;
   project: string;
 }
 

@@ -6,30 +6,30 @@ import {
   pushFailure,
   pushSuccess,
 } from "util/helpers";
-import { LxdInstance, LxdInstanceAction } from "types/instance";
-import { LxdTerminal, TerminalConnectPayload } from "types/terminal";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdOperationResponse } from "types/operation";
+import { IncusInstance, IncusInstanceAction } from "types/instance";
+import { IncusTerminal, TerminalConnectPayload } from "types/terminal";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusOperationResponse } from "types/operation";
 import { EventQueue } from "context/eventQueue";
 
 export const fetchInstance = (
   name: string,
   project: string,
   recursion = 2,
-): Promise<LxdInstance> => {
+): Promise<IncusInstance> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${name}?project=${project}&recursion=${recursion}`)
       .then(handleEtagResponse)
-      .then((data) => resolve(data as LxdInstance))
+      .then((data) => resolve(data as IncusInstance))
       .catch(reject);
   });
 };
 
-export const fetchInstances = (project: string): Promise<LxdInstance[]> => {
+export const fetchInstances = (project: string): Promise<IncusInstance[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances?project=${project}&recursion=2`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdInstance[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusInstance[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
@@ -38,7 +38,7 @@ export const createInstance = (
   body: string,
   project: string,
   target?: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances?project=${project}&target=${target ?? ""}`, {
       method: "POST",
@@ -51,9 +51,9 @@ export const createInstance = (
 };
 
 export const updateInstance = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   project: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${instance.name}?project=${project}`, {
       method: "PUT",
@@ -72,7 +72,7 @@ export const renameInstance = (
   oldName: string,
   newName: string,
   project: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${oldName}?project=${project}`, {
       method: "POST",
@@ -87,15 +87,15 @@ export const renameInstance = (
 };
 
 export const migrateInstance = (
-  name: string,
-  project: string,
+  instance: IncusInstance,
   target: string,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
-    fetch(`/1.0/instances/${name}?project=${project}&target=${target}`, {
+    fetch(`/1.0/instances/${instance.name}?project=${instance.project}&target=${target}`, {
       method: "POST",
       body: JSON.stringify({
         migration: true,
+        live: instance.type === "virtual-machine" && instance.status === "Running",
       }),
     })
       .then(handleResponse)
@@ -105,43 +105,43 @@ export const migrateInstance = (
 };
 
 export const startInstance = (
-  instance: LxdInstance,
-): Promise<LxdOperationResponse> => {
+  instance: IncusInstance,
+): Promise<IncusOperationResponse> => {
   return putInstanceAction(instance.name, instance.project, "start");
 };
 
 export const stopInstance = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   isForce: boolean,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return putInstanceAction(instance.name, instance.project, "stop", isForce);
 };
 
 export const freezeInstance = (
-  instance: LxdInstance,
-): Promise<LxdOperationResponse> => {
+  instance: IncusInstance,
+): Promise<IncusOperationResponse> => {
   return putInstanceAction(instance.name, instance.project, "freeze");
 };
 
 export const unfreezeInstance = (
-  instance: LxdInstance,
-): Promise<LxdOperationResponse> => {
+  instance: IncusInstance,
+): Promise<IncusOperationResponse> => {
   return putInstanceAction(instance.name, instance.project, "unfreeze");
 };
 
 export const restartInstance = (
-  instance: LxdInstance,
+  instance: IncusInstance,
   isForce: boolean,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return putInstanceAction(instance.name, instance.project, "restart", isForce);
 };
 
 const putInstanceAction = (
   instance: string,
   project: string,
-  action: LxdInstanceAction,
+  action: IncusInstanceAction,
   isForce?: boolean,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${instance}/state?project=${project}`, {
       method: "PUT",
@@ -159,7 +159,7 @@ const putInstanceAction = (
 export interface InstanceBulkAction {
   name: string;
   project: string;
-  action: LxdInstanceAction;
+  action: IncusInstanceAction;
 }
 
 export const updateInstanceBulkAction = (
@@ -190,8 +190,8 @@ export const updateInstanceBulkAction = (
 };
 
 export const deleteInstance = (
-  instance: LxdInstance,
-): Promise<LxdOperationResponse> => {
+  instance: IncusInstance,
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${instance.name}?project=${instance.project}`, {
       method: "DELETE",
@@ -203,7 +203,7 @@ export const deleteInstance = (
 };
 
 export const deleteInstanceBulk = (
-  instances: LxdInstance[],
+  instances: IncusInstance[],
   eventQueue: EventQueue,
 ): Promise<PromiseSettledResult<void>[]> => {
   const results: PromiseSettledResult<void>[] = [];
@@ -232,7 +232,7 @@ export const connectInstanceExec = (
   name: string,
   project: string,
   payload: TerminalConnectPayload,
-): Promise<LxdTerminal> => {
+): Promise<IncusTerminal> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${name}/exec?project=${project}&wait=10`, {
       method: "POST",
@@ -249,7 +249,7 @@ export const connectInstanceExec = (
       }),
     })
       .then(handleResponse)
-      .then((data: LxdTerminal) => resolve(data))
+      .then((data: IncusTerminal) => resolve(data))
       .catch(reject);
   });
 };
@@ -257,7 +257,7 @@ export const connectInstanceExec = (
 export const connectInstanceVga = (
   name: string,
   project: string,
-): Promise<LxdTerminal> => {
+): Promise<IncusTerminal> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${name}/console?project=${project}&wait=10`, {
       method: "POST",
@@ -268,7 +268,7 @@ export const connectInstanceVga = (
       }),
     })
       .then(handleResponse)
-      .then((data: LxdTerminal) => resolve(data))
+      .then((data: IncusTerminal) => resolve(data))
       .catch(reject);
   });
 };
@@ -276,7 +276,7 @@ export const connectInstanceVga = (
 export const connectInstanceConsole = (
   name: string,
   project: string,
-): Promise<LxdTerminal> => {
+): Promise<IncusTerminal> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/instances/${name}/console?project=${project}&wait=10`, {
       method: "POST",
@@ -286,7 +286,7 @@ export const connectInstanceConsole = (
       }),
     })
       .then(handleResponse)
-      .then((data: LxdTerminal) => resolve(data))
+      .then((data: IncusTerminal) => resolve(data))
       .catch(reject);
   });
 };
@@ -314,7 +314,7 @@ export const fetchInstanceLogs = (
       method: "GET",
     })
       .then(handleResponse)
-      .then((data: LxdApiResponse<string[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<string[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };

@@ -7,7 +7,7 @@ import {
   useNotify,
 } from "@canonical/react-components";
 import { isoTimeToString } from "util/helpers";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import InstanceSnapshotActions from "./actions/snapshots/InstanceSnapshotActions";
 import useEventListener from "@use-it/event-listener";
 import ItemName from "components/ItemName";
@@ -30,7 +30,7 @@ export const figureCollapsedScreen = (): boolean =>
   window.innerWidth <= collapsedViewMaxWidth;
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const InstanceSnapshots = (props: Props) => {

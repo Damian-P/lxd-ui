@@ -3,12 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, Icon } from "@canonical/react-components";
 import { queryKeys } from "util/queryKeys";
 import { fetchInstanceLogFile } from "api/instances";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import DownloadButton from "pages/instances/DownloadButton";
 import { getUrlParam } from "util/helpers";
 
 interface FileRowProps {
-  instance: LxdInstance;
+  instance: IncusInstance;
   path: string;
 }
 

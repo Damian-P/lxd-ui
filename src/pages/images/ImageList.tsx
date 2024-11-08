@@ -16,7 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "components/Loader";
 import { useParams } from "react-router-dom";
 import CreateInstanceFromImageBtn from "pages/images/actions/CreateInstanceFromImageBtn";
-import { localLxdToRemoteImage } from "util/images";
+import { localIncusToRemoteImage } from "util/images";
 import ScrollableTable from "components/ScrollableTable";
 import useSortTableData from "util/useSortTableData";
 import SelectableMainTable from "components/SelectableMainTable";
@@ -109,7 +109,7 @@ const ImageList: FC = () => {
           <CreateInstanceFromImageBtn
             key="launch"
             project={project}
-            image={localLxdToRemoteImage(image)}
+            image={localIncusToRemoteImage(image)}
           />,
           <DeleteImageBtn key="delete" image={image} project={project} />,
         ]}

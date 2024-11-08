@@ -1,10 +1,10 @@
-import { LxdConfigPair } from "./config";
-import { LxdDevices } from "./device";
+import { IncusConfigPair } from "./config";
+import { IncusDevices } from "./device";
 
-export interface LxdProfile {
-  config: LxdConfigPair;
+export interface IncusProfile {
+  config: IncusConfigPair;
   description: string;
-  devices: LxdDevices;
+  devices: IncusDevices;
   name: string;
   used_by?: string[];
   etag?: string;

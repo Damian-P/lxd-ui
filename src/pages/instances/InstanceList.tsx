@@ -40,6 +40,7 @@ import {
   DESCRIPTION,
   IPV4,
   IPV6,
+  LOCATION,
   NAME,
   SIZE_HIDEABLE_COLUMNS,
   SNAPSHOTS,
@@ -53,14 +54,14 @@ import SelectedTableNotification from "components/SelectedTableNotification";
 import CustomLayout from "components/CustomLayout";
 import HelpLink from "components/HelpLink";
 import { useDocs } from "context/useDocs";
-import { LxdInstanceStatus } from "types/instance";
+import { IncusInstanceStatus } from "types/instance";
 import useSortTableData from "util/useSortTableData";
 import PageHeader from "components/PageHeader";
 import InstanceDetailPanel from "./InstanceDetailPanel";
 
 const loadHidden = () => {
   const saved = localStorage.getItem("instanceListHiddenColumns");
-  return saved ? (JSON.parse(saved) as string[]) : [];
+  return saved ? (JSON.parse(saved) as string[]) : ["Location"];
 };
 
 const saveHidden = (columns: string[]) => {
@@ -83,7 +84,7 @@ const InstanceList: FC = () => {
   const filters: InstanceFilters = {
     queries: searchParams.getAll("query"),
     statuses: enrichStatuses(
-      searchParams.getAll("status") as LxdInstanceStatus[],
+      searchParams.getAll("status") as IncusInstanceStatus[],
     ),
     types: searchParams
       .getAll("type")
@@ -208,6 +209,11 @@ const InstanceList: FC = () => {
         content: TYPE,
         sortKey: "type",
         style: { width: `${COLUMN_WIDTHS[TYPE]}px` },
+      },
+      {
+        content: LOCATION,
+        sortKey: "location",
+        style: { width: `${COLUMN_WIDTHS[LOCATION]}px` },
       },
       {
         content: DESCRIPTION,
@@ -358,6 +364,18 @@ const InstanceList: FC = () => {
           },
           {
             content: (
+              <div className="u-truncate" title={instance.location}>
+                {instance.location}
+              </div>
+            ),
+            role: "rowheader",
+            "aria-label": LOCATION,
+            onClick: openSummary,
+            className: "clickable-cell",
+            style: { width: `${COLUMN_WIDTHS[LOCATION]}px` },
+          },
+          {
+            content: (
               <div className="u-truncate" title={instance.description}>
                 {instance.description}
               </div>
@@ -423,6 +441,7 @@ const InstanceList: FC = () => {
         ].filter((item) => !hiddenCols.includes(item["aria-label"])),
         sortData: {
           name: instance.name.toLowerCase(),
+          location: instance.location,
           description: instance.description.toLowerCase(),
           status: instance.status,
           type: instance.type,
@@ -574,7 +593,7 @@ const InstanceList: FC = () => {
                     }
                   >
                     <TableColumnsSelect
-                      columns={[TYPE, DESCRIPTION, IPV4, IPV6, SNAPSHOTS]}
+                      columns={[TYPE, LOCATION, DESCRIPTION, IPV4, IPV6, SNAPSHOTS]}
                       hidden={userHidden}
                       sizeHidden={sizeHidden}
                       setHidden={setHidden}

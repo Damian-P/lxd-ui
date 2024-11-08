@@ -1,4 +1,5 @@
 import { FC, KeyboardEvent } from "react";
+import { IncusInstance } from "types/instance";
 import {
   ActionButton,
   Button,
@@ -8,24 +9,22 @@ import {
 } from "@canonical/react-components";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { LxdClusterMember } from "types/cluster";
+import { IncusClusterMember } from "types/cluster";
 
 interface Props {
   close: () => void;
   migrate: (target: string) => void;
-  instance: string;
-  location: string;
-  members: LxdClusterMember[];
+  instance: IncusInstance;
+  members: IncusClusterMember[];
 }
 
 const MigrateInstanceForm: FC<Props> = ({
   close,
   migrate,
   instance,
-  location,
   members,
 }) => {
-  const memberNames = members.map((member) => member.server_name);
+  const memberNames = members.map((member) => member.server_name).sort();
 
   const MigrateSchema = Yup.object().shape({
     target: Yup.string().min(1, "This field is required"),
@@ -33,7 +32,7 @@ const MigrateInstanceForm: FC<Props> = ({
 
   const formik = useFormik({
     initialValues: {
-      target: memberNames.find((member) => member !== location) ?? "",
+      target: memberNames.find((member) => member !== instance.location) ?? "",
     },
     validationSchema: MigrateSchema,
     onSubmit: (values) => {
@@ -51,7 +50,7 @@ const MigrateInstanceForm: FC<Props> = ({
     <Modal
       close={close}
       className="migrate-instance-modal"
-      title={`Migrate instance ${instance}`}
+      title={`Migrate instance ${instance.name}`}
       buttonRow={
         <>
           <Button
@@ -85,7 +84,7 @@ const MigrateInstanceForm: FC<Props> = ({
             return {
               label: member,
               value: member,
-              disabled: member === location,
+              disabled: member === instance.location,
             };
           })}
         />

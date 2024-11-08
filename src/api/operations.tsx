@@ -1,9 +1,9 @@
 import { handleResponse } from "util/helpers";
-import { LxdOperation, LxdOperationList } from "types/operation";
-import { LxdApiResponse } from "types/apiResponse";
+import { IncusOperation, IncusOperationList } from "types/operation";
+import { IncusApiResponse } from "types/apiResponse";
 
-const sortOperationList = (operations: LxdOperationList) => {
-  const newestFirst = (a: LxdOperation, b: LxdOperation) => {
+const sortOperationList = (operations: IncusOperationList) => {
+  const newestFirst = (a: IncusOperation, b: IncusOperation) => {
     return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
   };
   operations.failure?.sort(newestFirst);
@@ -11,11 +11,11 @@ const sortOperationList = (operations: LxdOperationList) => {
   operations.running?.sort(newestFirst);
 };
 
-export const fetchOperations = (project: string): Promise<LxdOperationList> => {
+export const fetchOperations = (project: string): Promise<IncusOperationList> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/operations?project=${project}&recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdOperationList>) => {
+      .then((data: IncusApiResponse<IncusOperationList>) => {
         sortOperationList(data.metadata);
         return resolve(data.metadata);
       })
@@ -23,11 +23,11 @@ export const fetchOperations = (project: string): Promise<LxdOperationList> => {
   });
 };
 
-export const fetchAllOperations = (): Promise<LxdOperationList> => {
+export const fetchAllOperations = (): Promise<IncusOperationList> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/operations?all-projects=true&recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdOperationList>) => {
+      .then((data: IncusApiResponse<IncusOperationList>) => {
         sortOperationList(data.metadata);
         return resolve(data.metadata);
       })
@@ -35,7 +35,7 @@ export const fetchAllOperations = (): Promise<LxdOperationList> => {
   });
 };
 
-export const cancelOperation = (id: string): Promise<LxdOperationList> => {
+export const cancelOperation = (id: string): Promise<IncusOperationList> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/operations/${id}`, {
       method: "DELETE",

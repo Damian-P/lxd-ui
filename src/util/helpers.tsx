@@ -1,9 +1,9 @@
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdInstance } from "types/instance";
-import { LxdProject } from "types/project";
-import { LxdProfile } from "types/profile";
-import { LxdNetwork } from "types/network";
-import { LxdStorageVolume } from "types/storage";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusInstance } from "types/instance";
+import { IncusProject } from "types/project";
+import { IncusProfile } from "types/profile";
+import { IncusNetwork } from "types/network";
+import { IncusStorageVolume } from "types/storage";
 import { Dispatch, SetStateAction } from "react";
 import crypto from "crypto";
 
@@ -80,8 +80,8 @@ export const handleSettledResult = (
 };
 
 export const handleEtagResponse = async (response: Response) => {
-  const data = (await handleResponse(response)) as LxdApiResponse<
-    LxdInstance | LxdProject | LxdProfile | LxdNetwork | LxdStorageVolume
+  const data = (await handleResponse(response)) as IncusApiResponse<
+    IncusInstance | IncusProject | IncusProfile | IncusNetwork | IncusStorageVolume
   >;
   const result = data.metadata;
   result.etag = response.headers.get("etag")?.replace("W/", "") ?? undefined;
@@ -169,7 +169,7 @@ export const checkDuplicateName = (
   const signal = deduplicateController.signal;
   return fetch(`/1.0/${target}/${candidate}?project=${project}`, {
     signal,
-  }).then((response) => response.status === 404);
+  }).then((response) => response.status === 404 || response.status === 403);
 };
 
 export const getUrlParam = (paramName: string, url?: string): string | null => {

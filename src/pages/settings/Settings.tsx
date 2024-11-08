@@ -71,11 +71,19 @@ const Settings: FC = () => {
   const configFields = toConfigFields(configOptions?.configs?.server ?? {});
 
   configFields.push({
-    key: "user.ui_title",
+    key: "user.ui.title",
     category: "user",
     default: "",
-    shortdesc: "Title for the LXD-UI web page. Shows the hostname when unset.",
+    shortdesc: "Title for the Incus-UI web page. Shows the hostname when unset.",
     type: "string",
+  });
+
+  configFields.push({
+    key: "user.ui.sso_only",
+    category: "user",
+    default: "false",
+    shortdesc: "Whether to restrict login options to SSO/OIDC only.",
+    type: "bool",
   });
 
   if (hasAccessManagement) {
@@ -189,7 +197,7 @@ const Settings: FC = () => {
               title="Get more server settings"
               titleElement="h2"
             >
-              Update to LXD v5.19.0 or later to access more server settings
+              Update to Incus v5.19.0 or later to access more server settings
             </Notification>
           )}
           <ScrollableTable

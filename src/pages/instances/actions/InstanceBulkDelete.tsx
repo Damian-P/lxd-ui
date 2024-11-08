@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { deleteInstanceBulk } from "api/instances";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { pluralize } from "util/instanceBulkActions";
 import { queryKeys } from "util/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import { useEventQueue } from "context/eventQueue";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  instances: LxdInstance[];
+  instances: IncusInstance[];
   onStart: (names: string[]) => void;
   onFinish: () => void;
 }

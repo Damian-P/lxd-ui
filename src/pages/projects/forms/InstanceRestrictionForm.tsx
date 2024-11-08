@@ -10,7 +10,7 @@ import {
 } from "util/projectOptions";
 import { optionRenderer } from "util/formFields";
 import { getProjectKey } from "util/projectConfigFields";
-import { LxdConfigPair } from "types/config";
+import { IncusConfigPair } from "types/config";
 
 export interface InstanceRestrictionFormValues {
   restricted_virtual_machines_low_level?: string;
@@ -25,7 +25,7 @@ export interface InstanceRestrictionFormValues {
 
 export const instanceRestrictionPayload = (
   values: ProjectFormValues,
-): LxdConfigPair => {
+): IncusConfigPair => {
   return {
     [getProjectKey("restricted_virtual_machines_low_level")]:
       values.restricted_virtual_machines_low_level,

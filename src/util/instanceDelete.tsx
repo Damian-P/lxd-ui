@@ -1,3 +1,3 @@
-import { LxdInstanceStatus } from "types/instance";
+import { IncusInstanceStatus } from "types/instance";
 
-export const deletableStatuses: LxdInstanceStatus[] = ["Error", "Stopped"];
+export const deletableStatuses: IncusInstanceStatus[] = ["Error", "Stopped"];

@@ -15,6 +15,8 @@ import useEventListener from "@use-it/event-listener";
 import { enablePermissionsFeature } from "util/permissions";
 import { Location, useLocation } from "react-router-dom";
 import { useLoggedInUser } from "context/useLoggedInUser";
+import { useSettings } from "context/useSettings";
+import { isClusteredServer } from "util/settings";
 
 const isSmallScreen = () => isWidthBelow(620);
 
@@ -35,6 +37,8 @@ const initialiseOpenNavMenus = (location: Location) => {
 
 const Navigation: FC = () => {
   const { isRestricted, isOidc } = useAuth();
+  const { data: settings } = useSettings();
+  const isClustered = isClusteredServer(settings);
   const docBaseLink = useDocs();
   const { menuCollapsed, setMenuCollapsed } = useMenuCollapsed();
   const { project, isLoading } = useProject();
@@ -308,6 +312,8 @@ const Navigation: FC = () => {
                           Configuration
                         </NavLink>
                       </li>
+                      {isClustered && (
+                      <>
                       <hr className="is-dark navigation-hr" />
                       <li className="p-side-navigation__item">
                         <NavLink
@@ -322,6 +328,8 @@ const Navigation: FC = () => {
                           Cluster
                         </NavLink>
                       </li>
+                      </>
+                      )}
                       <li className="p-side-navigation__item">
                         <NavLink
                           to={`/ui/operations`}
@@ -381,7 +389,7 @@ const Navigation: FC = () => {
                               >
                                 <NavLink
                                   to="/ui/permissions/groups"
-                                  title="LXD groups"
+                                  title="Incus groups"
                                   onClick={softToggleMenu}
                                   className="accordion-nav-secondary"
                                 >
@@ -453,7 +461,7 @@ const Navigation: FC = () => {
                     <li className="p-side-navigation__item">
                       <div
                         className="p-side-navigation__link"
-                        title={`${loggedInUserName} (${loggedInUserID})`}
+                        title={`${loggedInUserName}`}
                       >
                         {authMethod == "tls" ? (
                           <Icon
@@ -490,7 +498,7 @@ const Navigation: FC = () => {
                   <li className="p-side-navigation__item">
                     <a
                       className="p-side-navigation__link"
-                      href="https://discourse.ubuntu.com/c/lxd/126"
+                      href="https://discuss.linuxcontainers.org"
                       target="_blank"
                       rel="noopener noreferrer"
                       title="Discussion"
@@ -505,7 +513,7 @@ const Navigation: FC = () => {
                   <li className="p-side-navigation__item">
                     <a
                       className="p-side-navigation__link"
-                      href="https://github.com/canonical/lxd-ui/issues/new"
+                      href="https://github.com/zabbly/incus/issues/new"
                       target="_blank"
                       rel="noopener noreferrer"
                       title="Report a bug"

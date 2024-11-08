@@ -1,9 +1,9 @@
 import { areNetworksEqual, testValidIp, testValidPort } from "./networks";
-import { LxdNetwork } from "types/network";
+import { IncusNetwork } from "types/network";
 
 describe("areNetworksEqual", () => {
   it("accepts matches", () => {
-    const a: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">> = {
+    const a: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">> = {
       config: {
         "bridge.driver": "native",
         "ipv4.address": "auto",
@@ -15,7 +15,7 @@ describe("areNetworksEqual", () => {
       name: "mybr23",
       type: "bridge",
     };
-    const b: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">> = {
+    const b: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">> = {
       config: {
         "bridge.driver": "native",
         "ipv4.address": "10.191.170.1/24",
@@ -32,11 +32,11 @@ describe("areNetworksEqual", () => {
   });
 
   it("rejects main diff", () => {
-    const a: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">> = {
+    const a: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">> = {
       config: {},
       name: "name",
     };
-    const b: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">> = {
+    const b: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">> = {
       config: {},
       name: "different-name",
     };
@@ -45,12 +45,12 @@ describe("areNetworksEqual", () => {
   });
 
   it("rejects config diff", () => {
-    const a: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">> = {
+    const a: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">> = {
       config: {
         "bridge.driver": "native",
       },
     };
-    const b: Partial<LxdNetwork> & Required<Pick<LxdNetwork, "config">> = {
+    const b: Partial<IncusNetwork> & Required<Pick<IncusNetwork, "config">> = {
       config: {
         "bridge.driver": "openvswitch",
       },

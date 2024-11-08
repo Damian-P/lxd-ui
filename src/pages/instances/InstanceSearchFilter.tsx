@@ -1,5 +1,5 @@
 import { FC, memo } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { instanceStatuses, instanceTypes } from "util/instanceFilter";
 import { SearchAndFilter } from "@canonical/react-components";
 import {
@@ -20,7 +20,7 @@ export const PROFILE = "profile";
 const QUERY_PARAMS = [QUERY, STATUS, TYPE, PROFILE];
 
 interface Props {
-  instances: LxdInstance[];
+  instances: IncusInstance[];
 }
 
 const InstanceSearchFilter: FC<Props> = ({ instances }) => {

@@ -10,7 +10,7 @@ export type ResourceDetail = {
 };
 
 // refer to api spec to see how the names can be extracted from resource url
-// https://documentation.ubuntu.com/lxd/en/latest/api/
+// https://documentation.ubuntu.com/incus/en/latest/api/
 export const extractResourceDetailsFromUrl = (
   resourceType: string,
   path: string,
@@ -29,7 +29,7 @@ export const extractResourceDetailsFromUrl = (
     project: project ? project : undefined,
     target: target ? target : undefined,
     // calling decode twice because the result is double encoded
-    // see https://github.com/canonical/lxd/issues/12398
+    // see https://github.com/canonical/incus/issues/12398
     name: decodeURIComponent(resourceName),
     path,
     type: resourceType,

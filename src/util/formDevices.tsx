@@ -1,8 +1,8 @@
 import {
-  LxdDevices,
-  LxdDiskDevice,
-  LxdIsoDevice,
-  LxdNicDevice,
+  IncusDevices,
+  IncusDiskDevice,
+  IncusIsoDevice,
+  IncusNicDevice,
 } from "types/device";
 import { RemoteImage } from "types/image";
 import { InstanceAndProfileFormikProps } from "components/forms/instanceAndProfileFormValues";
@@ -26,25 +26,25 @@ interface NoneDevice {
 export interface IsoVolumeDevice {
   type: "iso-volume";
   name: string;
-  bare: LxdIsoDevice;
+  bare: IncusIsoDevice;
 }
 
 export interface CustomNetworkDevice {
   type: "custom-nic";
   name: string;
-  bare: LxdNicDevice;
+  bare: IncusNicDevice;
 }
 
-export type FormDiskDevice = Partial<LxdDiskDevice> &
-  Required<Pick<LxdDiskDevice, "name" | "pool">> & {
+export type FormDiskDevice = Partial<IncusDiskDevice> &
+  Required<Pick<IncusDiskDevice, "name" | "pool">> & {
     limits?: {
       read?: string;
       write?: string;
     };
   };
 
-export type FormNetworkDevice = Partial<LxdNicDevice> &
-  Required<Pick<LxdNicDevice, "name">>;
+export type FormNetworkDevice = Partial<IncusNicDevice> &
+  Required<Pick<IncusNicDevice, "name">>;
 
 export type FormDevice =
   | FormDiskDevice
@@ -97,7 +97,7 @@ export const formDeviceToPayload = (devices: FormDevice[]) => {
     }, {});
 };
 
-export const parseDevices = (devices: LxdDevices): FormDevice[] => {
+export const parseDevices = (devices: IncusDevices): FormDevice[] => {
   return Object.keys(devices).map((key) => {
     const item = devices[key];
 

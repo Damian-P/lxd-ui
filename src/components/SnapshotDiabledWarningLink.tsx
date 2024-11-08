@@ -2,10 +2,10 @@ import { Icon } from "@canonical/react-components";
 import { useAuth } from "context/auth";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 
 interface Props {
-  project?: LxdProject;
+  project?: IncusProject;
 }
 
 const SnapshotDiabledWarningLink: FC<Props> = ({ project }) => {

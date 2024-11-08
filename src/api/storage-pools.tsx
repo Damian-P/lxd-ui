@@ -4,51 +4,51 @@ import {
   handleSettledResult,
 } from "util/helpers";
 import {
-  LxdStoragePool,
-  LxdStoragePoolResources,
-  LxdStorageVolume,
-  LxdStorageVolumeState,
+  IncusStoragePool,
+  IncusStoragePoolResources,
+  IncusStorageVolume,
+  IncusStorageVolumeState,
   UploadState,
 } from "types/storage";
-import { LxdApiResponse } from "types/apiResponse";
-import { LxdOperationResponse } from "types/operation";
+import { IncusApiResponse } from "types/apiResponse";
+import { IncusOperationResponse } from "types/operation";
 import axios, { AxiosResponse } from "axios";
-import { LxdClusterMember } from "types/cluster";
+import { IncusClusterMember } from "types/cluster";
 
 export const fetchStoragePool = (
   pool: string,
   project: string,
   target?: string,
-): Promise<LxdStoragePool> => {
+): Promise<IncusStoragePool> => {
   return new Promise((resolve, reject) => {
     const targetParam = target ? `&target=${target}` : "";
     fetch(
       `/1.0/storage-pools/${pool}?project=${project}&recursion=1${targetParam}`,
     )
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdStoragePool>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusStoragePool>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
 export const fetchStoragePools = (
   project: string,
-): Promise<LxdStoragePool[]> => {
+): Promise<IncusStoragePool[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/storage-pools?project=${project}&recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdStoragePool[]>) => resolve(data.metadata))
+      .then((data: IncusApiResponse<IncusStoragePool[]>) => resolve(data.metadata))
       .catch(reject);
   });
 };
 
 export const fetchStoragePoolResources = (
   pool: string,
-): Promise<LxdStoragePoolResources> => {
+): Promise<IncusStoragePoolResources> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/storage-pools/${pool}/resources`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdStoragePoolResources>) =>
+      .then((data: IncusApiResponse<IncusStoragePoolResources>) =>
         resolve(data.metadata),
       )
       .catch(reject);
@@ -56,7 +56,7 @@ export const fetchStoragePoolResources = (
 };
 
 export const createPool = (
-  pool: Partial<LxdStoragePool>,
+  pool: Partial<IncusStoragePool>,
   project: string,
   target?: string,
 ): Promise<void> => {
@@ -72,7 +72,7 @@ export const createPool = (
   });
 };
 
-const getClusterAndMemberPools = (pool: Partial<LxdStoragePool>) => {
+const getClusterAndMemberPools = (pool: Partial<IncusStoragePool>) => {
   const memberSpecificConfigKeys = new Set([
     "source",
     "size",
@@ -81,8 +81,8 @@ const getClusterAndMemberPools = (pool: Partial<LxdStoragePool>) => {
     "lvm.vg_name",
   ]);
   const configKeys = Object.keys(pool.config || {});
-  const memberConfig: LxdStoragePool["config"] = {};
-  const clusterConfig: LxdStoragePool["config"] = {};
+  const memberConfig: IncusStoragePool["config"] = {};
+  const clusterConfig: IncusStoragePool["config"] = {};
   for (const key of configKeys) {
     if (memberSpecificConfigKeys.has(key)) {
       memberConfig[key] = pool.config?.[key];
@@ -101,9 +101,9 @@ const getClusterAndMemberPools = (pool: Partial<LxdStoragePool>) => {
 };
 
 export const createClusteredPool = (
-  pool: LxdStoragePool,
+  pool: IncusStoragePool,
   project: string,
-  clusterMembers: LxdClusterMember[],
+  clusterMembers: IncusClusterMember[],
 ): Promise<void> => {
   const { memberPool, clusterPool } = getClusterAndMemberPools(pool);
   return new Promise((resolve, reject) => {
@@ -122,7 +122,7 @@ export const createClusteredPool = (
 };
 
 export const updatePool = (
-  pool: Partial<LxdStoragePool>,
+  pool: Partial<IncusStoragePool>,
   project: string,
   target?: string,
 ): Promise<void> => {
@@ -139,9 +139,9 @@ export const updatePool = (
 };
 
 export const updateClusteredPool = (
-  pool: Partial<LxdStoragePool>,
+  pool: Partial<IncusStoragePool>,
   project: string,
-  clusterMembers: LxdClusterMember[],
+  clusterMembers: IncusClusterMember[],
 ): Promise<void> => {
   const { memberPool, clusterPool } = getClusterAndMemberPools(pool);
   return new Promise((resolve, reject) => {
@@ -192,11 +192,11 @@ export const deleteStoragePool = (
 export const fetchStorageVolumes = (
   pool: string,
   project: string,
-): Promise<LxdStorageVolume[]> => {
+): Promise<IncusStorageVolume[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/storage-pools/${pool}/volumes?project=${project}&recursion=1`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdStorageVolume[]>) =>
+      .then((data: IncusApiResponse<IncusStorageVolume[]>) =>
         resolve(data.metadata.map((volume) => ({ ...volume, pool }))),
       )
       .catch(reject);
@@ -205,11 +205,11 @@ export const fetchStorageVolumes = (
 
 export const fetchAllStorageVolumes = (
   project: string,
-): Promise<LxdStorageVolume[]> => {
+): Promise<IncusStorageVolume[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/storage-volumes?recursion=1&project=${project}`)
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdStorageVolume[]>) =>
+      .then((data: IncusApiResponse<IncusStorageVolume[]>) =>
         resolve(data.metadata),
       )
       .catch(reject);
@@ -221,13 +221,13 @@ export const fetchStorageVolume = (
   project: string,
   type: string,
   volume: string,
-): Promise<LxdStorageVolume> => {
+): Promise<IncusStorageVolume> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/storage-pools/${pool}/volumes/${type}/${volume}?project=${project}&recursion=1`,
     )
       .then(handleEtagResponse)
-      .then((data) => resolve({ ...data, pool } as LxdStorageVolume))
+      .then((data) => resolve({ ...data, pool } as IncusStorageVolume))
       .catch(reject);
   });
 };
@@ -237,13 +237,13 @@ export const fetchStorageVolumeState = (
   project: string,
   type: string,
   volume: string,
-): Promise<LxdStorageVolumeState> => {
+): Promise<IncusStorageVolumeState> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/storage-pools/${pool}/volumes/${type}/${volume}/state?project=${project}&recursion=1`,
     )
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdStorageVolumeState>) =>
+      .then((data: IncusApiResponse<IncusStorageVolumeState>) =>
         resolve(data.metadata),
       )
       .catch(reject);
@@ -252,7 +252,7 @@ export const fetchStorageVolumeState = (
 
 export const renameStorageVolume = (
   project: string,
-  volume: LxdStorageVolume,
+  volume: IncusStorageVolume,
   newName: string,
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -278,7 +278,7 @@ export const createIsoStorageVolume = (
   project: string,
   setUploadState: (value: UploadState) => void,
   uploadController: AbortController,
-): Promise<LxdOperationResponse> => {
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     axios
       .post(
@@ -287,8 +287,8 @@ export const createIsoStorageVolume = (
         {
           headers: {
             "Content-Type": "application/octet-stream",
-            "X-LXD-name": name,
-            "X-LXD-type": "iso",
+            "X-Incus-name": name,
+            "X-Incus-type": "iso",
           },
           onUploadProgress: (event) => {
             setUploadState({
@@ -300,7 +300,7 @@ export const createIsoStorageVolume = (
           signal: uploadController.signal,
         },
       )
-      .then((response: AxiosResponse<LxdOperationResponse>) => response.data)
+      .then((response: AxiosResponse<IncusOperationResponse>) => response.data)
       .then(resolve)
       .catch(reject);
   });
@@ -309,7 +309,7 @@ export const createIsoStorageVolume = (
 export const createStorageVolume = (
   pool: string,
   project: string,
-  volume: Partial<LxdStorageVolume>,
+  volume: Partial<IncusStorageVolume>,
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch(`/1.0/storage-pools/${pool}/volumes?project=${project}`, {
@@ -325,7 +325,7 @@ export const createStorageVolume = (
 export const updateStorageVolume = (
   pool: string,
   project: string,
-  volume: Partial<LxdStorageVolume>,
+  volume: Partial<IncusStorageVolume>,
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     fetch(

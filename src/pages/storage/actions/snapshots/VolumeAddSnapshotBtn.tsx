@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { Button, Icon, Tooltip } from "@canonical/react-components";
 import usePortal from "react-useportal";
 import CreateVolumeSnapshotForm from "pages/storage/forms/CreateVolumeSnapshotForm";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   isCTA?: boolean;
   isDisabled?: boolean;
   className?: string;

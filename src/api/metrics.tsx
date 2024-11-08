@@ -1,7 +1,7 @@
 import parsePrometheusTextFormat from "parse-prometheus-text-format";
-import { LxdMetricGroup } from "types/metrics";
+import { IncusMetricGroup } from "types/metrics";
 
-export const fetchMetrics = (): Promise<LxdMetricGroup[]> => {
+export const fetchMetrics = (): Promise<IncusMetricGroup[]> => {
   return new Promise((resolve, reject) => {
     fetch("/1.0/metrics")
       .then((response) => {

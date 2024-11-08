@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { freezeInstance } from "api/instances";
@@ -11,7 +11,7 @@ import { useEventQueue } from "context/eventQueue";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
 }
 
 const FreezeInstanceBtn: FC<Props> = ({ instance }) => {

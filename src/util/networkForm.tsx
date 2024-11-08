@@ -1,12 +1,12 @@
 import {
-  LxdNetwork,
-  LxdNetworkBridgeDriver,
-  LxdNetworkDnsMode,
+  IncusNetwork,
+  IncusNetworkBridgeDriver,
+  IncusNetworkDnsMode,
 } from "types/network";
 import { NetworkFormValues } from "pages/networks/forms/NetworkForm";
 import { getNetworkKey } from "util/networks";
 
-export const toNetworkFormValues = (network: LxdNetwork): NetworkFormValues => {
+export const toNetworkFormValues = (network: IncusNetwork): NetworkFormValues => {
   return {
     readOnly: true,
     isCreating: false,
@@ -15,11 +15,11 @@ export const toNetworkFormValues = (network: LxdNetwork): NetworkFormValues => {
     networkType: network.type,
     bridge_driver: network.config[
       getNetworkKey("bridge_driver")
-    ] as LxdNetworkBridgeDriver,
+    ] as IncusNetworkBridgeDriver,
     bridge_hwaddr: network.config[getNetworkKey("bridge_hwaddr")],
     bridge_mtu: network.config[getNetworkKey("bridge_mtu")],
     dns_domain: network.config[getNetworkKey("dns_domain")],
-    dns_mode: network.config[getNetworkKey("dns_mode")] as LxdNetworkDnsMode,
+    dns_mode: network.config[getNetworkKey("dns_mode")] as IncusNetworkDnsMode,
     dns_nameservers: network.config[getNetworkKey("dns_nameservers")],
     dns_search: network.config[getNetworkKey("dns_search")],
     ipv4_address: network.config[getNetworkKey("ipv4_address")],

@@ -15,8 +15,8 @@ import { FC, useMemo, useState } from "react";
 import usePanelParams from "util/usePanelParams";
 import { updateGroup } from "api/auth-groups";
 import { queryKeys } from "util/queryKeys";
-import PermissionSelector, { LxdPermissionWithID } from "./PermissionSelector";
-import { LxdGroup } from "types/permissions";
+import PermissionSelector, { IncusPermissionWithID } from "./PermissionSelector";
+import { IncusGroup } from "types/permissions";
 import {
   constructResourceSelectorLabel,
   generateIdentityNamesLookup,
@@ -38,12 +38,12 @@ import LoggedInUserNotification from "./LoggedInUserNotification";
 import { extractResourceDetailsFromUrl } from "util/resourceDetails";
 
 type PermissionsEditHistory = {
-  permissionsAdded: LxdPermissionWithID[];
+  permissionsAdded: IncusPermissionWithID[];
   permissionsRemoved: Set<string>;
 };
 
 interface Props {
-  group: LxdGroup;
+  group: IncusGroup;
 }
 
 const EditGroupPermissionsPanel: FC<Props> = ({ group }) => {
@@ -84,7 +84,7 @@ const EditGroupPermissionsPanel: FC<Props> = ({ group }) => {
 
   const getPermissions = () => {
     const existingPermissions = group.permissions ?? [];
-    const permissions: LxdPermissionWithID[] = [];
+    const permissions: IncusPermissionWithID[] = [];
     for (const permission of existingPermissions) {
       permissions.push({
         ...permission,
@@ -139,7 +139,7 @@ const EditGroupPermissionsPanel: FC<Props> = ({ group }) => {
     });
   };
 
-  const addPermission = (newPermission: LxdPermissionWithID) => {
+  const addPermission = (newPermission: IncusPermissionWithID) => {
     // we should prevent user from adding the same permission again
     const permissionExists = permissions.some(
       (permission) => permission.id === newPermission.id,

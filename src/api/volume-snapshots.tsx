@@ -4,17 +4,17 @@ import {
   pushFailure,
   pushSuccess,
 } from "util/helpers";
-import { LxdOperationResponse } from "types/operation";
-import { LxdStorageVolume, LxdVolumeSnapshot } from "types/storage";
-import { LxdApiResponse, LxdSyncResponse } from "types/apiResponse";
+import { IncusOperationResponse } from "types/operation";
+import { IncusStorageVolume, IncusVolumeSnapshot } from "types/storage";
+import { IncusApiResponse, IncusSyncResponse } from "types/apiResponse";
 import { EventQueue } from "context/eventQueue";
 import { splitVolumeSnapshotName } from "util/storageVolume";
 
 export const createVolumeSnapshot = (args: {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
   name: string;
   expiresAt: string | null;
-}): Promise<LxdOperationResponse> => {
+}): Promise<IncusOperationResponse> => {
   const { volume, name, expiresAt } = args;
   return new Promise((resolve, reject) => {
     fetch(
@@ -34,9 +34,9 @@ export const createVolumeSnapshot = (args: {
 };
 
 export const deleteVolumeSnapshot = (
-  volume: LxdStorageVolume,
-  snapshot: Pick<LxdVolumeSnapshot, "name">,
-): Promise<LxdOperationResponse> => {
+  volume: IncusStorageVolume,
+  snapshot: Pick<IncusVolumeSnapshot, "name">,
+): Promise<IncusOperationResponse> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/storage-pools/${volume.pool}/volumes/${volume.type}/${volume.name}/snapshots/${snapshot.name}?project=${volume.project}`,
@@ -51,7 +51,7 @@ export const deleteVolumeSnapshot = (
 };
 
 export const deleteVolumeSnapshotBulk = (
-  volume: LxdStorageVolume,
+  volume: IncusStorageVolume,
   snapshotNames: string[],
   eventQueue: EventQueue,
 ): Promise<PromiseSettledResult<void>[]> => {
@@ -79,9 +79,9 @@ export const deleteVolumeSnapshotBulk = (
 
 // NOTE: this api endpoint results in a synchronous operation
 export const restoreVolumeSnapshot = (
-  volume: LxdStorageVolume,
-  snapshot: LxdVolumeSnapshot,
-): Promise<LxdSyncResponse<unknown>> => {
+  volume: IncusStorageVolume,
+  snapshot: IncusVolumeSnapshot,
+): Promise<IncusSyncResponse<unknown>> => {
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/storage-pools/${volume.pool}/volumes/${volume.type}/${volume.name}?project=${volume.project}`,
@@ -99,10 +99,10 @@ export const restoreVolumeSnapshot = (
 };
 
 export const renameVolumeSnapshot = (args: {
-  volume: LxdStorageVolume;
-  snapshot: LxdVolumeSnapshot;
+  volume: IncusStorageVolume;
+  snapshot: IncusVolumeSnapshot;
   newName: string;
-}): Promise<LxdOperationResponse> => {
+}): Promise<IncusOperationResponse> => {
   const { volume, snapshot, newName } = args;
   return new Promise((resolve, reject) => {
     fetch(
@@ -122,10 +122,10 @@ export const renameVolumeSnapshot = (args: {
 
 // NOTE: this api endpoint results in a synchronous operation
 export const updateVolumeSnapshot = (args: {
-  volume: LxdStorageVolume;
-  snapshot: LxdVolumeSnapshot;
+  volume: IncusStorageVolume;
+  snapshot: IncusVolumeSnapshot;
   expiresAt: string | null;
-}): Promise<LxdSyncResponse<unknown>> => {
+}): Promise<IncusSyncResponse<unknown>> => {
   const { volume, snapshot, expiresAt } = args;
   return new Promise((resolve, reject) => {
     fetch(
@@ -148,14 +148,14 @@ export const fetchStorageVolumeSnapshots = (args: {
   type: string;
   volumeName: string;
   project: string;
-}): Promise<LxdVolumeSnapshot[]> => {
+}): Promise<IncusVolumeSnapshot[]> => {
   const { pool, type, volumeName, project } = args;
   return new Promise((resolve, reject) => {
     fetch(
       `/1.0/storage-pools/${pool}/volumes/${type}/${volumeName}/snapshots?project=${project}&recursion=2`,
     )
       .then(handleResponse)
-      .then((data: LxdApiResponse<LxdVolumeSnapshot[]>) =>
+      .then((data: IncusApiResponse<IncusVolumeSnapshot[]>) =>
         resolve(
           data.metadata.map((snapshot) => ({
             ...snapshot,

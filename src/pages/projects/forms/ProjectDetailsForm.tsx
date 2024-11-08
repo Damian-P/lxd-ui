@@ -11,11 +11,11 @@ import {
 import { FormikProps } from "formik/dist/types";
 import { getProjectKey } from "util/projectConfigFields";
 import { isProjectEmpty } from "util/projects";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import AutoExpandingTextArea from "components/AutoExpandingTextArea";
 import ScrollableForm from "components/ScrollableForm";
 import { useSupportedFeatures } from "context/useSupportedFeatures";
-import { LxdConfigPair } from "types/config";
+import { IncusConfigPair } from "types/config";
 
 export interface ProjectDetailsFormValues {
   name: string;
@@ -33,7 +33,7 @@ export interface ProjectDetailsFormValues {
 
 export const projectDetailPayload = (
   values: ProjectDetailsFormValues,
-): Partial<LxdProject> => {
+): Partial<IncusProject> => {
   return {
     name: values.name,
     description: values.description,
@@ -42,7 +42,7 @@ export const projectDetailPayload = (
 
 export const projectDetailRestrictionPayload = (
   values: ProjectDetailsFormValues,
-): LxdConfigPair => {
+): IncusConfigPair => {
   const boolToPayload = (value?: boolean) => {
     if (value === undefined) {
       return undefined;
@@ -73,7 +73,7 @@ export const projectDetailRestrictionPayload = (
 
 interface Props {
   formik: FormikProps<ProjectDetailsFormValues>;
-  project?: LxdProject;
+  project?: IncusProject;
   isEdit: boolean;
 }
 
@@ -161,7 +161,7 @@ const ProjectDetailsForm: FC<Props> = ({ formik, project, isEdit }) => {
             value={features}
             options={[
               {
-                label: "Default LXD",
+                label: "Default Incus",
                 value: "default",
               },
               {

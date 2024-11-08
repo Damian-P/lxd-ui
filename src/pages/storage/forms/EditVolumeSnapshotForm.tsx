@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { LxdStorageVolume, LxdVolumeSnapshot } from "types/storage";
+import { IncusStorageVolume, IncusVolumeSnapshot } from "types/storage";
 import SnapshotForm from "components/forms/SnapshotForm";
 import { useNotify } from "@canonical/react-components";
 import { useQueryClient } from "@tanstack/react-query";
@@ -17,8 +17,8 @@ import { getVolumeSnapshotSchema } from "util/storageVolumeSnapshots";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  volume: LxdStorageVolume;
-  snapshot: LxdVolumeSnapshot;
+  volume: IncusStorageVolume;
+  snapshot: IncusVolumeSnapshot;
   close: () => void;
 }
 

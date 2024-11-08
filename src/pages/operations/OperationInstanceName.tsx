@@ -1,11 +1,11 @@
 import { FC } from "react";
 import ItemName from "components/ItemName";
-import { LxdOperation } from "types/operation";
+import { IncusOperation } from "types/operation";
 import InstanceLink from "pages/instances/InstanceLink";
 import { getInstanceName, getProjectName } from "util/operations";
 
 interface Props {
-  operation: LxdOperation;
+  operation: IncusOperation;
 }
 
 const OperationInstanceName: FC<Props> = ({ operation }) => {

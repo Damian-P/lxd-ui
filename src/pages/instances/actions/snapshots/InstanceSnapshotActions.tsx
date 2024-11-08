@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { LxdInstance, LxdInstanceSnapshot } from "types/instance";
+import { IncusInstance, IncusInstanceSnapshot } from "types/instance";
 import {
   deleteInstanceSnapshot,
   restoreInstanceSnapshot,
@@ -15,8 +15,8 @@ import InstanceEditSnapshotBtn from "./InstanceEditSnapshotBtn";
 import CreateImageFromInstanceSnapshotBtn from "pages/instances/actions/snapshots/CreateImageFromInstanceSnapshotBtn";
 
 interface Props {
-  instance: LxdInstance;
-  snapshot: LxdInstanceSnapshot;
+  instance: IncusInstance;
+  snapshot: IncusInstanceSnapshot;
   onSuccess: (message: ReactNode) => void;
   onFailure: (title: string, e: unknown) => void;
 }

@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "util/queryKeys";
 import { MainTable } from "@canonical/react-components";
 import Loader from "components/Loader";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import { Link } from "react-router-dom";
 import { fetchNetworks } from "api/networks";
 import { isNicDevice } from "util/devices";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   onFailure: (title: string, e: unknown) => void;
 }
 

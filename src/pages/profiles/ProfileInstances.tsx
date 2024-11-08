@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { getProfileInstances } from "util/usedBy";
-import { LxdProfile } from "types/profile";
+import { IncusProfile } from "types/profile";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProjects } from "api/projects";
 import { queryKeys } from "util/queryKeys";
@@ -8,7 +8,7 @@ import ProfileUsedByDefaultProject from "./ProfileUsedByDefaultProject";
 import ProfileUsedByRegularProject from "./ProfileUsedByRegularProject";
 
 interface Props {
-  profile: LxdProfile;
+  profile: IncusProfile;
   project: string;
   headingClassName?: string;
 }

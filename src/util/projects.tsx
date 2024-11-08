@@ -1,4 +1,4 @@
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { slugify } from "./slugify";
 
 export const storageTabs: string[] = ["Pools", "Volumes", "Custom ISOs"];
@@ -35,7 +35,7 @@ export const getSubpageFromUrl = (url: string): string | undefined => {
   return undefined;
 };
 
-export const isProjectEmpty = (project: LxdProject): boolean => {
+export const isProjectEmpty = (project: IncusProject): boolean => {
   if (!project.used_by) {
     return true;
   }
@@ -44,5 +44,5 @@ export const isProjectEmpty = (project: LxdProject): boolean => {
   return !project.used_by.some((item) => item !== defaultProfile);
 };
 
-export const isProjectWithProfiles = (project?: LxdProject): boolean =>
+export const isProjectWithProfiles = (project?: IncusProject): boolean =>
   project?.config["features.profiles"] === "true";

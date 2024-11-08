@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { getIpAddresses } from "util/networks";
-import { LxdInstance } from "types/instance";
+import { IncusInstance } from "types/instance";
 import ExpandableList from "components/ExpandableList";
 
 interface Props {
-  instance: LxdInstance;
+  instance: IncusInstance;
   family: "inet" | "inet6";
 }
 

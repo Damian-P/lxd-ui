@@ -13,12 +13,12 @@ import StorageVolumeFormMain from "pages/storage/forms/StorageVolumeFormMain";
 import { updateMaxHeight } from "util/updateMaxHeight";
 import useEventListener from "@use-it/event-listener";
 import { testDuplicateStorageVolumeName } from "util/storageVolume";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 
 interface Props {
   project: string;
   onCancel: () => void;
-  onFinish: (volume: LxdStorageVolume) => void;
+  onFinish: (volume: IncusStorageVolume) => void;
 }
 
 const CustomVolumeCreateModal: FC<Props> = ({

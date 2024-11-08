@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LxdProject } from "types/project";
+import { IncusProject } from "types/project";
 import { deleteProject } from "api/projects";
 import { queryKeys } from "util/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ import classnames from "classnames";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  project: LxdProject;
+  project: IncusProject;
 }
 
 const DeleteProjectBtn: FC<Props> = ({ project }) => {

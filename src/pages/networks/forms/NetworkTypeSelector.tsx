@@ -30,7 +30,7 @@ const NetworkTypeSelector: FC<Props> = ({ formik }) => {
           <>
             OVN needs to be configured.{" "}
             <a
-              href={`${docBaseLink}/howto/network_ovn_setup/#set-up-a-lxd-cluster-on-ovn`}
+              href={`${docBaseLink}/howto/network_ovn_setup/#set-up-a-incus-cluster-on-ovn`}
               target="_blank"
               rel="noopener noreferrer"
             >

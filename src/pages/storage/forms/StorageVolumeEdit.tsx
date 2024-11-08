@@ -10,7 +10,7 @@ import StorageVolumeForm, {
   StorageVolumeFormValues,
   volumeFormToPayload,
 } from "pages/storage/forms/StorageVolumeForm";
-import { LxdStorageVolume } from "types/storage";
+import { IncusStorageVolume } from "types/storage";
 import { getStorageVolumeEditValues } from "util/storageVolumeEdit";
 import { MAIN_CONFIGURATION } from "pages/storage/forms/StorageVolumeFormMenu";
 import { slugify } from "util/slugify";
@@ -18,7 +18,7 @@ import FormFooterLayout from "components/forms/FormFooterLayout";
 import { useToastNotification } from "context/toastNotificationProvider";
 
 interface Props {
-  volume: LxdStorageVolume;
+  volume: IncusStorageVolume;
 }
 
 const StorageVolumeEdit: FC<Props> = ({ volume }) => {

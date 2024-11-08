@@ -1,6 +1,6 @@
 import { ConfirmationModal, useNotify } from "@canonical/react-components";
 import { FC, useState } from "react";
-import { LxdGroup, LxdIdentity } from "types/permissions";
+import { IncusGroup, IncusIdentity } from "types/permissions";
 import { pivotIdentityGroupsChangeSummary } from "util/permissionIdentities";
 import GroupsOrIdentityChangesTable from "./GroupOrIdentityChangesTable";
 import {
@@ -19,8 +19,8 @@ interface Props {
   close: () => void;
   addedIdentities: Set<string>;
   removedIdentities: Set<string>;
-  selectedGroups: LxdGroup[];
-  allIdentities: LxdIdentity[];
+  selectedGroups: IncusGroup[];
+  allIdentities: IncusIdentity[];
 }
 
 const GroupIdentitiesPanelConfirmModal: FC<Props> = ({
